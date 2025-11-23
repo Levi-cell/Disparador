@@ -5,7 +5,7 @@ from opcoes.consultar_clientes import consulta_clientes
 from tratandoErros import *
 
 
- # criar_banco_se_nao_existir() só para negócios de terceiros
+ # criar_banco_se_nao_existir() # só para negócios de terceiros
 
 parou = False
 while not parou:

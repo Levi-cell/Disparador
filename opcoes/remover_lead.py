@@ -3,6 +3,7 @@ from src.SQLfunctions.UpdateFunctions import desativar_disparo_por_id
 from src.SQLfunctions.ConsultFunctions import consulta_cliente_sql_id
 from opcoes.gerarTabela import print_varios_clientes_tabela
 from opcoes.suport_functions.suport_invalidados import *
+from tratandoErros import trata_telefone
 
 def perguntar_continuar_remocao():
     print("\nDeseja remover mais algum cliente?")
@@ -31,22 +32,22 @@ def remomoca_da_lista_de_disparo():
             break
 
         if primeira_vez:
-            id_cliente = input("Digite o ID do cliente que deseja remover da lista de disparo:")
+           telefone = input("Digite o telefone do cliente que deseja remover da lista de disparo:")
+           telefone = trata_telefone(telefone)
         else:
-            id_cliente = input("Digite o ID de algum cliente novamente:")
+           telefone = input("Digite o telefone de algum cliente novamente:")
+           telefone = trata_telefone(telefone)
 
         primeira_vez = False
 
-        id_cliente = int(id_cliente)
-
         cliente_encontrado = None
         for cliente in lista_clientes:
-            if cliente[0] == id_cliente:
+            if cliente[2] == telefone:
                 cliente_encontrado = cliente
                 break
 
         if cliente_encontrado is None:
-            print("❌ ID não encontrado na lista de clientes, tente novamente.")
+            print("❌ Telefone não encontrado na lista de clientes, tente novamente.")
             print("----------")
             time.sleep(2)
             continue

@@ -1,12 +1,13 @@
 from src.SuportFunctions.PoupTxtfield import detectar_popup_ou_chat
 from selenium.webdriver.support import expected_conditions as EC
+from src.SuportFunctions.set_message import mensagem_do_dia
 from src.SuportFunctions.FunRandom import numero_randomico
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 import time
 
 
-def varre_clientes(dados_clientes, mensagem, driver, espera, lista_clientes_desativados):
+def varre_clientes(dados_clientes, driver, espera, lista_clientes_desativados):
 
     for nome, telefone in dados_clientes:
 
@@ -19,7 +20,8 @@ def varre_clientes(dados_clientes, mensagem, driver, espera, lista_clientes_desa
         print("📨 Enviando para:", numero_formatado, f"({nome})")
         print("---------------")
 
-        mensagem_personalizada = f"{nome}, {mensagem}"
+        mensagem_aleatoria = mensagem_do_dia()
+        mensagem_personalizada = f"{nome} 🌵, {mensagem_aleatoria}"
 
         link_whatsapp = (
             "https://web.whatsapp.com/send?"

@@ -5,7 +5,7 @@ from opcoes.gerarTabela import print_varios_clientes_tabela
 from opcoes.Clientes_invalidos import clientes_invalidados
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.chrome.options import Options
-from src.SuportFunctions.set_message import *
+# from src.SuportFunctions.set_message import *
 from selenium import webdriver
 import time
 
@@ -20,12 +20,6 @@ def disparador_promocao():
 
     dados_clientes = captura_nome_numero_banco()
     print("📦 Dados dos clientes carregados!")
-    print("----------")
-    time.sleep(2)
-
-    mensagem = mensagem_do_dia()
-
-    print("💬 Mensagem do dia configurada!")
     print("----------")
     time.sleep(2)
 
@@ -50,7 +44,7 @@ def disparador_promocao():
 
     lista_clientes_desativados = []
     lista_clientes_desativados = varre_clientes(
-        dados_clientes, mensagem, driver, espera, lista_clientes_desativados
+        dados_clientes, driver, espera, lista_clientes_desativados
     )
 
     if len(lista_clientes_desativados) > 0:

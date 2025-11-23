@@ -36,18 +36,19 @@ def consulta_clientes():
         if opcao not in ("1", "s", "ss", "sim"):
             break
 
-        id_cliente = input("Digite o ID do cliente:")
+        telefone = input("Digite o telefone do cliente:")
+        telefone = trata_telefone(telefone)
 
-        id_cliente = int(id_cliente)
+
 
         cliente_encontrado = None
         for cliente in clientes_consultados:
-            if cliente[0] == id_cliente:
+            if cliente[2] == telefone:
                 cliente_encontrado = cliente
                 break
 
         if cliente_encontrado is None:
-            print("❌ ID não encontrado na lista de clientes, tente novamente.")
+            print("❌ Telefone não encontrado na lista de clientes, tente novamente.")
             print("----------")
             time.sleep(2)
             continue
