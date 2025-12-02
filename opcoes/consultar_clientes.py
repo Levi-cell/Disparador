@@ -1,6 +1,34 @@
 from opcoes.suport_functions.suport_consult import *
 from tratandoErros import *
 
+def obter_telefone_ou_id():
+    """
+    Pergunta ao usuário se deseja consultar por ID ou telefone.
+    Faz validação da entrada e só retorna quando for válido.
+    """
+    while True:
+        print("\n📌 Como deseja fazer a consulta?")
+        print("[1]  → 🔢 ID do cliente")
+        print("[2]  → 📱 Telefone do cliente")
+
+        escolha = input("Digite a opção desejada: ").strip()
+
+        # Consulta por ID
+        if escolha == "1":
+            telefone_id = input("Digite o ID do cliente: ")
+            telefone_id = trata_entrada_de_id(telefone_id)
+            return int(telefone_id)
+
+        # Consulta por telefone
+        elif escolha == "2":
+            telefone_id = input("Digite o telefone do cliente: ")
+            telefone_id = trata_telefone(telefone_id)
+            return telefone_id
+
+        # Opção inválida
+        else:
+            print("❌ Opção inválida! Tente novamente.\n")
+
 def consulta_clientes():
 
     clientes_consultados = mostrar_todos_os_clientes()
@@ -33,22 +61,19 @@ def consulta_clientes():
         opcao = input("Digite sua opção: ").strip().lower()
         print("----------")
 
-        if opcao not in ("1", "s", "ss", "sim"):
+        if opcao not in ("1", "s", "ss", "sim", "Sim"):
             break
 
-        telefone = input("Digite o telefone do cliente:")
-        telefone = trata_telefone(telefone)
-
-
+        telefone_id = obter_telefone_ou_id()
 
         cliente_encontrado = None
         for cliente in clientes_consultados:
-            if cliente[2] == telefone:
+            if cliente[2] == telefone_id or cliente[0] == telefone_id:
                 cliente_encontrado = cliente
                 break
 
         if cliente_encontrado is None:
-            print("❌ Telefone não encontrado na lista de clientes, tente novamente.")
+            print("❌ Cliente não encontrado na lista de clientes, tente novamente.")
             print("----------")
             time.sleep(2)
             continue

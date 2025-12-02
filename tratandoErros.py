@@ -1,6 +1,22 @@
 import time
 import re
 
+
+def confirmar_acao():
+    print("Confirmar a ação?")
+    print("[1]  → Sim")
+    print("[2]  → Não")
+    print("⚠️ Qualquer tecla também serve como não.")
+
+    opc = input("Digite sua opção: ").strip()
+    time.sleep(2)
+    print("---------")
+
+    if opc == "1":
+        return True
+    return False
+
+
 def trata_entrada_de_opcao(numero):
     """
     Função de tratamento para caso o usuário digite uma letra ao em vez de número quando for interagir com o Menu.

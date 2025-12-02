@@ -10,6 +10,18 @@ def criar_banco_se_nao_existir():
     cursor.execute("CREATE DATABASE IF NOT EXISTS BancoDisparo")
     cursor.execute("USE BancoDisparo")
 
+    cursor.execute("""
+                CREATE TABLE IF NOT EXISTS clientes_indesejados (
+                    id_cliente INT AUTO_INCREMENT PRIMARY KEY,
+                    nome VARCHAR(100) NOT NULL,
+                    telefone VARCHAR(20) NOT NULL
+                ) COMMENT = 'Tabela de clientes INDESEJADOS da loja';
+            """)
+
+    conexao.commit()  # Salva alterações
+
+def criar_table_clientes():
+
     # Criar tabela
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS clientes (
@@ -20,6 +32,6 @@ def criar_banco_se_nao_existir():
         ) COMMENT = 'Tabela de clientes da loja';
     """)
 
-    conexao.commit()   # Salva alterações
-    print("✔ Banco e tabela verificados/criados com sucesso!")
+
+
 

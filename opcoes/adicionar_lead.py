@@ -1,5 +1,5 @@
-from src.SQLfunctions.InsertFunction import inserir_cliente
-from src.SQLfunctions.UpdateFunctions import ativar_disparo
+from src.SQLfunctions.InsertFunction import inserir_cliente_sql
+from src.SQLfunctions.UpdateFunctions import ativar_disparo_sql
 from src.SQLfunctions.ConsultFunctions import *
 from opcoes.gerarTabela import *
 from tratandoErros import *
@@ -22,13 +22,13 @@ def confirmar_acao(pergunta):
     print("------------------------------")
 
     # Aceita 1/2 como principais
-    if resposta in ("1", "s", "ss", "sim"):
+    if resposta in ("1", "s", "ss", "sim", "Sim"):
         return True
     if resposta == "2":
         return False
 
     # Fallback para segurança
-    return resposta in ("s", "sim", "ss", "sss")
+    return resposta in ("s", "sim", "ss", "sss",  "Sim")
 
 
 # -------------------------------
@@ -48,7 +48,7 @@ def tratar_telefone_ja_existente():
     escolha = input("Digite sua opção: ").strip().lower()
     print("------------------------------")
 
-    if escolha in ("1", "s", "ss", "sim"):
+    if escolha in ("1", "s", "ss", "sim", "Sim"):
         time.sleep(1)
         return True
 
@@ -108,7 +108,7 @@ def registra_cliente_no_banco(telefone_cliente):
 
         disparo_status = (disparo_input == "1")
 
-        inserir_cliente(nome, telefone_cliente, disparo_status)
+        inserir_cliente_sql(nome, telefone_cliente, disparo_status)
 
         print("----------------")
         time.sleep(1)
@@ -134,7 +134,7 @@ def processar_cliente_fora_da_lista(nome, telefone):
     time.sleep(3)
 
     if confirmar_acao("Deseja colocá-lo na lista?"):
-        ativar_disparo(telefone)
+        ativar_disparo_sql(telefone)
         status_modificado = consulta_cliente_sql(telefone)
 
         print("✔️ Cliente adicionado à lista!")

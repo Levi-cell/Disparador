@@ -3,7 +3,7 @@ from opcoes.gerarTabela import print_varios_clientes_tabela
 from tratandoErros import *
 
 def mostrar_lista_de_clientes():
-    lista_clientes = captura_tudo_banco()
+    lista_clientes = captura_tudo_banco_sql()
 
     print("Esses são os clientes na lista, confira logo abaixo:")
     time.sleep(2)

@@ -1,6 +1,6 @@
 from conexao import cursor, conexao
 
-def desativar_disparo(telefone):
+def desativar_disparo_sql(telefone):
     """
     Atualiza o disparo_status de um cliente para False (desativado),
     usando o telefone como referência.
@@ -10,7 +10,7 @@ def desativar_disparo(telefone):
     conexao.commit()
 
 
-def ativar_disparo(telefone):
+def ativar_disparo_sql(telefone):
     """
     Atualiza o disparo_status de um cliente para False (desativado),
     usando o telefone como referência.
@@ -19,7 +19,7 @@ def ativar_disparo(telefone):
     cursor.execute(sql, (telefone,))
     conexao.commit()
 
-def ativar_disparo_por_id(id_cliente):
+def ativar_disparo_por_id_sql(id_cliente):
     """
     Atualiza o disparo_status de um cliente para False (desativado),
     usando o telefone como referência.
@@ -28,7 +28,7 @@ def ativar_disparo_por_id(id_cliente):
     cursor.execute(sql, (id_cliente,))
     conexao.commit()
 
-def desativar_disparo_por_id(id_cliente):
+def desativar_disparo_por_id_sql(id_cliente):
     """
     Atualiza o disparo_status de um cliente para False (desativado),
     usando o telefone como referência.
@@ -37,7 +37,7 @@ def desativar_disparo_por_id(id_cliente):
     cursor.execute(sql, (id_cliente,))
     conexao.commit()
 
-def atualizar_telefone_cliente(novo_telefone, id_cliente):
+def atualizar_telefone_cliente_sql(novo_telefone, id_cliente):
     """
     Atualiza o telefone do cliente no banco de dados.
     Recebe o ID do cliente.
@@ -54,7 +54,7 @@ def atualizar_telefone_cliente(novo_telefone, id_cliente):
     cursor.execute(sql, valores)
     conexao.commit()
 
-def atualizar_nome_cliente(nome, id_cliente):
+def atualizar_nome_cliente_sql(nome, id_cliente):
     """
     Atualiza o telefone do cliente no banco de dados.
     Recebe o ID do cliente.

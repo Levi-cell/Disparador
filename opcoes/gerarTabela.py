@@ -45,3 +45,27 @@ def print_varios_clientes_tabela(registros):
         )
 
     print("+------------+-------------------------------+------------------+----------------+")
+
+def print_varios_indesejados_tabela(registros):
+    """
+    Exibe uma lista de clientes em formato de tabela.
+    Cada registro deve conter: (id_cliente, nome, telefone, disparo_status)
+    """
+
+
+    # Cabeçalho
+    print("+------------+-------------------------------+------------------")
+    print("| ID Cliente | Nome                          | Telefone         ")
+    print("+------------+-------------------------------+------------------")
+
+    for registro in registros:
+        id_cliente, nome, telefone = registro
+
+
+        print(
+            f"| {str(id_cliente).ljust(10)} | "
+            f"{nome.ljust(29)} | "
+            f"{telefone.ljust(16)} | "
+        )
+
+    print("+------------+-------------------------------+------------------")

@@ -1,6 +1,6 @@
 from src.SQLfunctions.ConsultFunctions import consulta_cliente_sql
 from selenium.webdriver.support import expected_conditions as EC
-from src.SQLfunctions.UpdateFunctions import desativar_disparo
+from src.SQLfunctions.UpdateFunctions import desativar_disparo_sql
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
@@ -8,7 +8,7 @@ import time
 
 def detectar_popup_ou_chat(driver, telefone):
 
-    espera = WebDriverWait(driver, 30)
+    espera = WebDriverWait(driver, 180)
 
     try:
         elemento = espera.until(
@@ -33,7 +33,7 @@ def detectar_popup_ou_chat(driver, telefone):
             print("---------------")
             time.sleep(1)
 
-            desativar_disparo(telefone)
+            desativar_disparo_sql(telefone)
 
             novo_cliente_desativado = consulta_cliente_sql(telefone)
 

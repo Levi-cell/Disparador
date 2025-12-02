@@ -1,6 +1,6 @@
 from opcoes.suport_functions.suport_removidos import mostrar_lista_de_clientes
-from src.SQLfunctions.UpdateFunctions import desativar_disparo_por_id
-from src.SQLfunctions.ConsultFunctions import consulta_cliente_sql_id
+from src.SQLfunctions.UpdateFunctions import desativar_disparo_por_id_sql
+from src.SQLfunctions.ConsultFunctions import consulta_cliente_id_sql
 from opcoes.gerarTabela import print_varios_clientes_tabela
 from opcoes.suport_functions.suport_invalidados import *
 from tratandoErros import trata_telefone
@@ -11,7 +11,7 @@ def perguntar_continuar_remocao():
     print("[2] → Não")
     escolha = input("Digite sua opção: ").strip().lower()
 
-    if escolha in ("1", "s", "ss", "sim"):
+    if escolha in ("1", "s", "ss", "sim", "Sim"):
         return True
     return False
 
@@ -67,11 +67,11 @@ def remomoca_da_lista_de_disparo():
         print("----------")
         time.sleep(2)
 
-        if escolha in ("1", "s", "ss", "sim"):
-            desativar_disparo_por_id(id_cliente)
+        if escolha in ("1", "s", "ss", "sim", "Sim"):
+            desativar_disparo_por_id_sql(id_cliente)
             lista_clientes.remove(cliente_encontrado)
 
-            cliente_removido = consulta_cliente_sql_id(id_cliente)
+            cliente_removido = consulta_cliente_id_sql(id_cliente)
             clientes_removidos.append(cliente_removido)
             print("✅ Cliente removido da lista com sucesso!")
             time.sleep(1)

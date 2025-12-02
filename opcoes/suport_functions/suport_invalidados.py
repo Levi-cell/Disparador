@@ -1,4 +1,4 @@
-from src.SQLfunctions.UpdateFunctions import atualizar_telefone_cliente, ativar_disparo_por_id
+from src.SQLfunctions.UpdateFunctions import atualizar_telefone_cliente_sql, ativar_disparo_por_id_sql
 from src.SQLfunctions.ConsultFunctions import consulta_cliente_sql
 from opcoes.adicionar_lead import tratar_telefone_ja_existente
 from tratandoErros import trata_telefone
@@ -10,14 +10,14 @@ def define_status_disparo(id_cliente):
     para este cliente. Agora usa 1 = sim / 2 = não.
     """
 
-    print("\nDeseja ativar o envio de promoções para este cliente?")
+    print("\nDeseja re-ativar o envio de promoções para este cliente?")
     print("[1]  → Sim")
     print("[2]  → Não")
     print("⚠️ Qualquer tecla também serve como não.")
     escolha = input("Digite sua opção: ").strip()
 
     if escolha in ("1", "s", "ss", "sim"):
-        ativar_disparo_por_id(id_cliente)
+        ativar_disparo_por_id_sql(id_cliente)
         print("✔️ Disparo ativado com sucesso!")
         print("----------")
         time.sleep(2)
@@ -61,7 +61,7 @@ def confirma_alteracao_telefone(novo_numero, id_cliente):
     confirmacao = input("Digite sua opção: ").strip()
 
     if confirmacao in ("1", "s", "ss", "sim"):
-        atualizar_telefone_cliente(novo_numero, id_cliente)
+        atualizar_telefone_cliente_sql(novo_numero, id_cliente)
         print("✔ Telefone alterado com sucesso!")
         print("----------")
         time.sleep(2)

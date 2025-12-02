@@ -1,4 +1,4 @@
-from src.SQLfunctions.ConsultFunctions import consulta_cliente_sql_id
+from src.SQLfunctions.ConsultFunctions import consulta_cliente_id_sql
 from tratandoErros import trata_entrada_de_id
 from opcoes.suport_functions.suport_invalidados import *
 import time
@@ -32,7 +32,7 @@ def clientes_invalidados(lista_de_invalidados):
 
         primeira_vez = False
 
-        if opcao not in ("1", "s", "ss", "sim"):
+        if opcao not in ("1", "s", "ss", "sim", "Sim"):
             print("Encerrando tratamento...")
             print("-----------")
             time.sleep(2)
@@ -73,7 +73,7 @@ def clientes_invalidados(lista_de_invalidados):
         alterou_disparo = define_status_disparo(id_cliente)
 
         if alterou_telefone or alterou_disparo:
-            cliente_modificado = consulta_cliente_sql_id(id_cliente)
+            cliente_modificado = consulta_cliente_id_sql(id_cliente)
             clientes_alterados.append(cliente_modificado)
             lista_de_invalidados.remove(cliente_encontrado)
             print("✔ Cliente foi modificado e removido da lista de inválidos.")
