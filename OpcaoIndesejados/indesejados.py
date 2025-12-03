@@ -2,9 +2,9 @@ import time
 from tratandoErros import *
 from tratandoErros import trata_telefone, trata_entrada_de_id
 from opcoes.gerarTabela import print_varios_clientes_tabela, print_varios_indesejados_tabela
-from src.SQLfunctions.InsertFunction import inserir_cliente_indesejado_sql
-from src.SQLfunctions.DeleteFunctions import deletar_cliente_por_id_sql
-from src.SQLfunctions.ConsultFunctions import consulta_todos_cliente_sql, lista_desativados_sql, consulta_todos_clientes_indesejados_sql
+from processDisparo.SQLfunctions.InsertFunction import inserir_cliente_indesejado_sql
+from processDisparo.SQLfunctions.DeleteFunctions import deletar_cliente_por_id_sql
+from processDisparo.SQLfunctions.ConsultFunctions import consulta_todos_cliente_sql, lista_desativados_sql, consulta_todos_clientes_indesejados_sql
 
 
 # ------------------------------------------------------------

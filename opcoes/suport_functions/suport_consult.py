@@ -1,5 +1,5 @@
-from src.SQLfunctions.ConsultFunctions import consulta_todos_cliente_sql, consulta_cliente_sql, consulta_cliente_id_sql
-from src.SQLfunctions.UpdateFunctions import atualizar_telefone_cliente_sql, atualizar_nome_cliente_sql
+from processDisparo.SQLfunctions.ConsultFunctions import consulta_todos_cliente_sql, consulta_cliente_sql, consulta_cliente_id_sql
+from processDisparo.SQLfunctions.UpdateFunctions import atualizar_telefone_cliente_sql, atualizar_nome_cliente_sql
 from opcoes.adicionar_lead import tratar_telefone_ja_existente
 from opcoes.gerarTabela import *
 from tratandoErros import *

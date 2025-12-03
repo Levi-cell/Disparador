@@ -1,14 +1,14 @@
 import time
 from banco import *
-from src.SQLfunctions.DeleteFunctions import *
-from src.SQLfunctions.InsertFunction import inserir_cliente_sql
+from processDisparo.SQLfunctions.DeleteFunctions import *
+from processDisparo.SQLfunctions.InsertFunction import inserir_cliente_sql
 from tratandoErros import trata_telefone, trata_nome_cliente
 from ProcedimentosInstalacaoDisparador.processFunctions import *
 from ProcedimentosInstalacaoDisparador.automatedDownload import *
 from opcoes.consultar_clientes import tratar_telefone_ja_existente
 from ProcedimentosInstalacaoDisparador.tratando_csv import molda_txt_completo
 from opcoes.gerarTabela import print_varios_clientes_tabela, print_cliente_tabela
-from src.SQLfunctions.ConsultFunctions import consulta_cliente_sql, consulta_todos_cliente_sql
+from processDisparo.SQLfunctions.ConsultFunctions import consulta_cliente_sql, consulta_todos_cliente_sql
 
 
 def perguntar_se_quer_inserir_testes():

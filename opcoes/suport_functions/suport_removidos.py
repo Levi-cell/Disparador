@@ -1,4 +1,4 @@
-from src.SQLfunctions.ConsultFunctions import *
+from processDisparo.SQLfunctions.ConsultFunctions import *
 from opcoes.gerarTabela import print_varios_clientes_tabela
 from tratandoErros import *
 

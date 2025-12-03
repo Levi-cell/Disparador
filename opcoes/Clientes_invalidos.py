@@ -1,4 +1,4 @@
-from src.SQLfunctions.ConsultFunctions import consulta_cliente_id_sql
+from processDisparo.SQLfunctions.ConsultFunctions import consulta_cliente_id_sql
 from tratandoErros import trata_entrada_de_id
 from opcoes.suport_functions.suport_invalidados import *
 import time

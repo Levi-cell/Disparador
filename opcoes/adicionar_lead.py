@@ -1,6 +1,6 @@
-from src.SQLfunctions.InsertFunction import inserir_cliente_sql
-from src.SQLfunctions.UpdateFunctions import ativar_disparo_sql
-from src.SQLfunctions.ConsultFunctions import *
+from processDisparo.SQLfunctions.InsertFunction import inserir_cliente_sql
+from processDisparo.SQLfunctions.UpdateFunctions import ativar_disparo_sql
+from processDisparo.SQLfunctions.ConsultFunctions import *
 from opcoes.gerarTabela import *
 from tratandoErros import *
 import time

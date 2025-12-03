@@ -2,10 +2,10 @@ import os
 import shutil
 import time
 from selenium.webdriver.common.by import By
-from src.DisparadorMain import conecta_ao_chrome_remoto
+from processDisparo.DisparadorMain import conecta_ao_chrome_remoto
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from src.SuportFunctions.iniciar_chrome import iniciar_chrome_remoto
+from processDisparo.SuportFunctions.iniciar_chrome import iniciar_chrome_remoto
 
 def mover_csv():
     """Move o primeiro arquivo CSV encontrado na pasta Downloads para a pasta do projeto."""

@@ -2,7 +2,7 @@ import re
 import csv
 import time
 from pathlib import Path
-from src.SQLfunctions.ConsultFunctions import consulta_todos_cliente_sql, consulta_todos_clientes_indesejados_sql
+from processDisparo.SQLfunctions.ConsultFunctions import consulta_todos_cliente_sql, consulta_todos_clientes_indesejados_sql
 
 def gerar_contatos_em_txt():
     results = []

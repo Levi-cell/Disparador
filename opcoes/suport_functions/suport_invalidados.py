@@ -1,5 +1,5 @@
-from src.SQLfunctions.UpdateFunctions import atualizar_telefone_cliente_sql, ativar_disparo_por_id_sql
-from src.SQLfunctions.ConsultFunctions import consulta_cliente_sql
+from processDisparo.SQLfunctions.UpdateFunctions import atualizar_telefone_cliente_sql, ativar_disparo_por_id_sql
+from processDisparo.SQLfunctions.ConsultFunctions import consulta_cliente_sql
 from opcoes.adicionar_lead import tratar_telefone_ja_existente
 from tratandoErros import trata_telefone
 import time

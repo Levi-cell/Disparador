@@ -1,1 +1,0 @@
-& "$PSScriptRoot\menuInterativo.exe"

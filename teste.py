@@ -190,15 +190,15 @@ def baixa_csv():
 # from selenium.webdriver.common.by import By
 # from selenium.webdriver.support.ui import WebDriverWait
 # from selenium.webdriver.support import expected_conditions as EC
-# from src.SuportFunctions.iniciar_chrome import iniciar_chrome_remoto
-# from src.DisparadorMain import conecta_ao_chrome_remoto
+# from processDisparo.SuportFunctions.iniciar_chrome import iniciar_chrome_remoto
+# from processDisparo.DisparadorMain import conecta_ao_chrome_remoto
 #
 #
 # # ================================
 # #  CONFIGURAÇÕES IMPORTANTES
 # # ================================
 #
-# FOTO_CAMINHO = r"C:\Disparo\Projeto\Disparador\src\Midia\quarta.jpg"  # coloque o nome da foto aqui
+# FOTO_CAMINHO = r"C:\Disparo\Projeto\Disparador\processDisparo\Midia\quarta.jpg"  # coloque o nome da foto aqui
 # NUMERO_WHATSAPP = "+5571994111866"  # <<<<<< número que você pediu
 #
 #
