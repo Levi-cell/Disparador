@@ -1,5 +1,21 @@
 from conexao import cursor, conexao
 
+from conexao import cursor, conexao
+
+
+def contatos_faltantes_do_ultimo_disparo_sql(id_anterior):
+    query = """
+        SELECT nome, telefone 
+        FROM clientes 
+        WHERE disparo_status = TRUE AND id_clientes > %s
+    """
+
+    cursor.execute(query, (id_anterior,))
+    resultado_banco = cursor.fetchall()
+
+    return resultado_banco
+
+
 def captura_nome_numero_banco_sql():
 
     cursor.execute("SELECT nome, telefone FROM clientes WHERE disparo_status = TRUE")

@@ -10,7 +10,7 @@ from banco import *
 
 ## Cria banco caso não exista, # ADM pode comentar a linha 13, 15 e 9 colocar um banco na conexao.
 
-criar_banco_se_nao_existir()
+# criar_banco_se_nao_existir()
 
 criar_table_clientes()
 

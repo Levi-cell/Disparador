@@ -119,5 +119,86 @@ def disparador_promocao():
 
     return
 
+# def disparador_promoca_Fallback():   # Caso o disparador trave por algum problema provavelmente gerado pelo cliente
+#
+#     opcao = escolhe_se_midia()
+#
+#     print("⚠️  ATENÇÃO, não use o dispositivo enquanto o disparador estiver sendo executado!!")
+#     print("⚠️  ATENÇÃO, não minimize o navegador!!")
+#     print("⚠️  Caso não esteja logado no whatsapp, tente logar dentro de 3 minutos.")
+#     print("----------")
+#     time.sleep(2)
+#
+#     iniciar_chrome_remoto()
+#
+#     dados_clientes = captura_nome_numero_banco_sql()
+#     print("📦 Dados dos clientes carregados!")
+#     print("----------")
+#     time.sleep(2)
+#
+#     driver = conecta_ao_chrome_remoto()
+#
+#     espera = WebDriverWait(driver, 180) # define tempo de espera por ação, use espera.until para cada comando
+#
+#     print("✔ Conectado ao Chrome remoto!\n")
+#     print("----------")
+#     time.sleep(2)
+#
+#     link_inicial = "https://web.whatsapp.com"
+#     driver.get(link_inicial)
+#
+#     print("🌐 Calibrando o WhatsApp...")
+#     print("----------")
+#
+#     time.sleep(5)
+#
+#     lista_clientes_desativados = []
+#
+#     if opcao == "1":
+#         lista_clientes_desativados = varre_clientes_com_midia(
+#             dados_clientes, driver, espera, lista_clientes_desativados
+#         )
+#     else:
+#
+#         lista_clientes_desativados = varre_clientes_sem_midia(
+#             dados_clientes, driver, espera, lista_clientes_desativados
+#         )
+#
+#     if len(lista_clientes_desativados) > 0:
+#         print("🚫 O disparo terminou, confira logo abaixo os clientes inválidos...")
+#         print("----------")
+#         time.sleep(2)
+#
+#         print_varios_clientes_tabela(lista_clientes_desativados)
+#
+#         clientes_corrigidos = clientes_invalidados(lista_clientes_desativados)
+#
+#         print("----------")
+#         time.sleep(2)
+#
+#         if len(clientes_corrigidos) > 0:
+#             print("🔄 Confira logo abaixo os clientes com dados alterados...")
+#             print("----------")
+#             time.sleep(2)
+#
+#             print_varios_clientes_tabela(clientes_corrigidos)
+#         else:
+#             print("ℹ️ Nenhum cliente foi modificado.")
+#             print("----------")
+#             time.sleep(2)
+#     else:
+#         print("✔ Nenhum cliente estava com número inválido.")
+#         print("----------")
+#         time.sleep(2)
+#
+#     print("📭 Não há mais números para enviar mensagem")
+#     print("----------")
+#     time.sleep(2)
+#
+#     print("✅ Disparo finalizado!")
+#     print("----------")
+#     time.sleep(2)
+#
+#     return
 
 

@@ -17,7 +17,7 @@ def escolhe_foto_data():
         return foto
 
     else:
-        foto = r"C:\Disparo\Projeto\Disparador\src\Midia\video.mp4"
+        foto = r"C:\Disparo\Projeto\Disparador\src\Midia\caldo.jpeg"
         return foto
 
 def define_foto(opcao):

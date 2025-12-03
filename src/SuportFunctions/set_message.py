@@ -280,13 +280,12 @@ def aviso_ausencia():
 def mensagem_atualizacao():
 
     mensagem = (
-        "🌵 AVISO, CaldoLover! 🌵\n"
-        "Tem novidade chegando na nossa agenda do Caldão Nordestino!\n"
+        " CaldoLover! 🌵\n"
+        "Já estamos abertos e seguindo a agenda nova 😊!\n"
         "\n"
-        "A partir de hoje, estaremos abrindo de terça a sábado, sempre prontos para servir "
-        "aquele caldinho gostoso que abraça a alma e aquece o coração. 💛🔥\n"
-        "\n"
-        "Terça estaremos te esperando!\n"
+        "Lembrando que estaremos abrindo das terças aos sábados, sempre prontos para servir "
+        "aquele caldinho gostoso que abraça a alma e aquece o coração! 💛🔥\n"
+
     )
 
     return mensagem
@@ -307,7 +306,7 @@ def escolhe_sua_mensagem():
 
         if escolha == "1":
             if confirmar_acao():
-                return mensagem_do_dia(), escolha
+                return mensagem_atualizacao(), escolha
             else:
                 continue
 
