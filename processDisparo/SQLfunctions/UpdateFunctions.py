@@ -70,3 +70,17 @@ def atualizar_nome_cliente_sql(nome, id_cliente):
 
     cursor.execute(sql, valores)
     conexao.commit()
+
+def marcar_enviou_dia_sql(telefone):
+    """
+    Atualiza o campo 'enviou_dia' para TRUE para o cliente com o ID especificado.
+    """
+    sql = "UPDATE clientes SET enviou_dia = TRUE WHERE telefone = %s"
+    cursor.execute(sql, (telefone,))
+    conexao.commit()
+
+def desativar_enviou_dia_sql():
+    sql = "UPDATE clientes SET enviou_dia = FALSE"
+    cursor.execute(sql)
+    conexao.commit()
+

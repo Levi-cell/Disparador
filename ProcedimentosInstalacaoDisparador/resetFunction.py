@@ -131,22 +131,26 @@ def deletar_txt():
 # Chamada da função
 def baixa_nova_base_de_dados():
 
-    time.sleep(2)
-
-    deletar_csv()  # Deletando arquivos antigos se existir
+    deletar_csv()
     deletar_txt()
+
+    time.sleep(2)
     print("------------------------")
     print("❗️ATENÇÃO❗️ No primeiro acesso ao navegador o sistema pode pedir login...")
     print("------------------------")
     time.sleep(2)
-    print("caso isso aconteça você tera 3 minutos para fazer login após o navegador abrir...")
-    time.sleep(2)
+    print("caso isso aconteça pare o programa quando o google abrir, faça login, e execute o sistema de novo...")
+    time.sleep(4)
     print("------------------------")
     print("caso não faça você precisará voltar ao menu e ir para opçaõ 5 de novo")
     print("------------------------")
     time.sleep(5)
 
-    baixa_csv()  # Baixando novo csv
+    foi = baixa_csv()
+
+    if not foi:
+        return
+    # Baixando novo csv
 
     molda_txt_completo()  # Molda o novo txt salvando as alterações e black-list do banco antigo
     deletar_tabela_sql()  # agora podemos deletar a tabela

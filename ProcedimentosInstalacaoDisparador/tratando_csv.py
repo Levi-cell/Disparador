@@ -1,6 +1,7 @@
 import re
 import csv
 import time
+from tratandoErros import trata_nome_pejorativo_txt
 from pathlib import Path
 from processDisparo.SQLfunctions.ConsultFunctions import consulta_todos_cliente_sql, consulta_todos_clientes_indesejados_sql
 
@@ -88,6 +89,14 @@ def processar_contatos_txt():
 
         # manter apenas o primeiro nome
         primeiro_nome = nome_limpo.split()[0]
+
+        primeiro_nome = trata_nome_pejorativo_txt(primeiro_nome)
+
+        if primeiro_nome == "Ah" or primeiro_nome == "Cliente" or primeiro_nome == "Ifood":
+            return "Saudação"
+
+        if primeiro_nome == "IFOOD" or primeiro_nome == "ifood":
+            return "Saudação"
 
         return primeiro_nome
 

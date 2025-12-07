@@ -1,10 +1,12 @@
 from OpcaoIndesejados.indesejados import set_indesejados
 from ProcedimentosInstalacaoDisparador.mainReset import resetar_disparador
 from processDisparo.SQLfunctions.ConsultFunctions import consulta_todos_cliente_sql
+from processDisparo.SuportFunctions.set_message import escolhe_sua_mensagem, pergunta_antecede
+from processDisparo.DisparadorMain import escolhe_se_midia
 from opcoes.remover_lead import remomoca_da_lista_de_disparo
 from opcoes.adicionar_lead import adiciona_cliente_na_lista
 from opcoes.consultar_clientes import consulta_clientes
-from processDisparo.DisparadorMain import disparador_promocao
+from processDisparo.DisparadorMain import prepara_disparo
 from tratandoErros import *
 from banco import *
 
@@ -24,7 +26,7 @@ def menu_interativo():
     #
     # ADM pode comentar a linha 25, 27 e 29, caso coloque um banco na conexao.
 
-    criar_banco_se_nao_existir()
+    # criar_banco_se_nao_existir()
 
     criar_table_clientes()
 
@@ -46,7 +48,7 @@ def menu_interativo():
         opcao = input("\nDigite a opção desejada: ")
 
         if opcao == "1":
-            disparador_promocao()
+            prepara_disparo()
             parou = tratamento_de_retorno(parou)
             if parou:
                 break
@@ -97,3 +99,4 @@ def menu_interativo():
         else:
             print("\n⚠ Opção inválida. Tente novamente!")
 
+menu_interativo()

@@ -4,7 +4,7 @@ def contatos_faltantes_do_ultimo_disparo_sql(id_anterior):
     query = """
         SELECT nome, telefone 
         FROM clientes 
-        WHERE disparo_status = TRUE AND id_clientes > %s
+        WHERE disparo_status = TRUE AND id_cliente > %s and enviou_dia = False
     """
 
     cursor.execute(query, (id_anterior,))
@@ -12,13 +12,6 @@ def contatos_faltantes_do_ultimo_disparo_sql(id_anterior):
 
     return resultado_banco
 
-
-def captura_nome_numero_banco_sql():
-
-    cursor.execute("SELECT nome, telefone FROM clientes WHERE disparo_status = TRUE")
-    resultado_banco = cursor.fetchall()
-
-    return resultado_banco
 
 def captura_tudo_banco_sql():
 
@@ -40,7 +33,7 @@ def consulta_todos_cliente_sql():
 
 def consulta_cliente_sql(telefone):
     query = """
-            SELECT id_cliente, nome, telefone, disparo_status
+            SELECT id_cliente, nome, telefone, disparo_status, enviou_dia
             FROM clientes
             WHERE telefone = %s
         """
@@ -51,7 +44,7 @@ def consulta_cliente_sql(telefone):
 
 def consulta_cliente_id_sql(id_cliente):
     query = """
-            SELECT id_cliente, nome, telefone, disparo_status
+            SELECT id_cliente, nome, telefone, disparo_status, enviou_dia
             FROM clientes
             WHERE id_cliente = %s
         """

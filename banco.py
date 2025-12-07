@@ -28,7 +28,8 @@ def criar_table_clientes():
             id_cliente INT AUTO_INCREMENT PRIMARY KEY,
             nome VARCHAR(100) NOT NULL,
             telefone VARCHAR(20) NOT NULL,
-            disparo_status BOOLEAN NOT NULL
+            disparo_status BOOLEAN NOT NULL,
+            enviou_dia BOOLEAN NULL
         ) COMMENT = 'Tabela de clientes da loja';
     """)
 

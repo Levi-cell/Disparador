@@ -1,23 +1,52 @@
 import os
 import time
-from selenium.webdriver.common.by import By
+from processDisparo.SuportFunctions.iniciar_chrome import trazer_chrome_para_frente_e_acessar_aba
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import By
 from datetime import datetime
+from processDisparo.SuportFunctions.FunRandom import foto_randomica
+from selenium.common.exceptions import (
+    NoSuchElementException,
+    NoSuchWindowException,
+    NoSuchFrameException,
+    StaleElementReferenceException,
+    TimeoutException,
+    WebDriverException,
+    ElementClickInterceptedException,
+    ElementNotInteractableException,
+    InvalidElementStateException,
+    MoveTargetOutOfBoundsException,
+    UnexpectedAlertPresentException,
+    JavascriptException
+)
+
+def midia_aleatoria():
+    midia_sorteada = foto_randomica()
+
+    video_1 = r"C:\Disparo\Projeto\Disparador\processDisparo\Midia\video.mp4"
+    foto_1 = r"C:\Disparo\Projeto\Disparador\processDisparo\Midia\caldo.jpeg"
+
+    dict_foto = {1: video_1,
+                 2: foto_1}
+
+    for chave in dict_foto:
+        if chave == midia_sorteada:
+            return dict_foto[chave]
 
 
 def escolhe_foto_data():
     dia_semana = datetime.now().weekday()
 
     if dia_semana == 2:  # 2 = quarta
-        foto = r"C:\Disparo\Projeto\Disparador\src\Midia\quarta.jpg"
+        foto = r"C:\Disparo\Projeto\Disparador\processDisparo\Midia\quarta.jpg"
         return foto
 
     elif dia_semana == 3:  # 3 = quinta
-        foto = r"C:\Disparo\Projeto\Disparador\src\Midia\Quinta.jpg"
+        foto = r"C:\Disparo\Projeto\Disparador\processDisparo\Midia\Quinta.jpg"
         return foto
 
     else:
-        foto = r"C:\Disparo\Projeto\Disparador\src\Midia\caldo.jpeg"
+        foto = midia_aleatoria()
         return foto
 
 def define_foto(opcao):
@@ -28,19 +57,21 @@ def define_foto(opcao):
 
     elif opcao == "2":
 
-        foto = r"C:\Disparo\Projeto\Disparador\src\Midia\ausencia.png"
+        foto = r"C:\Disparo\Projeto\Disparador\processDisparo\Midia\ausencia.png"
 
         return foto
 
-    else:
+    elif opcao == "3":
 
-        foto = r"C:\Disparo\Projeto\Disparador\src\Midia\aviso.jpg"
+        foto = r"C:\Disparo\Projeto\Disparador\processDisparo\Midia\aviso.jpg"
 
         return foto
 
 
 
-def enviar_foto_whatsapp(opcao, espera):
+def enviar_foto_whatsapp(opcao, espera, link):
+
+    deu_certo = True
 
     foto = define_foto(opcao)
     print("\n----------- TESTANDO CAMINHO DA FOTO -----------")
@@ -49,27 +80,56 @@ def enviar_foto_whatsapp(opcao, espera):
         print(f"✔ Foto encontrada!\nCaminho: {foto}")
     else:
         print(f"❌ ERRO! Foto não encontrada!\n{foto}")
-        return
+        return not deu_certo
     time.sleep(2)
     print("-----------------------------------------------\n")
 
     # Abrir botão de anexar
+    botao_clip = None
+    trazer_chrome_para_frente_e_acessar_aba(link)
     try:
+        trazer_chrome_para_frente_e_acessar_aba(link)
         botao_clip = espera.until(
             EC.element_to_be_clickable((By.XPATH, """// *[ @ id = "main"] / footer / div[1] / div / span / div / div[2] / div / div[
         1] / div / span / button / div / div / div[1]"""))
         )
         botao_clip.click()
         print("✔ Botão de anexar clicado!")
-    except Exception as e:
-        print("❌ ERRO ao clicar no botão de anexar!")
+
+    except (
+    NoSuchElementException,
+    TimeoutException,
+    StaleElementReferenceException,
+    WebDriverException,
+    NoSuchFrameException,
+    NoSuchWindowException,
+    ElementClickInterceptedException,
+    ElementNotInteractableException,
+    InvalidElementStateException,
+    MoveTargetOutOfBoundsException,
+    UnexpectedAlertPresentException,
+    JavascriptException,
+)as e:
         print(e)
-        return
+        return not deu_certo
+
+    except Exception:
+        print("❌ ERRO ao carregar a foto!")
+
+        return not deu_certo
+
+    if botao_clip is None:
+        return not deu_certo
+
+
 
     time.sleep(2)
 
     # Input de imagem
+    input_imagem = None
+    trazer_chrome_para_frente_e_acessar_aba(link)
     try:
+        trazer_chrome_para_frente_e_acessar_aba(link)
         input_imagem = espera.until(
             EC.presence_of_element_located(
                 (By.XPATH, "//input[@accept='image/*,video/mp4,video/3gpp,video/quicktime']")
@@ -77,8 +137,26 @@ def enviar_foto_whatsapp(opcao, espera):
         )
         input_imagem.send_keys(foto)
         print("✔ Foto carregada!")
-    except Exception as e:
-        print("❌ ERRO ao carregar a foto!")
+        return deu_certo
+
+    except (
+    NoSuchElementException,
+    TimeoutException,
+    StaleElementReferenceException,
+    WebDriverException,
+    NoSuchFrameException,
+    NoSuchWindowException,
+    ElementNotInteractableException,
+    InvalidElementStateException,
+)as e:
         print(e)
-        return
+        return not deu_certo
+
+    except Exception:
+        print("❌ ERRO ao carregar a foto!")
+
+        return not deu_certo
+
+
+
 

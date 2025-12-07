@@ -3,6 +3,43 @@ from datetime import datetime
 from tratandoErros import confirmar_acao
 from processDisparo.SuportFunctions.FunRandom import numero_message
 
+def pergunta_antecede():
+
+    while True:
+        print("Deseja enviar com ou sem aviso de antecedência?")
+        print("[1]  → Sim")
+        print("[2]  → Não")
+
+        escolha = input("Digite sua opção: ").strip()
+        time.sleep(2)
+        print("---------")
+
+        if escolha == "1":
+            if confirmar_acao():
+                return escolha
+            else:
+                continue
+
+        elif escolha == "2":
+            if confirmar_acao():
+                return escolha
+            else:
+                continue
+
+        else:
+            print("❌ Opção inválida. Tente novamente.")
+            time.sleep(2)
+            print("------------------------------")
+            continue
+
+
+def message_antencede():
+
+    message = "\n\nA partir dás 18 estamos aí! 😊"
+
+    return message
+
+
 def menssangem_aleatoria_quinta():
 
     mensagem_sorteada = numero_message()
@@ -165,102 +202,112 @@ def menssangem_aleatoria_quarta():
         if chave == mensagem_sorteada:
             return dict_mensagens[chave]
 
-def menssangem_aleatoria_dias_frios():
-
-    mensagem_sorteada = numero_message()
-
-    mensagem_1 = (
-        "Friozinho no fim de semana…\n\n"
-        "O que falta para nosso CaldoLover fechar a noite com chave de ouro? 🤔🌵 Um caldinho quentinho! 😋🔥\n"
-        "(Caso não queira receber nossos avisos e lembretes, é só avisar.)"
-    )
-
-    mensagem_2 = (
-        "Aquele friozinho no fim de semana chegou…\n\n"
-        "E para o nosso CaldoLover fechar a noite com perfeição só falta um caldinho delicioso! 🤗🔥\n"
-        "(Se preferir não receber nossos lembretes e avisos, basta nos informar.)"
-    )
-
-    mensagem_3 = (
-        "Friozinho gostoso no fim de semana…\n\n"
-        "O que falta para nosso CaldoLover fechar a noite com chave de ouro? 🤔🌵 Um caldinho bem quente! 😍🔥\n"
-        "(Se não quiser mais receber nossos avisos e lembretes, só avisar.)"
-    )
-
-    mensagem_4 = (
-        "Fim de semana geladinho…\n\n"
-        "E nosso CaldoLover já sabe o que falta pra completar, né? 😏🌵 Um caldinho quentinho irresistível! 🔥\n"
-        "(Caso deseje parar de receber nossos lembretes, é só avisar.)"
-    )
-
-    mensagem_5 = (
-        "Friozinho no fim de semana pedindo aquele aconchego…\n\n"
-        "O que falta para nosso CaldoLover fechar a noite com chave de ouro? 🤔🌵 Um caldinho quentinho e delicioso! 🤗🔥\n"
-        "(Se não quiser continuar recebendo nossos avisos, é só nos dizer.)"
-    )
-
-    mensagem_6 = (
-        "Chegou o friozinho no fim de semana…\n\n"
-        "E o que falta para nosso CaldoLover fechar bem a noite? 🤔 Aquele caldinho quentinho que abraça! 🌵🔥\n"
-        "(Caso queira parar de receber nossos lembretes, avise.)"
-    )
-
-    mensagem_7 = (
-        "Friozinho do fim de semana batendo…\n\n"
-        "E só falta uma coisa para nosso CaldoLover fechar a noite com chave de ouro 🌵: um caldinho perfeito pra aquecer! 😌🔥\n"
-        "(Se preferir não receber mais lembretes, basta avisar.)"
-    )
-
-    mensagem_8 = (
-        "Com esse friozinho no fim de semana…\n\n"
-        "O que falta para nosso CaldoLover completar a noite? 🤔🌵 Um caldinho saboroso! 🥰🔥\n"
-        "(Caso não queira mais receber nossos lembretes, apenas nos avise.)"
-    )
-
-    mensagem_9 = (
-        "Fim de semana geladinho chegando…\n\n"
-        "O que falta para nosso CaldoLover fechar a noite com chave de ouro? 🤔🌵 Um caldinho quentinho daqueles! 😋🔥\n"
-        "(Se não quiser receber nossos avisos e lembretes, é só informar.)"
-    )
-
-    mensagem_10 = (
-        "Friozinho no fim de semana… perfeito pra quê? 🤔🌵\n\n"
-        "Para nosso CaldoLover fechar a noite com chave de ouro com um caldinho delicioso! 😋🔥\n"
-        "(Caso não queira mais receber lembretes e avisos, avise por aqui.)"
-    )
-
-    # Dicionário com todas as mensagens
-    dict_mensagens = {
-        0: mensagem_1,
-        1: mensagem_2,
-        2: mensagem_3,
-        3: mensagem_4,
-        4: mensagem_5,
-        5: mensagem_6,
-        6: mensagem_7,
-        7: mensagem_8,
-        8: mensagem_9,
-        9: mensagem_10
-    }
-
-    for chave in dict_mensagens:
-        if chave == mensagem_sorteada:
-            return dict_mensagens[chave]
+# def menssangem_aleatoria_dias_frios():
+#
+#     mensagem_sorteada = numero_message()
+#
+#     mensagem_1 = (
+#         "Friozinho no fim de semana…\n\n"
+#         "O que falta para nosso CaldoLover fechar a noite com chave de ouro? 🤔🌵 Um caldinho quentinho! 😋🔥\n"
+#         "(Caso não queira receber nossos avisos e lembretes, é só avisar.)"
+#     )
+#
+#     mensagem_2 = (
+#         "Aquele friozinho no fim de semana chegou…\n\n"
+#         "E para o nosso CaldoLover fechar a noite com perfeição só falta um caldinho delicioso! 🤗🔥\n"
+#         "(Se preferir não receber nossos lembretes e avisos, basta nos informar.)"
+#     )
+#
+#     mensagem_3 = (
+#         "Friozinho gostoso no fim de semana…\n\n"
+#         "O que falta para nosso CaldoLover fechar a noite com chave de ouro? 🤔🌵 Um caldinho bem quente! 😍🔥\n"
+#         "(Se não quiser mais receber nossos avisos e lembretes, só avisar.)"
+#     )
+#
+#     mensagem_4 = (
+#         "Fim de semana geladinho…\n\n"
+#         "E nosso CaldoLover já sabe o que falta pra completar, né? 😏🌵 Um caldinho quentinho irresistível! 🔥\n"
+#         "(Caso deseje parar de receber nossos lembretes, é só avisar.)"
+#     )
+#
+#     mensagem_5 = (
+#         "Friozinho no fim de semana pedindo aquele aconchego…\n\n"
+#         "O que falta para nosso CaldoLover fechar a noite com chave de ouro? 🤔🌵 Um caldinho quentinho e delicioso! 🤗🔥\n"
+#         "(Se não quiser continuar recebendo nossos avisos, é só nos dizer.)"
+#     )
+#
+#     mensagem_6 = (
+#         "Chegou o friozinho no fim de semana…\n\n"
+#         "E o que falta para nosso CaldoLover fechar bem a noite? 🤔 Aquele caldinho quentinho que abraça! 🌵🔥\n"
+#         "(Caso queira parar de receber nossos lembretes, avise.)"
+#     )
+#
+#     mensagem_7 = (
+#         "Friozinho do fim de semana batendo…\n\n"
+#         "E só falta uma coisa para nosso CaldoLover fechar a noite com chave de ouro 🌵: um caldinho perfeito pra aquecer! 😌🔥\n"
+#         "(Se preferir não receber mais lembretes, basta avisar.)"
+#     )
+#
+#     mensagem_8 = (
+#         "Com esse friozinho no fim de semana…\n\n"
+#         "O que falta para nosso CaldoLover completar a noite? 🤔🌵 Um caldinho saboroso! 🥰🔥\n"
+#         "(Caso não queira mais receber nossos lembretes, apenas nos avise.)"
+#     )
+#
+#     mensagem_9 = (
+#         "Fim de semana geladinho chegando…\n\n"
+#         "O que falta para nosso CaldoLover fechar a noite com chave de ouro? 🤔🌵 Um caldinho quentinho daqueles! 😋🔥\n"
+#         "(Se não quiser receber nossos avisos e lembretes, é só informar.)"
+#     )
+#
+#     mensagem_10 = (
+#         "Friozinho no fim de semana… perfeito pra quê? 🤔🌵\n\n"
+#         "Para nosso CaldoLover fechar a noite com chave de ouro com um caldinho delicioso! 😋🔥\n"
+#         "(Caso não queira mais receber lembretes e avisos, avise por aqui.)"
+#     )
+#
+#     # Dicionário com todas as mensagens
+#     dict_mensagens = {
+#         0: mensagem_1,
+#         1: mensagem_2,
+#         2: mensagem_3,
+#         3: mensagem_4,
+#         4: mensagem_5,
+#         5: mensagem_6,
+#         6: mensagem_7,
+#         7: mensagem_8,
+#         8: mensagem_9,
+#         9: mensagem_10
+#     }
+#
+#     for chave in dict_mensagens:
+#         if chave == mensagem_sorteada:
+#             return dict_mensagens[chave]
 
 def mensagem_do_dia():
     # 0 = segunda, 1 = terça, 2 = quarta, 3 = quinta, 4 = sexta...
     dia_semana = datetime.now().weekday()
+    horario = datetime.now().hour
 
     if dia_semana == 2:   # 2 = quarta
         mensagem_quarta = menssangem_aleatoria_quarta()
+        if horario < 18:
+            ausencia = message_antencede()
+            mensagem_quarta = mensagem_quarta + ausencia
         return mensagem_quarta
 
     elif dia_semana == 3: # 3 = quinta
         mensagem_quinta = menssangem_aleatoria_quinta()
+        if horario < 18:
+            ausencia = message_antencede()
+            mensagem_quinta = mensagem_quinta + ausencia
         return mensagem_quinta
 
     else:
-        mensagem_dia_frio = menssangem_aleatoria_dias_frios()
+        mensagem_dia_frio = mensagem_simples()
+        if horario < 18:
+            ausencia = message_antencede()
+            mensagem_dia_frio = mensagem_dia_frio + ausencia
         return mensagem_dia_frio
 
 def aviso_ausencia():
@@ -306,19 +353,19 @@ def escolhe_sua_mensagem():
 
         if escolha == "1":
             if confirmar_acao():
-                return mensagem_atualizacao(), escolha
+                return escolha
             else:
                 continue
 
         elif escolha == "2":
             if confirmar_acao():
-                return aviso_ausencia(), escolha
+                return escolha
             else:
                 continue
 
         elif escolha == "3":
             if confirmar_acao():
-                return mensagem_atualizacao(), escolha
+                return escolha
             else:
                 continue
 
@@ -327,3 +374,94 @@ def escolhe_sua_mensagem():
             time.sleep(2)
             print("------------------------------")
             continue
+
+def menssangem_aleatoria_dias_frios():
+
+    mensagem_sorteada = numero_message()
+
+    mensagem_1 = (
+        "Bora renovar as forças nesse fim de semana… 💪✨\n\n"
+        "E nada ajuda mais nessa renovação do que um caldinho acolhedor para completar o dia! 😋🔥\n"
+        "(Caso não queira receber nossos avisos e lembretes, é só avisar.)"
+    )
+
+    mensagem_2 = (
+        "Fim de semana chegando… que tal dar aquele up na energia? 💥😌\n\n"
+        "E para acompanhar esse momento, um caldinho aconchegante cai perfeitamente! 🤗🔥\n"
+        "(Se preferir não receber nossos lembretes e avisos, basta nos informar.)"
+    )
+
+    mensagem_3 = (
+        "Hora de recarregar as energias do fim de semana… ✨⚡\n\n"
+        "E nada ajuda mais nessa recarga do que um caldinho revigorante pra completar o clima! 😍🔥\n"
+        "(Se não quiser mais receber nossos avisos e lembretes, só avisar.)"
+    )
+
+    mensagem_4 = (
+        "Fim de semana perfeito para renovar o ânimo… ✨🙌\n\n"
+        "E para embalar essa renovação, um caldinho acolhedor irresistível é a pedida certa! 😏🌵🔥\n"
+        "(Caso deseje parar de receber nossos lembretes, é só avisar.)"
+    )
+
+    mensagem_5 = (
+        "Aquele momento de repor as energias do fim de semana… 😌💛\n\n"
+        "E para deixar tudo ainda melhor, um caldinho aconchegante sempre cai perfeito! 🤗🌵🔥\n"
+        "(Se não quiser continuar recebendo nossos avisos, é só nos dizer.)"
+    )
+
+    mensagem_6 = (
+        "Hora de preparar bem o corpo para amanhã… 🚀✨\n\n"
+        "E para acompanhar esse cuidado, um caldinho acolhedor que abraça é ideal! 🌵🔥\n"
+        "(Caso queira parar de receber nossos lembretes, avise.)"
+    )
+
+    mensagem_7 = (
+        "Finalzinho de dia pedindo uma pausa… 😌✨\n\n"
+        "E para reforçar essa pausa, um caldinho revigorante dá aquele gás gostoso! 😌🌵🔥\n"
+        "(Se preferir não receber mais lembretes, basta avisar.)"
+    )
+
+    mensagem_8 = (
+        "Fim de semana bom é aquele em que a gente repõe as energias… ✨😍\n\n"
+        "E nada combina mais com esse momento do que um caldinho aconchegante para fechar o dia! 🥰🌵🔥\n"
+        "(Caso não queira mais receber nossos lembretes, apenas nos avise.)"
+    )
+
+    mensagem_9 = (
+        "Preparando o corpo e a mente para amanhã… 🌟🙌\n\n"
+        "E para ajudar nessa preparação, um caldinho acolhedor faz toda a diferença! 😋🌵🔥\n"
+        "(Se não quiser receber nossos avisos e lembretes, é só informar.)"
+    )
+
+    mensagem_10 = (
+        "Que tal dar aquele gás para encerrar o dia bem? ✨💪\n\n"
+        "E para fechar com chave de ouro, um caldinho revigorante é perfeito para o momento! 😋🌵🔥\n"
+        "(Caso não queira mais receber lembretes e avisos, avise por aqui.)"
+    )
+
+    # Dicionário com todas as mensagens
+    dict_mensagens = {
+        0: mensagem_1,
+        1: mensagem_2,
+        2: mensagem_3,
+        3: mensagem_4,
+        4: mensagem_5,
+        5: mensagem_6,
+        6: mensagem_7,
+        7: mensagem_8,
+        8: mensagem_9,
+        9: mensagem_10
+    }
+
+    for chave in dict_mensagens:
+        if chave == mensagem_sorteada:
+            return dict_mensagens[chave]
+
+
+def mensagem_simples():
+
+    message = ("O tempo esfriou, e o caldão nordestino já está quentinho esperando por você 😊💛🔥!\n\n"
+               "Aproveita por que depois de hoje só terça-feira 👀")
+
+    return message
+

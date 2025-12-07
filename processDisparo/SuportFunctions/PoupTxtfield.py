@@ -1,16 +1,26 @@
 from processDisparo.SQLfunctions.ConsultFunctions import consulta_cliente_sql
-from selenium.webdriver.support import expected_conditions as EC
 from processDisparo.SQLfunctions.UpdateFunctions import desativar_disparo_sql
+from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
-from selenium.common.exceptions import TimeoutException
+from processDisparo.SuportFunctions.iniciar_chrome import trazer_chrome_para_frente_e_acessar_aba
 from selenium.webdriver.common.by import By
 import time
+from selenium.common.exceptions import (
+    NoSuchElementException,
+    NoSuchWindowException,
+    NoSuchFrameException,
+    StaleElementReferenceException,
+    TimeoutException,
+    WebDriverException,
+)
 
-def detectar_popup_ou_chat(driver, telefone):
+def detectar_popup_ou_chat(driver, telefone, link):
 
-    espera = WebDriverWait(driver, 180)
-
+    deu_certo = True
+    espera = WebDriverWait(driver, 30)
+    trazer_chrome_para_frente_e_acessar_aba(link)
     try:
+        trazer_chrome_para_frente_e_acessar_aba(link)
         elemento = espera.until(
             EC.any_of(
                 # 🔴 POPUP de número inválido
@@ -40,14 +50,28 @@ def detectar_popup_ou_chat(driver, telefone):
             print("⛔ Cliente marcado como INATIVO!")
             print("---------------")
             time.sleep(1)
-            return False, novo_cliente_desativado   # ← NÃO CONTINUA O DISPARO
+            return False, novo_cliente_desativado, deu_certo   # ← NÃO CONTINUA O DISPARO
 
         # ✔ CASO CONTRÁRIO, O CHAT ABRIU NORMALMENTE
         print("📨 Chat carregado — número válido!")
         print("---------------")
         time.sleep(1)
-        return True, None
+        return True, None, deu_certo
 
-    except TimeoutException:
+    except (
+    NoSuchElementException,
+    TimeoutException,
+    StaleElementReferenceException,
+    WebDriverException,
+    NoSuchFrameException,
+    NoSuchWindowException,
+)as e:
+        print(e)
         print("⚠ Tempo esgotado sem detectar nada!")
-        return False, None
+        deu_certo = True
+        return False, None, not deu_certo
+
+    except Exception:
+        deu_certo = True
+        return False, None, not deu_certo
+

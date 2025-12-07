@@ -1,6 +1,6 @@
 import time
 import re
-
+import unicodedata
 
 def confirmar_acao():
     print("Confirmar a ação?")
@@ -211,3 +211,64 @@ def trata_telefone(telefone: str) -> str:
         return numeros
 
 
+def trata_nome_pejorativo_txt(nome: str) -> str:
+    """
+    Limpa e valida um nome:
+    - Aceita somente letras, acentos e espaço.
+    - Remove emojis e caracteres inválidos.
+    - Bloqueia palavras pejorativas.
+    - Bloqueia repetições exageradas (aaaaaa, kkkkkk, xxxxxx).
+    - Bloqueia nomes muito curtos ou vazios.
+    - Sempre retorna apenas o primeiro nome.
+    """
+
+
+    # Remove emojis e caracteres não alfabéticos
+    nome = re.sub(r"[^A-Za-zÀ-ÖØ-öø-ÿ\s]", "", nome)
+
+    # Normaliza espaços
+    nome = re.sub(r"\s+", " ", nome).strip()
+
+    # Se estiver vazio → Saudação
+    if not nome:
+        return "Saudação"
+
+    # Sempre manter apenas o primeiro nome
+    primeiro = nome.split()[0]
+
+    # Lista de palavras proibidas
+    palavras_proibidas = {
+        "porra", "merda", "bosta", "caralho", "cacete",
+        "desgraça", "vagabundo", "vagabunda", "fdp",
+        "foda", "foder", "fudido", "fudida", "arrombado",
+        "arrombada", "pau", "rola", "piroca", "pica",
+        "buceta", "xoxota", "xereca", "cu", "cuzão",
+        "cuzona", "otário", "otária", "idiota", "imbecil",
+        "burro", "burra", "corno", "corna", "desgraçado",
+        "desgraçada", "canalha", "cretino", "cretina",
+        "babaca", "energúmeno", "nojento", "nojenta",
+        "trapaceiro", "enganador", "pilantra", "safado",
+        "safada", "sem-vergonha", "sem vergonha",
+        "puta", "puto", "putinha", "prostituta",
+        "prostituto", "escroto", "escrota", "miserável",
+        "macaco", "gay"
+    }
+
+    # Se o primeiro nome for pejorativo → Saudação
+    if primeiro.lower() in palavras_proibidas:
+        return "Saudação"
+
+    # ❗ Bloqueia nomes com letras repetidas exageradas (ex: aaaaa, kkkkkk, xxxxx)
+    if re.fullmatch(r"(.)\1{3,}", primeiro.lower()):
+        return "Saudação"
+
+    # ❗ Bloqueia nomes muito curtos (1 letra)
+    if len(primeiro) <= 1:
+        return "Saudação"
+
+    # ❗ Bloqueia nomes tipo "aaa", "bbb", "ccc"
+    if len(set(primeiro.lower())) == 1:
+        return "Saudação"
+
+    # Capitaliza corretamente (Carlos, João, José)
+    return primeiro

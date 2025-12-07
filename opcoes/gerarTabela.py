@@ -4,7 +4,7 @@ def print_cliente_tabela(resultado):
     Agora inclui a coluna disparo_status.
     """
 
-    id_cliente, nome, telefone, disparo_status = resultado
+    id_cliente, nome, telefone, disparo_status, enviou_dia = resultado
 
     # Converte booleano para texto mais legível
     status_formatado = "Ativo" if disparo_status else "Inativo"
@@ -33,7 +33,7 @@ def print_varios_clientes_tabela(registros):
     print("+------------+-------------------------------+------------------+----------------+")
 
     for registro in registros:
-        id_cliente, nome, telefone, disparo_status = registro
+        id_cliente, nome, telefone, disparo_status, enviou_dia = registro
 
         status_formatado = "Ativo" if disparo_status else "Inativo"
 

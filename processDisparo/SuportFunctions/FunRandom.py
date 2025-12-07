@@ -5,3 +5,6 @@ def numero_message():
 
 def numero_randomico():
     return random.randint(1, 5)
+
+def foto_randomica():
+    return random.randint(1, 2)

@@ -2,6 +2,9 @@ import time
 from ProcedimentosInstalacaoDisparador.resetFunction import baixa_nova_base_de_dados
 
 def resetar_disparador():
+    print("⚠️ Não feche o sistema enquanto estiver baixando a nova base de dados...")
+    print("------------------------")
+    time.sleep(2)
     print("Essa opção irá baixar os contatos do seu número de telefone para o sistema...")
     print("------------------------")
     time.sleep(4)
