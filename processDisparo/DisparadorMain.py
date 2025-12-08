@@ -851,6 +851,7 @@ def disparador_promocao(id_cliente, midia, tipo_message):
     driver = conecta_ao_chrome_remoto()
     if not driver:
         trata_erro_inicial(id_cliente, midia, tipo_message)
+        return
 
     espera = WebDriverWait(driver, 30)
 
@@ -863,6 +864,7 @@ def disparador_promocao(id_cliente, midia, tipo_message):
 
     if not foi:
         trata_erro_inicial(id_cliente, midia, tipo_message)
+        return
 
     trazer_chrome_para_frente_e_acessar_aba(link_inicial)
     print("🌐 Calibrando o WhatsApp...")
@@ -880,7 +882,7 @@ def disparador_promocao(id_cliente, midia, tipo_message):
             dados_clientes, driver, espera, lista_clientes_desativados, tipo_message, midia
         )
 
-    if len(lista_clientes_desativados) > 0:
+    if lista_clientes_desativados is not None and len(lista_clientes_desativados) > 0:
         print("🚫 O disparo terminou, confira logo abaixo os clientes inválidos...")
         print("----------")
         time.sleep(2)
@@ -951,7 +953,7 @@ def paste_text_into_field(campo, mensagem: str):
 
 
 def localiza_campo_texto(espera, link_whatsapp):
-    campo_mensagem = None
+    foi = True
     try:
         trazer_chrome_para_frente_e_acessar_aba(link_whatsapp)
         campo_mensagem = espera.until(
@@ -961,18 +963,18 @@ def localiza_campo_texto(espera, link_whatsapp):
         )
         campo_mensagem.send_keys(Keys.CONTROL, "a")
         campo_mensagem.send_keys(Keys.BACKSPACE)
-        return campo_mensagem
+        return campo_mensagem, foi
 
     except (
         NoSuchElementException, TimeoutException, StaleElementReferenceException,
         WebDriverException, NoSuchFrameException, NoSuchWindowException,
     ) as e:
         print(e)
-        return False
+        return None, not foi
 
     except Exception as e:
         print(e)
-        return False
+        return None, not foi
 
 
 
@@ -1039,8 +1041,6 @@ def envia_foto_botao(link_whatsapp, espera):
         print("❌ Não foi encontrado o botão de enviar ❌")
         return False
 
-
-
 def varre_clientes_com_midia(
     dados_clientes, driver, espera, lista_clientes_desativados,
     tipo_message, midia
@@ -1078,6 +1078,7 @@ def varre_clientes_com_midia(
         foi = abre_link(driver, link_whatsapp)
         if not foi:
             tratativa_disparo(nome, telefone, midia, tipo_message)
+            return
 
         trazer_chrome_para_frente_e_acessar_aba(link_whatsapp)
         time.sleep(3)
@@ -1087,6 +1088,7 @@ def varre_clientes_com_midia(
         )
         if not deu_certo:
             tratativa_disparo(nome, telefone, midia, tipo_message)
+            return
 
         if numero_avalidar is False and cliente_removido is not None:
             print("⏭ Pulando número inválido!\n")
@@ -1095,15 +1097,17 @@ def varre_clientes_com_midia(
             continue
 
         trazer_chrome_para_frente_e_acessar_aba(link_whatsapp)
-        campo_mensagem = localiza_campo_texto(espera, link_whatsapp)
-        if not campo_mensagem:
+        campo_mensagem, foi = localiza_campo_texto(espera, link_whatsapp)
+        if not foi:
             tratativa_disparo(nome, telefone, midia, tipo_message)
+            return
 
         foi = cola_mensagem_campo(
             link_whatsapp, campo_mensagem, mensagem_personalizada
         )
         if not foi:
             tratativa_disparo(nome, telefone, midia, tipo_message)
+            return
 
         print("Enviando foto...")
         time.sleep(1)
@@ -1114,6 +1118,7 @@ def varre_clientes_com_midia(
         )
         if not deu_certo:
             tratativa_disparo(nome, telefone, midia, tipo_message)
+            return
 
         tempo_espera_1 = numero_randomico()
         print("⏳ Esperando %s segundos antes de enviar..." % tempo_espera_1)
@@ -1124,6 +1129,7 @@ def varre_clientes_com_midia(
 
         if not foi:
             tratativa_disparo(nome, telefone, midia, tipo_message)
+            return
 
         print("---------------")
         print("✔ Mensagem enviada!")
@@ -1176,6 +1182,7 @@ def varre_clientes_sem_midia(
         foi = abre_link(driver, link_whatsapp)
         if not foi:
             tratativa_disparo(nome, telefone, midia, tipo_message)
+            return
 
         trazer_chrome_para_frente_e_acessar_aba(link_whatsapp)
         time.sleep(3)
@@ -1186,23 +1193,26 @@ def varre_clientes_sem_midia(
 
         if not deu_certo:
             tratativa_disparo(nome, telefone, midia, tipo_message)
+            return
 
-        if numero_avalidar is False:
+        if numero_avalidar is False and cliente_removido is not None:
             print("⏭ Pulando número inválido!\n")
             lista_clientes_desativados.append(cliente_removido)
             time.sleep(3)
             continue
 
         trazer_chrome_para_frente_e_acessar_aba(link_whatsapp)
-        campo_mensagem = localiza_campo_texto(espera, link_whatsapp)
-        if not campo_mensagem:
+        campo_mensagem, foi = localiza_campo_texto(espera, link_whatsapp)
+        if not foi:
             tratativa_disparo(nome, telefone, midia, tipo_message)
+            return
 
         foi = cola_mensagem_campo(
             link_whatsapp, campo_mensagem, mensagem_personalizada
         )
         if not foi:
             tratativa_disparo(nome, telefone, midia, tipo_message)
+            return
 
         tempo_espera_1 = numero_randomico()
         print("⏳ Esperando %s segundos antes de enviar..." % tempo_espera_1)
@@ -1211,6 +1221,7 @@ def varre_clientes_sem_midia(
         foi = envia_mensagem_enter(campo_mensagem)
         if not foi:
             tratativa_disparo(nome, telefone, midia, tipo_message)
+            return
 
         print("---------------")
         print("✔ Mensagem enviada!")
