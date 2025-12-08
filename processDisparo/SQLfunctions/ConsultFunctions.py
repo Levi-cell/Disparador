@@ -12,6 +12,13 @@ def contatos_faltantes_do_ultimo_disparo_sql(id_anterior):
 
     return resultado_banco
 
+def captura_enviados_sql():
+
+    cursor.execute("SELECT * FROM clientes WHERE disparo_status = TRUE and enviou_dia = False")
+    resultado_banco = cursor.fetchall()
+
+    return resultado_banco
+
 
 def captura_tudo_banco_sql():
 

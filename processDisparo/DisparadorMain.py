@@ -673,10 +673,20 @@ from urllib3.exceptions import MaxRetryError
 
 
 def prepara_disparo():
+
     id_cliente = 0
     midia = escolhe_se_midia()
     tipo_mensagem = escolhe_sua_mensagem()
     disparador_promocao(id_cliente, midia, tipo_mensagem)
+
+    print("📭 Não há mais números para enviar mensagem")
+    print("----------")
+    time.sleep(2)
+
+    print("✅ Disparo finalizado!")
+    print("----------")
+    time.sleep(2)
+
     desativar_enviou_dia_sql()
     return
 
@@ -902,17 +912,17 @@ def disparador_promocao(id_cliente, midia, tipo_message):
             print("ℹ️ Nenhum cliente foi modificado.")
             print("----------")
             time.sleep(2)
-    else:
-        print("✔ Nenhum cliente estava com número inválido.")
-        print("----------")
-        time.sleep(2)
+    # else:
+    #     print("✔ Nenhum cliente estava com número inválido.")
+    #     print("----------")
+    #     time.sleep(2)
 
-    print("📭 Não há mais números para enviar mensagem")
-    print("----------")
-    time.sleep(2)
-    print("✅ Disparo finalizado!")
-    print("----------")
-    time.sleep(2)
+    # print("📭 Não há mais números para enviar mensagem")
+    # print("----------")
+    # time.sleep(2)
+    # print("✅ Disparo finalizado!")
+    # print("----------")
+    # time.sleep(2)
     return
 
 
