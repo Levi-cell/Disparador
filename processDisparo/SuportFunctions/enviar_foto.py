@@ -1,5 +1,6 @@
 import os
 import time
+import pyautogui
 from processDisparo.SuportFunctions.iniciar_chrome import trazer_chrome_para_frente_e_acessar_aba
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
@@ -20,6 +21,13 @@ from selenium.common.exceptions import (
     JavascriptException
 )
 
+def carrega_foto_windows(caminho_foto):
+    time.sleep(1)
+    pyautogui.write(caminho_foto)
+    time.sleep(0.5)
+    pyautogui.press("enter")
+    print("✔ Caminho enviado ao Windows Explorer!")
+
 def midia_aleatoria():
     midia_sorteada = foto_randomica()
 
@@ -38,7 +46,7 @@ def escolhe_foto_data():
     dia_semana = datetime.now().weekday()
 
     if dia_semana == 2:  # 2 = quarta
-        foto = r"C:\Disparo\Projeto\Disparador\processDisparo\Midia\quarta.jpg"
+        foto = r"C:\Disparo\Projeto\Disparador\processDisparo\Midia\quarta.png"
         return foto
 
     elif dia_semana == 3:  # 3 = quinta
@@ -67,8 +75,6 @@ def define_foto(opcao):
 
         return foto
 
-
-
 def enviar_foto_whatsapp(opcao, espera, link):
 
     deu_certo = True
@@ -81,17 +87,15 @@ def enviar_foto_whatsapp(opcao, espera, link):
     else:
         print(f"❌ ERRO! Foto não encontrada!\n{foto}")
         return not deu_certo
-    time.sleep(2)
+
     print("-----------------------------------------------\n")
 
     # Abrir botão de anexar
-    botao_clip = None
     trazer_chrome_para_frente_e_acessar_aba(link)
     try:
         trazer_chrome_para_frente_e_acessar_aba(link)
         botao_clip = espera.until(
-            EC.element_to_be_clickable((By.XPATH, """// *[ @ id = "main"] / footer / div[1] / div / span / div / div[2] / div / div[
-        1] / div / span / button / div / div / div[1]"""))
+            EC.element_to_be_clickable((By.XPATH, """//*[@id="main"]/footer/div[1]/div/span/div/div/div/div[1]"""))
         )
         botao_clip.click()
         print("✔ Botão de anexar clicado!")
@@ -118,24 +122,18 @@ def enviar_foto_whatsapp(opcao, espera, link):
 
         return not deu_certo
 
-    if botao_clip is None:
-        return not deu_certo
-
-
-
-    time.sleep(2)
-
-    # Input de imagem
-    input_imagem = None
+    # fotos e videos
     trazer_chrome_para_frente_e_acessar_aba(link)
     try:
         trazer_chrome_para_frente_e_acessar_aba(link)
         input_imagem = espera.until(
-            EC.presence_of_element_located(
-                (By.XPATH, "//input[@accept='image/*,video/mp4,video/3gpp,video/quicktime']")
+            EC.element_to_be_clickable(
+                (By.XPATH, '//*[@id="app"]/div/div/span[6]/div/ul/div/div/div[2]/li/div/span')
             )
         )
-        input_imagem.send_keys(foto)
+        input_imagem.click()
+        carrega_foto_windows(foto)
+
         print("✔ Foto carregada!")
         return deu_certo
 
@@ -160,3 +158,16 @@ def enviar_foto_whatsapp(opcao, espera, link):
 
 
 
+
+
+
+"//input[@accept='image/*,video/mp4,video/3gpp,video/quicktime']"
+
+'//*[@id="app"]/div/div/span[6]/div/ul/div/div/div[2]/li'
+
+
+'//*[@id="app"]/div/div/span[6]/div/ul/div/div/div[2]/li/div/span'
+
+'//*[@id="app"]/div/div/span[6]/div/ul/div/div/div[2]/li/div/span'
+
+'//*[@id="app"]/div/div/span[6]/div/ul/div/div/div[2]/li/div'

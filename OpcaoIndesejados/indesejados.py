@@ -147,7 +147,7 @@ def set_indesejados():
             if cliente_encontrado is None:
                 continue
 
-            id_cliente, nome, telefone_atual, disparo_status_atual = cliente_encontrado
+            id_cliente, nome, telefone_atual, disparo_status_atual, envio = cliente_encontrado
 
             titulo("Cliente Selecionado")
             print(f"🧑 Nome: {nome}")

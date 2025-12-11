@@ -39,6 +39,8 @@ def resetar_disparador():
             print("Iniciando Instalação/Reset... 🔄")
             time.sleep(2)
             baixa_nova_base_de_dados()
+            print("Reinicie o programa para acessar os dados baixados...")
+            time.sleep(3)
             return
 
         elif escolha == "2":

@@ -32,7 +32,7 @@ def detectar_popup_ou_chat(driver, telefone, link):
                 # 🟢 Campo de mensagem do WhatsApp
                 EC.presence_of_element_located((
                     By.XPATH,
-                    "//footer//*[@contenteditable='true']"
+                    '//*[@id="main"]/footer/div[1]/div/span/div/div/div/div[3]/div[1]'
                 ))
             )
         )
@@ -41,7 +41,7 @@ def detectar_popup_ou_chat(driver, telefone, link):
         if elemento.tag_name == "div" and "dialog" in elemento.get_attribute("role"):
             print("\n❌ Número inválido detectado!")
             print("---------------")
-            time.sleep(1)
+            time.sleep(3)
 
             desativar_disparo_sql(telefone)
 
@@ -55,7 +55,7 @@ def detectar_popup_ou_chat(driver, telefone, link):
         # ✔ CASO CONTRÁRIO, O CHAT ABRIU NORMALMENTE
         print("📨 Chat carregado — número válido!")
         print("---------------")
-        time.sleep(1)
+
         return True, None, deu_certo
 
     except (

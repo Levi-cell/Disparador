@@ -142,9 +142,7 @@ def baixa_nova_base_de_dados():
     print("caso isso aconteça pare o programa quando o google abrir, faça login, e execute o sistema de novo...")
     time.sleep(4)
     print("------------------------")
-    print("caso não faça você precisará voltar ao menu e ir para opçaõ 5 de novo")
-    print("------------------------")
-    time.sleep(5)
+
 
     foi = baixa_csv()
 

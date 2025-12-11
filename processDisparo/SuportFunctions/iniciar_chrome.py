@@ -67,7 +67,7 @@ def bring_chrome_to_front():
     hwnd = win32gui.FindWindow(None, "WhatsApp")
     if hwnd:
         win32gui.ShowWindow(hwnd, win32con.SW_RESTORE)  # restaura se estiver minimizado
-        time.sleep(0.2)
+        time.sleep(0.25)
         win32gui.SetForegroundWindow(hwnd)  # traz para frente
 
 def trazer_chrome_para_frente_e_acessar_aba(url_alvo):
@@ -159,3 +159,5 @@ def trazer_chrome_para_frente_e_acessar_aba(url_alvo):
     except Exception:
         print("...") # ❌ Erro ao ativar aba:
         return False
+
+

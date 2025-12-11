@@ -118,6 +118,70 @@ def processar_contatos_txt():
     p.write_text("\n".join(saida), encoding="utf-8")
     print("✔ Contatos processados com sucesso!")
 
+def conserva_numeros_unicos_do_banco():
+    caminho = r"C:\Disparo\Projeto\Disparador\ProcedimentosInstalacaoDisparador\contatos.txt"
+    dados_banco = consulta_todos_cliente_sql()
+    # dados_banco deve retornar uma lista de tuplas ou dicionários com (id, nome, telefone, ...)
+
+    # -----------------------------
+    # 1) Ler o TXT existente
+    # -----------------------------
+    contatos_txt = []
+    numeros_txt = set()
+
+    with open(caminho, "r", encoding="utf-8") as file:
+        for linha in file:
+            linha = linha.strip()
+            if "|||" in linha:
+                nome, numero = linha.split("|||", 1)
+                nome = nome.strip(" -").strip()
+                numero = numero.strip()
+                # ignora linhas que são o cabeçalho "- Nome ||| Numero" (case-insensitive)
+                if nome.lower() == "nome" and numero.lower() == "numero":
+                    continue
+                contatos_txt.append((nome, numero))
+                numeros_txt.add(numero)
+
+    # -----------------------------
+    # 2) Ler números do banco
+    # -----------------------------
+    novos_contatos = []
+    for cliente in dados_banco:
+        # ajusta conforme estrutura retornada por consulta_todos_cliente_sql
+        # aqui assumimos cliente[1]=nome, cliente[2]=telefone
+        nome_db = cliente[1]
+        numero_db = cliente[2]
+
+        if numero_db is None:
+            continue
+        numero_db = numero_db.strip()
+        if not numero_db:
+            continue
+
+        if numero_db not in numeros_txt:
+            novos_contatos.append((nome_db.strip() if nome_db else "", numero_db))
+            numeros_txt.add(numero_db)
+
+    # -----------------------------
+    # 3) Recriar o contatos.txt (cabeçalho apenas 1 vez)
+    # -----------------------------
+    with open(caminho, "w", encoding="utf-8") as file:
+        # Cabeçalho (escrito apenas uma vez)
+        file.write("- Nome ||| Numero\n\n")
+
+        # Novos contatos do banco (após o cabeçalho)
+        for nome, numero in novos_contatos:
+            print(nome, numero)
+            file.write(f"- {nome} ||| {numero}\n\n")
+
+        # Contatos já existentes (lidos do arquivo original, sem o cabeçalho)
+        for nome, numero in contatos_txt:
+            file.write(f"- {nome} ||| {numero}\n\n")
+
+    print("✔ contatos.txt atualizado com cabeçalho (apenas uma vez)!")
+    print(f"✔ {len(novos_contatos)} novos contatos adicionados após o cabeçalho.")
+
+
 def verifica_numeros_iguais():
     # Consulta todos os clientes no banco
     dados_banco = consulta_todos_cliente_sql()
@@ -180,7 +244,7 @@ def verifica_numeros_iguais():
     print("✔ Arquivo atualizado com nomes do banco de dados!")
     print(f"📁 {caminho}")
 
-from pathlib import Path
+
 
 def remove_clientes_indesejados():
     # Busca lista no banco [(id, nome, telefone), ...]
@@ -228,6 +292,9 @@ def remove_clientes_indesejados():
 def molda_txt_completo():
     gerar_contatos_em_txt()
     processar_contatos_txt()
+    conserva_numeros_unicos_do_banco()
     verifica_numeros_iguais()
     remove_clientes_indesejados()
+
+
 

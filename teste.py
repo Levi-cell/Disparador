@@ -1,24 +1,25 @@
-import os
-import shutil
 import time
-import socket
+import os
 import subprocess
+import socket
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.chrome.options import Options
+from selenium.common.exceptions import *
+import pyautogui
+
+
+# ============================================================
+# CONFIGURAÇÃO DO CHROME REMOTO
+# ============================================================
 
 CHROME_PATH = r"C:\Program Files\Google\Chrome\Application\chrome.exe"
 PROFILE_PATH = r"C:\SeleniumProfile"
 PORT = 9222
 
-
-
-
-# ============================================================================================
-# FUNÇÕES AUXILIARES
-# ============================================================================================
 
 def porta_em_uso(porta: int) -> bool:
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -29,153 +30,119 @@ def porta_em_uso(porta: int) -> bool:
 
 def iniciar_chrome_remoto():
     if porta_em_uso(PORT):
-        print("⚠ Chrome já está aberto no modo remoto. Tudo certo.")
-        print("---------------")
+        print("⚠ Chrome já está aberto no modo remoto.")
         return
 
-    print("🚀 Iniciando Chrome em modo remoto...")
-    print("---------------")
-
-    comando = (
-        f'"{CHROME_PATH}" '
-        f'--remote-debugging-port={PORT} '
-        f'--user-data-dir="{PROFILE_PATH}" '
-        f'--disable-popup-blocking '
-    )
-
+    comando = f'"{CHROME_PATH}" --remote-debugging-port={PORT} --user-data-dir="{PROFILE_PATH}"'
     subprocess.Popen(comando)
     time.sleep(3)
-
-    print("✔ Chrome remoto iniciado com sucesso!")
-    print("---------------")
+    print("✔ Chrome remoto iniciado!")
 
 
 def conecta_ao_chrome_remoto():
-    options = Options()
-    options.add_experimental_option("debuggerAddress", f"127.0.0.1:{PORT}")
-    return webdriver.Chrome(options=options)
+    opcoes = Options()
+    opcoes.add_experimental_option("debuggerAddress", "127.0.0.1:9222")
+    return webdriver.Chrome(options=opcoes)
 
-def mover_csv():
-    """Move o primeiro arquivo CSV encontrado na pasta Downloads para a pasta do projeto."""
 
-    # Caminhos importantes
-    downloads = os.path.join(os.path.expanduser("~"), "Downloads")
-    destino_final = r"C:\Disparo\Projeto\Disparador\ProcedimentosInstalacaoDisparador"
+def trazer_chrome_para_frente(driver):
+    """Apenas maximiza a janela para garantir foco."""
+    try:
+        driver.maximize_window()
+    except:
+        pass
 
-    # Aguarda o navegador terminar o download
-    time.sleep(3)
 
-    # Lista somente arquivos CSV no Downloads
-    arquivos_csv = [
-        arquivo for arquivo in os.listdir(downloads)
-        if arquivo.lower().endswith(".csv")
-    ]
+# ============================================================
+# FUNÇÃO QUE ENVIA A MÍDIA (FINAL)
+# ============================================================
 
-    # Caso não exista nenhum arquivo CSV
-    if not arquivos_csv:
-        print("❌ Nenhum arquivo CSV encontrado na pasta Downloads.")
-        return
+def enviar_foto(numero, caminho_foto):
 
-    # Seleciona o primeiro CSV encontrado
-    arquivo = arquivos_csv[0]
-
-    origem = os.path.join(downloads, arquivo)
-    destino = os.path.join(destino_final, arquivo)
-
-    # Move o arquivo
-    shutil.move(origem, destino)
-    print(f"✔ Arquivo movido com sucesso para: {destino}")
-
-def baixa_csv():
+    if not os.path.exists(caminho_foto):
+        print("❌ ERRO: Foto não encontrada!")
+        print(caminho_foto)
+        return False
 
     iniciar_chrome_remoto()
     driver = conecta_ao_chrome_remoto()
 
-    driver.get("https://contacts.google.com/")
+    espera = WebDriverWait(driver, 20)
 
-    WebDriverWait(driver, 40).until(
-        EC.presence_of_element_located((By.TAG_NAME, "body"))
-    )
+    # Ir para o número
+    link = f"https://web.whatsapp.com/send?phone=55{numero}"
+    driver.get(link)
+    time.sleep(5)
 
-    time.sleep(3)
+    trazer_chrome_para_frente(driver)
 
+    # Abrir o botão de anexar
     try:
-        menu_button = driver.find_element(By.CSS_SELECTOR, "div[aria-label='Main menu']")
-        menu_button.click()
-        time.sleep(1)
-    except:
-        pass
+        botao_clip = espera.until(
+            EC.element_to_be_clickable((By.XPATH,
+                """//*[@id="main"]/footer/div[1]/div/span/div/div[2]/div/div[1]/div/span/button"""
+            ))
+        )
+        botao_clip.click()
+        print("✔ Botão de anexar clicado!")
 
-    export_button = WebDriverWait(driver, 20).until(
-        EC.element_to_be_clickable((By.XPATH,
-                                    '//*[@id="yDmH0d"]/c-wiz[2]/div/div[1]/div[2]/div[3]/div/div[1]/div[1]/div[2]/div/div[6]/span[2]/button/div'))
-    )
-    export_button.click()
-
-    time.sleep(2)
-
-    csv_option = WebDriverWait(driver, 20).until(
-        EC.element_to_be_clickable(
-            (By.XPATH, '//*[@id="yDmH0d"]/div[4]/div[2]/div/div[1]/div/div[3]/div[2]/div[1]/div'))
-    )
-    csv_option.click()
+    except Exception as e:
+        print("❌ ERRO ao clicar no clipe:", e)
+        return False
 
     time.sleep(1)
 
-    exportar_final = WebDriverWait(driver, 20).until(
-        EC.element_to_be_clickable((By.XPATH, '//*[@id="yDmH0d"]/div[4]/div[2]/div/div[2]/div[2]/button/span[5]'))
-    )
-    exportar_final.click()
+    # Clicar no item "Fotos e vídeos"
+    try:
+        fotos_videos = espera.until(
+            EC.element_to_be_clickable((By.XPATH,
+                """//*[@id="app"]/div/div/span[6]/div/ul/div/div/div[2]/li/div/span"""
+            ))
+        )
+        fotos_videos.click()
+        print("✔ Clicou em Fotos e vídeos!")
 
-    print("\n✔ Download iniciado. Arquivo aparecerá em Downloads.\n")
-    mover_csv()
-    # Move depois que o Chrome baixar
-    print("✔ Processo concluído!\n")
+    except Exception as e:
+        print("❌ ERRO ao clicar em Fotos e vídeos:", e)
+        return False
 
+    # ============================================================
+    # AQUI ABRE O WINDOWS EXPLORER
+    # Vamos digitar o caminho + Enter usando PyAutoGUI
+    # ============================================================
+    time.sleep(2)
+    pyautogui.write(caminho_foto)
+    pyautogui.press("enter")
+    print("✔ Caminho enviado ao Windows Explorer!")
 
+    # Aguardar o preview carregar
+    time.sleep(4)
 
+    # Clicar no botão de enviar
+    try:
+        enviar = espera.until(
+            EC.element_to_be_clickable((By.XPATH,
+                '//*[@id="app"]/div/div/div[3]/div/div[3]/div[2]/div/span/div/div/div/div[2]/div/div[2]/div[2]/div/div'
+            ))
+        )
+        enviar.click()
+        print("✔ Foto enviada com sucesso!")
 
+    except:
+        print("❌ ERRO ao clicar no botão enviar.")
+        return False
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    return True
 
 
+# ============================================================
+# EXECUTAR O ENVIO
+# ============================================================
 
-
-
-
-
-
-
-
-
+enviar_foto(
+    numero="71994111866",
+    caminho_foto=r"C:\Disparo\Projeto\Disparador\processDisparo\Midia\caldo.jpeg"
+)
 
 
 

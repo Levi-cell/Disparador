@@ -35,7 +35,8 @@ def pergunta_antecede():
 
 def message_antencede():
 
-    message = "\n\nA partir dás 18 estamos aí! 😊"
+    message = ("\n\nPS: Agende seu pedido ou nos mande um 💛 para garantir o seu antes que acabe! ás 18 horas iremos te notificar "
+               "e preparar o seu Caldinho 😊")
 
     return message
 
@@ -45,7 +46,7 @@ def menssangem_aleatoria_quinta():
     mensagem_sorteada = numero_message()
 
     mensagem_quinta_1 = (
-        "Boa noite Caldolover de plantão! 😊\n\n"
+        "Caldolover de plantão! 😊\n\n"
         "Hoje é a nossa tradicional Quinta Nordestina, caldo sabor nordestino está com R$3 de desconto! Peça já o seu 🌵🔥 exclusivo aqui no WhatsApp!\n"
         "(Se quiser pausar o recebimento das promoções, é só informar.)"
     )
@@ -57,7 +58,7 @@ def menssangem_aleatoria_quinta():
     )
 
     mensagem_quinta_3 = (
-        "Boa noite querido(a) Caldolover! 😊\n\n"
+        "querido(a) Caldolover! 😊\n\n"
         "Hoje todos os caldos sabor nordestino estão com R$3 OFF! Não perca o seu caldinho 🌵🔥 promoção exclusiva do WhatsApp!\n"
         "(Se preferir parar de receber nossas mensagens, é só pedir.)"
     )
@@ -69,7 +70,7 @@ def menssangem_aleatoria_quinta():
     )
 
     mensagem_quinta_5 = (
-        "Boa noite Caldolover! 😊\n\n"
+        "Caldolover! 😊\n\n"
         "Hoje tem caldo sabor nordestino com tamanhos a partir de 6,99! Aproveite e peça o seu 🌵🔥 válido somente no WhatsApp!\n"
         "(Caso não queira mais receber novidades, basta informar.)"
     )
@@ -81,7 +82,7 @@ def menssangem_aleatoria_quinta():
     )
 
     mensagem_quinta_7 = (
-        "Boa noite Caldolover! 😊\n\n"
+        "Caldolover! 😊\n\n"
         "O caldo sabor nordestino está com R$3 OFF em todos os tamanhos! Garanta o seu caldinho 🌵🔥 Promoção exclusiva do WhatsApp!\n"
         "(Se não quiser mais receber nossas promoções, pode avisar sem problema.)"
     )
@@ -93,7 +94,7 @@ def menssangem_aleatoria_quinta():
     )
 
     mensagem_quinta_9 = (
-        "Boa noite Caldolover querido(a)! 😊\n\n"
+        "Caldolover querido(a)! 😊\n\n"
         "Temos caldo nordestino com R$3 OFF hoje! Não deixe para depois 🌵🔥 oferta exclusiva do WhatsApp!\n"
         "(Se preferir não receber mensagens promocionais, é só informar.)"
     )
@@ -132,7 +133,7 @@ def menssangem_aleatoria_quarta():
     )
 
     mensagem2 = (
-        "Boa noite, Caldolover querido(a)! 😊\n\n"
+        "Caldolover querido(a)! 😊\n\n"
         "Hoje é dia de aproveitar o caldo de sururu com tamanhos a partir de R$8,99! Vem de caldinho 🌵🔥 somente pelo WhatsApp!\n"
         "(Se desejar parar de receber nossas ofertas, é só informar.)"
     )
@@ -144,7 +145,7 @@ def menssangem_aleatoria_quarta():
     )
 
     mensagem4 = (
-        "Boa noite Caldolover! 😊\n\n"
+        "Caldolover! 😊\n\n"
         "A quarta do sururuvis está garantida com R$3 OFF nos caldos de sururu! Garanta o seu 🌵🔥 apenas aqui no WhatsApp!\n"
         "(Caso deseje sair da lista de promoções, é só pedir.)"
     )
@@ -156,7 +157,7 @@ def menssangem_aleatoria_quarta():
     )
 
     mensagem6 = (
-        "Boa noite Caldolover! 😊\n\n"
+        "Caldolover! 😊\n\n"
         "O caldo de sururu está com R$3 OFF em todos os tamanhos! Aproveite agora 🌵🔥 — promoção exclusiva do WhatsApp!\n"
         "(Se quiser parar de receber promoções, só nos sinalizar.)"
     )
@@ -168,7 +169,7 @@ def menssangem_aleatoria_quarta():
     )
 
     mensagem8 = (
-        "Boa noite, Caldolover querido(a)! 😊\n\n"
+        "Caldolover querido(a)! 😊\n\n"
         "Hoje tem sururu com tamanhos a partir de R$8,99! Não deixe para depois 🌵🔥 só no WhatsApp!\n"
         "(Se desejar sair da lista de promoções, basta avisar.)"
     )
@@ -180,7 +181,7 @@ def menssangem_aleatoria_quarta():
     )
 
     mensagem10 = (
-        "Boa noite Caldolover! 😊\n\n"
+        "Caldolover! 😊\n\n"
         "Hoje tem Caldo de sururu com tamanhos a partir de R$8,99! Vem garantir o seu 🌵🔥 disponível somente no WhatsApp\n"
         "(Se preferir parar de receber nossas mensagens, é só avisar.)"
     )
@@ -202,87 +203,87 @@ def menssangem_aleatoria_quarta():
         if chave == mensagem_sorteada:
             return dict_mensagens[chave]
 
-# def menssangem_aleatoria_dias_frios():
-#
-#     mensagem_sorteada = numero_message()
-#
-#     mensagem_1 = (
-#         "Friozinho no fim de semana…\n\n"
-#         "O que falta para nosso CaldoLover fechar a noite com chave de ouro? 🤔🌵 Um caldinho quentinho! 😋🔥\n"
-#         "(Caso não queira receber nossos avisos e lembretes, é só avisar.)"
-#     )
-#
-#     mensagem_2 = (
-#         "Aquele friozinho no fim de semana chegou…\n\n"
-#         "E para o nosso CaldoLover fechar a noite com perfeição só falta um caldinho delicioso! 🤗🔥\n"
-#         "(Se preferir não receber nossos lembretes e avisos, basta nos informar.)"
-#     )
-#
-#     mensagem_3 = (
-#         "Friozinho gostoso no fim de semana…\n\n"
-#         "O que falta para nosso CaldoLover fechar a noite com chave de ouro? 🤔🌵 Um caldinho bem quente! 😍🔥\n"
-#         "(Se não quiser mais receber nossos avisos e lembretes, só avisar.)"
-#     )
-#
-#     mensagem_4 = (
-#         "Fim de semana geladinho…\n\n"
-#         "E nosso CaldoLover já sabe o que falta pra completar, né? 😏🌵 Um caldinho quentinho irresistível! 🔥\n"
-#         "(Caso deseje parar de receber nossos lembretes, é só avisar.)"
-#     )
-#
-#     mensagem_5 = (
-#         "Friozinho no fim de semana pedindo aquele aconchego…\n\n"
-#         "O que falta para nosso CaldoLover fechar a noite com chave de ouro? 🤔🌵 Um caldinho quentinho e delicioso! 🤗🔥\n"
-#         "(Se não quiser continuar recebendo nossos avisos, é só nos dizer.)"
-#     )
-#
-#     mensagem_6 = (
-#         "Chegou o friozinho no fim de semana…\n\n"
-#         "E o que falta para nosso CaldoLover fechar bem a noite? 🤔 Aquele caldinho quentinho que abraça! 🌵🔥\n"
-#         "(Caso queira parar de receber nossos lembretes, avise.)"
-#     )
-#
-#     mensagem_7 = (
-#         "Friozinho do fim de semana batendo…\n\n"
-#         "E só falta uma coisa para nosso CaldoLover fechar a noite com chave de ouro 🌵: um caldinho perfeito pra aquecer! 😌🔥\n"
-#         "(Se preferir não receber mais lembretes, basta avisar.)"
-#     )
-#
-#     mensagem_8 = (
-#         "Com esse friozinho no fim de semana…\n\n"
-#         "O que falta para nosso CaldoLover completar a noite? 🤔🌵 Um caldinho saboroso! 🥰🔥\n"
-#         "(Caso não queira mais receber nossos lembretes, apenas nos avise.)"
-#     )
-#
-#     mensagem_9 = (
-#         "Fim de semana geladinho chegando…\n\n"
-#         "O que falta para nosso CaldoLover fechar a noite com chave de ouro? 🤔🌵 Um caldinho quentinho daqueles! 😋🔥\n"
-#         "(Se não quiser receber nossos avisos e lembretes, é só informar.)"
-#     )
-#
-#     mensagem_10 = (
-#         "Friozinho no fim de semana… perfeito pra quê? 🤔🌵\n\n"
-#         "Para nosso CaldoLover fechar a noite com chave de ouro com um caldinho delicioso! 😋🔥\n"
-#         "(Caso não queira mais receber lembretes e avisos, avise por aqui.)"
-#     )
-#
-#     # Dicionário com todas as mensagens
-#     dict_mensagens = {
-#         0: mensagem_1,
-#         1: mensagem_2,
-#         2: mensagem_3,
-#         3: mensagem_4,
-#         4: mensagem_5,
-#         5: mensagem_6,
-#         6: mensagem_7,
-#         7: mensagem_8,
-#         8: mensagem_9,
-#         9: mensagem_10
-#     }
-#
-#     for chave in dict_mensagens:
-#         if chave == mensagem_sorteada:
-#             return dict_mensagens[chave]
+def menssangem_aleatoria_dias_frios():
+
+    mensagem_sorteada = numero_message()
+
+    mensagem_1 = (
+        "Friozinho no fim de semana…\n\n"
+        "O que falta para nosso CaldoLover fechar a noite com chave de ouro? 🤔🌵 Um caldinho quentinho! 😋🔥\n"
+        "(Caso não queira receber nossos avisos e lembretes, é só avisar.)"
+    )
+
+    mensagem_2 = (
+        "Aquele friozinho no fim de semana chegou…\n\n"
+        "E para o nosso CaldoLover fechar a noite com perfeição só falta um caldinho delicioso! 🤗🔥\n"
+        "(Se preferir não receber nossos lembretes e avisos, basta nos informar.)"
+    )
+
+    mensagem_3 = (
+        "Friozinho gostoso no fim de semana…\n\n"
+        "O que falta para nosso CaldoLover fechar a noite com chave de ouro? 🤔🌵 Um caldinho bem quente! 😍🔥\n"
+        "(Se não quiser mais receber nossos avisos e lembretes, só avisar.)"
+    )
+
+    mensagem_4 = (
+        "Fim de semana geladinho…\n\n"
+        "E nosso CaldoLover já sabe o que falta pra completar, né? 😏🌵 Um caldinho quentinho irresistível! 🔥\n"
+        "(Caso deseje parar de receber nossos lembretes, é só avisar.)"
+    )
+
+    mensagem_5 = (
+        "Friozinho no fim de semana pedindo aquele aconchego…\n\n"
+        "O que falta para nosso CaldoLover fechar a noite com chave de ouro? 🤔🌵 Um caldinho quentinho e delicioso! 🤗🔥\n"
+        "(Se não quiser continuar recebendo nossos avisos, é só nos dizer.)"
+    )
+
+    mensagem_6 = (
+        "Chegou o friozinho no fim de semana…\n\n"
+        "E o que falta para nosso CaldoLover fechar bem a noite? 🤔 Aquele caldinho quentinho que abraça! 🌵🔥\n"
+        "(Caso queira parar de receber nossos lembretes, avise.)"
+    )
+
+    mensagem_7 = (
+        "Friozinho do fim de semana batendo…\n\n"
+        "E só falta uma coisa para nosso CaldoLover fechar a noite com chave de ouro 🌵: um caldinho perfeito pra aquecer! 😌🔥\n"
+        "(Se preferir não receber mais lembretes, basta avisar.)"
+    )
+
+    mensagem_8 = (
+        "Com esse friozinho no fim de semana…\n\n"
+        "O que falta para nosso CaldoLover completar a noite? 🤔🌵 Um caldinho saboroso! 🥰🔥\n"
+        "(Caso não queira mais receber nossos lembretes, apenas nos avise.)"
+    )
+
+    mensagem_9 = (
+        "Fim de semana geladinho chegando…\n\n"
+        "O que falta para nosso CaldoLover fechar a noite com chave de ouro? 🤔🌵 Um caldinho quentinho daqueles! 😋🔥\n"
+        "(Se não quiser receber nossos avisos e lembretes, é só informar.)"
+    )
+
+    mensagem_10 = (
+        "Friozinho no fim de semana… perfeito pra quê? 🤔🌵\n\n"
+        "Para nosso CaldoLover fechar a noite com chave de ouro com um caldinho delicioso! 😋🔥\n"
+        "(Caso não queira mais receber lembretes e avisos, avise por aqui.)"
+    )
+
+    # Dicionário com todas as mensagens
+    dict_mensagens = {
+        0: mensagem_1,
+        1: mensagem_2,
+        2: mensagem_3,
+        3: mensagem_4,
+        4: mensagem_5,
+        5: mensagem_6,
+        6: mensagem_7,
+        7: mensagem_8,
+        8: mensagem_9,
+        9: mensagem_10
+    }
+
+    for chave in dict_mensagens:
+        if chave == mensagem_sorteada:
+            return dict_mensagens[chave]
 
 def mensagem_do_dia():
     # 0 = segunda, 1 = terça, 2 = quarta, 3 = quinta, 4 = sexta...
@@ -375,7 +376,7 @@ def escolhe_sua_mensagem():
             print("------------------------------")
             continue
 
-def menssangem_aleatoria_dias_frios():
+def menssangem_fim_de_semana():
 
     mensagem_sorteada = numero_message()
 
@@ -461,7 +462,7 @@ def menssangem_aleatoria_dias_frios():
 def mensagem_simples():
 
     message = ("O tempo esfriou, e o caldão nordestino já está quentinho esperando por você 😊💛🔥!\n\n"
-               "Aproveita por que depois de hoje só terça-feira 👀")
+               "(Caso não queira mais receber lembretes e avisos, avise por aqui.)")
 
     return message
 

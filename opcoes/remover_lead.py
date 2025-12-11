@@ -52,7 +52,7 @@ def remomoca_da_lista_de_disparo():
             time.sleep(2)
             continue
 
-        id_cliente, nome, telefone_atual, disparo_status_atual = cliente_encontrado
+        id_cliente, nome, telefone_atual, disparo_status_atual, envio = cliente_encontrado
 
         print(f"\n📌 Cliente selecionado: {nome}")
         print(f"📞 Telefone atual: {telefone_atual}")

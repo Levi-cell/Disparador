@@ -72,7 +72,7 @@ def conecta_chrome():
 
     try:
         driver = webdriver.Chrome(options=opcoes_chrome)
-    except WebDriverException as e:
+    except EXCEPTIONS as e:
         print(f"❌ Erro ao conectar ao Chrome: {e}")
         print("Dica: não mexa no computador e no navegador enquanto o arquivo estiver sendo baixado")
         time.sleep(5)
@@ -100,27 +100,27 @@ def baixa_csv():
     try:
         driver.get(link)
         trazer_chrome_para_frente_e_acessar_aba(link)
-    except (WebDriverException, NoSuchWindowException) as e:
+    except EXCEPTIONS as e:
         print(f"❌ Não foi possível abrir o site ou a janela foi fechada: {e}")
         return False
 
     time.sleep(3)
 
-    # Aguarda carregamento da página
+    # barra de pesquisa 1
 
     try:
         WebDriverWait(driver, 10).until(
             EC.presence_of_element_located((By.XPATH, '//*[@id="gb"]/div[2]/div[2]/div[2]/form/div/div/div/div/div/div[1]/input[1]'))
         )
-    except TimeoutException:
+    except EXCEPTIONS:
         print(f"Validando elementos base")
         pass
 
     time.sleep(3)
 
-    # Menu principal
+    # barra de pesquisa 2
     try:
-        menu_button = driver.find_element(By.XPATH, '//*[@id="yDmH0d"]/c-wiz[2]/div/div[1]/div[2]/div[3]/div/div[2]/div[3]')
+        menu_button = driver.find_element(By.XPATH, '//*[@id="gb"]/div[2]/div[2]/div[2]/form/div/div/div/div/div/div[1]/input[1]')
         menu_button.click()
         time.sleep(1)
     except EXCEPTIONS:
@@ -133,7 +133,7 @@ def baixa_csv():
         trazer_chrome_para_frente_e_acessar_aba(link)
         export_button = WebDriverWait(driver, 10).until(
             EC.element_to_be_clickable((By.XPATH,
-                                        '//*[@id="yDmH0d"]/c-wiz[2]/div/div[1]/div[2]/div[3]/div/div[1]/div[1]/div[2]/div/div[6]/span[2]/button/div'))
+                                        '//*[@id="yDmH0d"]/c-wiz[2]/main/div[1]/div[2]/div[3]/div/div[1]/div[1]/div[2]/div/div[6]/span[2]/button'))
         )
         export_button.click()
     except EXCEPTIONS as e:
