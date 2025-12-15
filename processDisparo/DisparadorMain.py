@@ -392,6 +392,9 @@ def varre_clientes_com_midia(
     dados_clientes, driver, espera, lista_clientes_desativados,
     tipo_message, midia
 ):
+
+    nao_disparo = nao_quer_disparo()
+
     for nome, telefone in dados_clientes:
 
         evita_dupla_mensagem = consulta_cliente_sql(telefone)
@@ -412,8 +415,10 @@ def varre_clientes_com_midia(
             mensagem_aleatoria = mensagem_do_dia()
         elif tipo_message == "2":
             mensagem_aleatoria = aviso_ausencia()
+            mensagem_aleatoria = mensagem_aleatoria + nao_disparo
         elif tipo_message == "3":
             mensagem_aleatoria = mensagem_atualizacao()
+            mensagem_aleatoria = mensagem_aleatoria + nao_disparo
 
         mensagem_personalizada = f"{nome} 🌵, {mensagem_aleatoria}"
 
@@ -503,6 +508,9 @@ def varre_clientes_sem_midia(
     dados_clientes, driver, espera, lista_clientes_desativados,
     tipo_message, midia
 ):
+
+    nao_disparo = nao_quer_disparo()
+
     for nome, telefone in dados_clientes:
 
         evita_dupla_mensagem = consulta_cliente_sql(telefone)
@@ -523,8 +531,10 @@ def varre_clientes_sem_midia(
             mensagem_aleatoria = mensagem_do_dia()
         elif tipo_message == "2":
             mensagem_aleatoria = aviso_ausencia()
+            mensagem_aleatoria = mensagem_aleatoria + nao_disparo
         elif tipo_message == "3":
             mensagem_aleatoria = mensagem_atualizacao()
+            mensagem_aleatoria = mensagem_aleatoria + nao_disparo
 
         mensagem_personalizada = f"{nome} 🌵, {mensagem_aleatoria}"
 

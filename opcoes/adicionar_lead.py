@@ -106,9 +106,10 @@ def registra_cliente_no_banco(telefone_cliente):
         print("⚠️ Qualquer tecla também serve como não.")
         disparo_input = input("Digite sua opção: ").strip()
 
+        # Expressão booleana compacta que compara a variavel com 1, funciona como um if compacto
         disparo_status = (disparo_input == "1")
 
-        inserir_cliente_sql(nome, telefone_cliente, disparo_status)
+        inserir_cliente_sql(nome, telefone_cliente, disparo_status, False)
 
         print("----------------")
         time.sleep(1)

@@ -1,0 +1,1453 @@
+<div class="container">
+
+<style>
+body { background: transparent !important; margin: 0; padding: 0; }
+.container { background: transparent !important; font-family: Arial, sans-serif; max-width: 100%; margin: auto; padding: 15px; color: #8B4513; box-sizing: border-box; }
+
+h1 { text-align: center; font-size: 28px; color: #FFD700; margin-bottom: 5px; font-weight: 900; text-shadow: 1px 1px 3px rgba(0,0,0,0.3); padding: 0 10px; }
+
+.card { background: #FFFFFF; border: 2px solid #FFD700; padding: 15px; margin-bottom: 15px; border-radius: 12px; box-shadow: 0 2px 6px rgba(139,69,19,0.1); display: flex; flex-direction: column; align-items: center; width: 100%; box-sizing: border-box; }
+
+.titulo { font-size: 20px; font-weight: 900; color: #8B4513; text-align: center; margin-bottom: 10px; padding: 0 10px; width: 100%; word-wrap: break-word; }
+
+/* Badge de promoção */
+.promo-badge {
+    background: #FFD700;
+    color: #8B4513;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 3px 8px;
+    border-radius: 4px;
+    margin-left: 8px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.tabela-caldo {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 10px;
+}
+.tabela-caldo th, .tabela-caldo td {
+    border: 2px solid #8B4513;
+    padding: 10px 5px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #8B4513 !important;
+    text-align: center;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+.tabela-caldo th {
+    background: #FFD700;
+    font-size: 15px;
+    color: #8B4513 !important;
+}
+.tabela-caldo td.qty-cell {
+    padding: 8px 5px;
+    min-width: 130px;
+}
+
+.qty-btn-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    width: 100%;
+    max-width: 130px;
+    margin: 0 auto;
+}
+
+.qty-btn {
+    width: 32px;
+    height: 32px;
+    border: 2px solid #8B4513;
+    background: #FFD700;
+    font-size: 18px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    color: #8B4513;
+    transition: transform 0.12s ease, background 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin: 0;
+}
+.qty-btn:hover { transform: scale(1.15); background: #FFF8DC; }
+.qty-btn:active { transform: scale(0.82); background: #DAA520; }
+.qty-number {
+    padding: 0 6px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #8B4513;
+    min-width: 25px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+#btnPedido { margin-top: 15px; width: 100%; padding: 16px; font-size: 18px; font-weight: bold; background: #FFD700; color: #8B4513; border: none; border-radius: 10px; cursor: pointer; box-sizing: border-box; border: 2px solid #FFD700; }
+#btnPedido:hover { background: #A0522D; }
+
+#total-area {
+    margin: 0 0 15px 0;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: #8B4513;
+    padding: 10px;
+    background: #FFFFFF;
+    border: 2px solid #FFD700;
+    border-radius: 10px;
+    width: 100%;
+    box-shadow: 0 2px 4px rgba(139,69,19,0.1);
+    box-sizing: border-box;
+}
+
+/* Estilo para a notificação fixa */
+#notification {
+    position: fixed;
+    top: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #FFD700;
+    color: #8B4513;
+    padding: 10px 20px;
+    border-radius: 8px;
+    box-shadow: 0 3px 8px rgba(139,69,19,0.3);
+    z-index: 9999;
+    font-weight: bold;
+    text-align: center;
+    max-width: 90%;
+    display: none;
+    font-size: 15px;
+    border: 2px solid #8B4513;
+}
+
+.pagamento-opcao {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: bold;
+    color: #8B4513;
+    font-size: 16px;
+    padding: 6px 0;
+    cursor: pointer;
+    width: 100%;
+}
+
+.pagamento-opcao input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: #8B4513;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+/* Media Queries para celular vertical */
+@media (max-width: 768px) {
+    .container { padding: 10px; }
+
+    h1 { font-size: 24px; }
+
+    .card {
+        padding: 12px;
+        margin-bottom: 12px;
+        border-radius: 10px;
+    }
+
+    .titulo {
+        font-size: 18px;
+        margin-bottom: 8px;
+        padding: 0 5px;
+    }
+
+    .promo-badge {
+        font-size: 12px;
+        padding: 2px 6px;
+        margin-left: 5px;
+    }
+
+    .tabela-caldo {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .tabela-caldo th,
+    .tabela-caldo td {
+        font-size: 14px;
+        padding: 8px 4px;
+    }
+
+    .tabela-caldo th {
+        font-size: 13px;
+        padding: 8px 4px;
+    }
+
+    .tabela-caldo td.qty-cell {
+        padding: 6px 4px;
+        min-width: 110px;
+    }
+
+    .qty-btn-container {
+        gap: 5px;
+        max-width: 110px;
+    }
+
+    .qty-btn {
+        width: 26px;
+        height: 26px;
+        font-size: 16px;
+    }
+
+    .qty-number {
+        font-size: 16px;
+        padding: 0 5px;
+    }
+
+    #btnPedido {
+        padding: 14px;
+        font-size: 16px;
+    }
+
+    #total-area {
+        font-size: 16px;
+        padding: 8px;
+        margin-bottom: 12px;
+    }
+
+    #notification {
+        top: 10px;
+        padding: 8px 16px;
+        font-size: 14px;
+        max-width: 95%;
+    }
+
+    .pagamento-opcao {
+        font-size: 15px;
+        padding: 5px 0;
+    }
+
+    .pagamento-opcao input[type="checkbox"] {
+        width: 16px;
+        height: 16px;
+    }
+}
+
+/* Para telas muito pequenas (menos de 360px) */
+@media (max-width: 360px) {
+    .container { padding: 8px; }
+
+    h1 { font-size: 22px; }
+
+    .card { padding: 10px; }
+
+    .titulo { font-size: 17px; }
+
+    .promo-badge {
+        font-size: 11px;
+        padding: 2px 5px;
+    }
+
+    .tabela-caldo th,
+    .tabela-caldo td {
+        font-size: 13px;
+        padding: 6px 3px;
+    }
+
+    .tabela-caldo th { font-size: 12px; }
+
+    .tabela-caldo td.qty-cell {
+        min-width: 100px;
+        padding: 5px 3px;
+    }
+
+    .qty-btn-container {
+        gap: 4px;
+        max-width: 100px;
+    }
+
+    .qty-btn {
+        width: 24px;
+        height: 24px;
+        font-size: 15px;
+    }
+
+    .qty-number {
+        font-size: 15px;
+        padding: 0 4px;
+    }
+}
+
+/* Ajustes para desktop */
+@media (min-width: 769px) {
+    .container {
+        max-width: 800px;
+        margin: 20px auto;
+    }
+
+    .tabela-caldo {
+        table-layout: auto;
+    }
+
+    .tabela-caldo th:nth-child(1),
+    .tabela-caldo td:nth-child(1) {
+        width: 35%;
+    }
+
+    .tabela-caldo th:nth-child(2),
+    .tabela-caldo td:nth-child(2) {
+        width: 35%;
+    }
+
+    .tabela-caldo th:nth-child(3),
+    .tabela-caldo td:nth-child(3) {
+        width: 30%;
+        min-width: 130px;
+    }
+
+    .qty-btn-container {
+        max-width: 120px;
+    }
+}
+
+/* Garantir que todas as células da tabela não quebrem o layout */
+.tabela-caldo tr {
+    display: table-row;
+}
+
+.tabela-caldo td,
+.tabela-caldo th {
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+</style>
+
+<h1>CALDÃO NORDESTINO</h1>
+<p style="text-align:center;font-weight:bold;color:#FFD700;font-size:16px;padding:0 10px;margin-bottom:10px;">Selecione seus caldos e quantidades:</p>
+
+<!-- Elemento de notificação fixo (não será bloqueado como popup) -->
+<div id="notification"></div>
+
+<script>
+const letras = { 300: "P", 400: "M", 500: "G" };
+
+// Preços originais
+const precosOriginais = {
+    sururu: { 300: 11.99, 400: 14.99, 500: 16.99 },
+    camarao:{ 300: 11.99, 400: 14.99, 500: 16.99 },
+    frango: { 300: 9.99, 400: 12.99, 500: 14.99 },
+    mocoto: { 300: 9.99, 400: 12.99, 500: 14.99 },
+    nord:   { 300: 9.99, 400: 12.99, 500: 14.99 }
+};
+
+// Variável para armazenar os preços atuais (com promoções aplicadas)
+let precosAtuais = {};
+
+const nomesCaldos = { sururu: "Sururu", camarao: "Camarão", frango: "Frango", mocoto: "Mocotó", nord: "Nordestino" };
+const combos = {
+    querocaldo: { nome: "Combo QueroCaldo", itens: "Camarão + Sururu (G)", preco: 27.99 },
+    caldolover: { nome: "Combo CaldoLover", itens: "Nordestino + Camarão (G)", preco: 25.99 },
+    caldolicia: { nome: "Combo Caldolicia", itens: "Frango + Nordestino (G)", preco: 23.99 }
+};
+const extras = { limao: { nome: "Limão", preco: 0 }, molho: { nome: "Molho", preco: 0 }, torrada: { nome: "Torrada", preco: 1 } };
+
+// Função para obter o dia da semana atual (0=Domingo, 1=Segunda, ..., 6=Sábado)
+function getDiaDaSemana() {
+    const hoje = new Date();
+    return hoje.getDay(); // 0-6
+}
+
+// Função para aplicar promoções de acordo com o dia da semana
+function aplicarPromocoes() {
+    // Copia os preços originais
+    precosAtuais = JSON.parse(JSON.stringify(precosOriginais));
+
+    const diaDaSemana = getDiaDaSemana();
+    const hoje = new Date();
+    const dataFormatada = hoje.toLocaleDateString('pt-BR');
+
+    // Verificar promoções
+    let temPromocaoSururu = false;
+    let temPromocaoNordestino = false;
+
+    // Quarta-feira (dia 3) - Promoção do Sururu: R$ 3,00 de desconto
+    if (diaDaSemana === 3) { // 3 = Quarta-feira
+        temPromocaoSururu = true;
+        for (let tamanho in precosAtuais.sururu) {
+            precosAtuais.sururu[tamanho] = Math.max(0, precosAtuais.sururu[tamanho] - 3);
+        }
+    }
+
+    // Quinta-feira (dia 4) - Promoção do Nordestino: R$ 3,00 de desconto
+    if (diaDaSemana === 4) { // 4 = Quinta-feira
+        temPromocaoNordestino = true;
+        for (let tamanho in precosAtuais.nord) {
+            precosAtuais.nord[tamanho] = Math.max(0, precosAtuais.nord[tamanho] - 3);
+        }
+    }
+
+    // Atualizar display com informações de promoção
+    atualizarDisplayPromocoes(temPromocaoSururu, temPromocaoNordestino, dataFormatada);
+
+    return { temPromocaoSururu, temPromocaoNordestino, dataFormatada };
+}
+
+// Função para atualizar o display com informações de promoção
+function atualizarDisplayPromocoes(promoSururu, promoNordestino, data) {
+    // Atualizar títulos dos cards
+    const tituloSururu = document.querySelector('.card:nth-child(1) .titulo');
+    const tituloNordestino = document.querySelector('.card:nth-child(5) .titulo');
+
+    if (tituloSururu && promoSururu) {
+        tituloSururu.innerHTML = '🥣 Caldo de Sururu <span class="promo-badge">PROMO QUARTA!</span>';
+    }
+
+    if (tituloNordestino && promoNordestino) {
+        tituloNordestino.innerHTML = '🥣 Caldo Nordestino <span class="promo-badge">PROMO QUINTA!</span>';
+    }
+
+    // Adicionar banner de promoção no topo se houver promoção
+    const bannerPromocao = document.getElementById('banner-promocao');
+    if (promoSururu || promoNordestino) {
+        let mensagemPromo = `🏷️ PROMOÇÃO `;
+        if (promoSururu) mensagemPromo += "Quarta do Sururuvis, Sururu com R$ 3,00 OFF! ";
+        if (promoNordestino) mensagemPromo += "Quinta Nordestina, Nordestino com - R$ 3,00 OFF!";
+
+        if (bannerPromocao) {
+            bannerPromocao.textContent = mensagemPromo;
+            bannerPromocao.style.display = 'block';
+        }
+    } else if (bannerPromocao) {
+        bannerPromocao.style.display = 'none';
+    }
+}
+
+// Função para mostrar notificação
+function showTemporaryPopup(msg) {
+    const notification = document.getElementById("notification");
+    notification.innerText = msg;
+    notification.style.display = "block";
+    notification.style.opacity = "1";
+    notification.style.transform = "translateX(-50%) translateY(0)";
+
+    setTimeout(() => {
+        notification.style.opacity = "0";
+        notification.style.transform = "translateX(-50%) translateY(-20px)";
+        setTimeout(() => {
+            notification.style.display = "none";
+        }, 300);
+    }, 2500);
+}
+
+// Função para calcular o total atual usando preços atuais (com promoções)
+function calcularTotal() {
+    let total = 0;
+
+    for (let sabor in precosAtuais) {
+        for (let tam in precosAtuais[sabor]) {
+            let qtd = parseInt(document.getElementById(`qtd-${sabor}${tam}`).innerText);
+            if(qtd > 0) {
+                let preco = precosAtuais[sabor][tam];
+                total += preco * qtd;
+            }
+        }
+    }
+
+    for (let c in combos) {
+        let qtd = parseInt(document.getElementById(`qtd-combo-${c}`).innerText);
+        if(qtd > 0) {
+            let preco = combos[c].preco;
+            total += preco * qtd;
+        }
+    }
+
+    for (let a in extras) {
+        let qtd = parseInt(document.getElementById(`qtd-${a}`).innerText);
+        if(qtd > 0 && extras[a].preco > 0) {
+            let preco = extras[a].preco;
+            total += preco * qtd;
+        }
+    }
+
+    return total;
+}
+
+// Atualizar display do total
+function atualizarTotalDisplay() {
+    const total = calcularTotal();
+    const totalFormatado = total.toFixed(2).replace(".", ",");
+    document.getElementById("total-display").innerText = `R$ ${totalFormatado}`;
+    document.getElementById("btnPedido").innerHTML = `FINALIZAR PEDIDO (R$ ${totalFormatado})`;
+}
+
+// Renderização otimizada para mobile
+function renderTabela(sabor, id) {
+    let html = `<table class="tabela-caldo"><tr><th>Tamanho</th><th>Preço</th><th>Qtd</th></tr>`;
+    for (let tam in precosAtuais[sabor]) {
+        let preco = precosAtuais[sabor][tam].toFixed(2).replace(".", ",");
+        let precoOriginal = precosOriginais[sabor][tam].toFixed(2).replace(".", ",");
+
+        // Verificar se tem desconto
+        const temDesconto = precosAtuais[sabor][tam] < precosOriginais[sabor][tam];
+
+        html += `<tr>
+            <td>${letras[tam]} (${tam}ml)</td>
+            <td>`;
+
+        if (temDesconto) {
+            html += `<span style="text-decoration: line-through; color: #A0522D; font-size: 14px;">R$ ${precoOriginal}</span><br>`;
+            html += `<span style="color: #8B4513; font-weight: bold;">R$ <span id="preco-${sabor}${tam}">${preco}</span></span>`;
+        } else {
+            html += `R$ <span id="preco-${sabor}${tam}">${preco}</span>`;
+        }
+
+        html += `</td>
+            <td class="qty-cell">
+                <div class="qty-btn-container">
+                    <button class="qty-btn" onclick="alterarQtd('${sabor}${tam}',-1)">−</button>
+                    <span class="qty-number" id="qtd-${sabor}${tam}">0</span>
+                    <button class="qty-btn" onclick="alterarQtd('${sabor}${tam}',1)">+</button>
+                </div>
+            </td>
+        </tr>`;
+    }
+    html += "</table>";
+    document.getElementById(id).innerHTML = html;
+}
+
+function renderCombos() {
+    let html = `<table class="tabela-caldo"><tr><th>Combo</th><th>Preço</th><th>Qtd</th></tr>`;
+    for (let c in combos) {
+        let combo = combos[c];
+        let nomeVisual = combo.nome.replace(/^Combo\s+/i, "").replace("CaldoLover", "CaldoLvr").replace("Caldolicia", "Caldolic");
+        html += `<tr>
+            <td title="${combo.nome}">${nomeVisual}</td>
+            <td>R$ ${combo.preco.toFixed(2).replace(".", ",")}</td>
+            <td class="qty-cell">
+                <div class="qty-btn-container">
+                    <button class="qty-btn" onclick="alterarQtd('combo-${c}',-1)">−</button>
+                    <span class="qty-number" id="qtd-combo-${c}">0</span>
+                    <button class="qty-btn" onclick="alterarQtd('combo-${c}',1)">+</button>
+                </div>
+            </td>
+        </tr>`;
+    }
+    html += "</table>";
+    document.getElementById("combos-area").innerHTML = html;
+}
+
+function renderExtras() {
+    let html = `<table class="tabela-caldo"><tr><th>Extras</th><th>Preço</th><th>Qtd</th></tr>`;
+    for (let a in extras) {
+        let preco = extras[a].preco.toFixed(2).replace(".", ",");
+        html += `<tr>
+            <td>${extras[a].nome}</td>
+            <td>R$ ${preco}</td>
+            <td class="qty-cell">
+                <div class="qty-btn-container">
+                    <button class="qty-btn" onclick="alterarQtdExtra('${a}',-1)">−</button>
+                    <span class="qty-number" id="qtd-${a}">0</span>
+                    <button class="qty-btn" onclick="alterarQtdExtra('${a}',1)">+</button>
+                </div>
+            </td>
+        </tr>`;
+    }
+    html += "</table>";
+    document.getElementById("extras-area").innerHTML = html;
+}
+
+// Total de copos
+function contarTotalCopos() {
+    let total = 0;
+    for (let sabor in precosAtuais)
+        for (let tam in precosAtuais[sabor])
+            total += parseInt(document.getElementById(`qtd-${sabor}${tam}`).innerText);
+    for (let c in combos)
+        total += parseInt(document.getElementById(`qtd-combo-${c}`).innerText) * 2;
+    return total;
+}
+
+// Atualiza aviso
+function atualizarInfoDireitos() {
+    const totalCopos = contarTotalCopos();
+    document.getElementById("info-direitos").innerText = `Direito até: ${totalCopos} limão(s), ${Math.ceil(totalCopos/2)} molho(s)`;
+}
+
+// Ajusta extras caso direito diminua
+function ajustarExtrasParaDireitos() {
+    const totalCopos = contarTotalCopos();
+    const direitoLimao = totalCopos;
+    const direitoMolho = Math.ceil(totalCopos / 2);
+
+    const campoLimao = document.getElementById("qtd-limao");
+    let qtdLimao = parseInt(campoLimao.innerText);
+    if (qtdLimao > direitoLimao) {
+        campoLimao.innerText = direitoLimao;
+        showTemporaryPopup("Limão: máx. 1 por copo!");
+    }
+
+    const campoMolho = document.getElementById("qtd-molho");
+    let qtdMolho = parseInt(campoMolho.innerText);
+    if (qtdMolho > direitoMolho) {
+        campoMolho.innerText = direitoMolho;
+        showTemporaryPopup("Molho: máx. 1 a cada 2 copos!");
+    }
+
+    atualizarInfoDireitos();
+    atualizarTotalDisplay();
+}
+
+// Adicionar/remover copos/combos
+function alterarQtd(id, delta) {
+    const campo = document.getElementById("qtd-" + id);
+    let atual = parseInt(campo.innerText);
+    atual = Math.max(0, atual + delta);
+    campo.innerText = atual;
+    ajustarExtrasParaDireitos();
+    atualizarTotalDisplay();
+}
+
+// Adicionar/remover extras manualmente
+function alterarQtdExtra(id, delta) {
+    const campo = document.getElementById("qtd-" + id);
+    let atual = parseInt(campo.innerText);
+    const totalCopos = contarTotalCopos();
+    if (id === "limao") {
+        if (atual + delta > totalCopos) {
+            showTemporaryPopup("Limão: máx. 1 por copo!");
+            return;
+        }
+        atual = Math.max(0, atual + delta);
+    } else if (id === "molho") {
+        if (atual + delta > Math.ceil(totalCopos/2)) {
+            showTemporaryPopup("Molho: máx. 1 a cada 2 copos!");
+            return;
+        }
+        atual = Math.max(0, atual + delta);
+    } else {
+        atual = Math.max(0, atual + delta);
+    }
+    campo.innerText = atual;
+    atualizarInfoDireitos();
+    atualizarTotalDisplay();
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    // Aplicar promoções antes de renderizar as tabelas
+    const promocoes = aplicarPromocoes();
+
+    // Renderizar tabelas com preços atualizados
+    renderTabela("sururu","sururu-area");
+    renderTabela("camarao","camarao-area");
+    renderTabela("frango","frango-area");
+    renderTabela("mocoto","mocoto-area");
+    renderTabela("nord","nord-area");
+    renderCombos();
+    renderExtras();
+    atualizarInfoDireitos();
+    atualizarTotalDisplay();
+
+    const checkboxDinheiro = document.querySelector('input[name="pagamento"][value="Dinheiro"]');
+    const trocoArea = document.getElementById("troco-area");
+    const trocoInput = document.getElementById("valor-troco");
+
+    document.querySelectorAll('input[name="pagamento"]').forEach(cb => {
+        cb.addEventListener("change", function () {
+            if (this.checked) {
+                document.querySelectorAll('input[name="pagamento"]').forEach(other => {
+                    if (other !== this) other.checked = false;
+                });
+            }
+
+            if (checkboxDinheiro.checked) {
+                trocoArea.style.display = "block";
+            } else {
+                trocoArea.style.display = "none";
+                trocoInput.value = "";
+            }
+        });
+    });
+
+    document.getElementById("btnPedido").onclick = function() {
+        let nomeCliente = document.getElementById("nome-cliente").value.trim();
+        let observacaoCliente = document.getElementById("observacao-cliente").value.trim();
+        let msg = "Gostaria de fazer o seguinte pedido:\n\n";
+        let totalPedido = 0;
+
+        for (let sabor in precosAtuais) {
+            for (let tam in precosAtuais[sabor]) {
+                let qtd = parseInt(document.getElementById(`qtd-${sabor}${tam}`).innerText);
+                if(qtd > 0) {
+                    let preco = precosAtuais[sabor][tam];
+                    let precoOriginal = precosOriginais[sabor][tam];
+                    let subtotal = preco * qtd;
+                    totalPedido += subtotal;
+
+                    let itemMsg = `* ${nomesCaldos[sabor]} ${letras[tam]} – R$ ${preco.toFixed(2).replace(".", ",")} x${qtd}`;
+
+                    // Adicionar nota sobre desconto se houver
+
+                    msg += itemMsg + `\n`;
+                }
+            }
+        }
+
+        for (let c in combos) {
+            let qtd = parseInt(document.getElementById(`qtd-combo-${c}`).innerText);
+            if(qtd > 0) {
+                let preco = combos[c].preco;
+                let subtotal = preco * qtd;
+                totalPedido += subtotal;
+                msg += `* ${combos[c].nome} – ${combos[c].itens} – R$ ${preco.toFixed(2).replace(".", ",")} x${qtd}\n`;
+            }
+        }
+
+        for (let a in extras) {
+            let qtd = parseInt(document.getElementById(`qtd-${a}`).innerText);
+            if(qtd > 0) {
+                let preco = extras[a].preco;
+                let subtotal = preco * qtd;
+                totalPedido += subtotal;
+                msg += `* ${extras[a].nome} – R$ ${preco.toFixed(2).replace(".", ",")} x${qtd}\n`;
+            }
+        }
+
+        if(nomeCliente !== "") {
+            msg += `\n*Nome do cliente: ${nomeCliente}*\n`;
+        }
+
+        if(observacaoCliente !== "") {
+            msg += `\n*Observação: ${observacaoCliente}*\n`;
+        }
+
+        msg += `\nTotal do pedido sem o frete: *R$ ${totalPedido.toFixed(2).replace(".", ",")}*`;
+
+        let pagamentoSelecionado = "";
+        document.querySelectorAll('input[name="pagamento"]').forEach(cb => {
+            if (cb.checked) pagamentoSelecionado = cb.value;
+        });
+
+        if (pagamentoSelecionado !== "") {
+            msg += `\nForma de pagamento: *${pagamentoSelecionado}*`;
+
+            if (pagamentoSelecionado === "Dinheiro") {
+                let trocoRaw = document.getElementById("valor-troco").value.trim();
+
+                if (trocoRaw !== "") {
+                    trocoRaw = trocoRaw.replace(",", ".");
+                    let trocoNumero = parseFloat(trocoRaw);
+
+                    if (!isNaN(trocoNumero)) {
+                        let trocoFormatado = trocoNumero.toFixed(2).replace(".", ",");
+                        msg += `, *troco\excedente: R$ ${trocoFormatado}*`;
+                    }
+                }
+            }
+        }
+
+        window.open("https://api.whatsapp.com/send?phone=5575991211138&text="+encodeURIComponent(msg), "_blank");
+    };
+});
+</script>
+
+<!-- Banner de promoção (será mostrado apenas quando houver promoção) -->
+<div id="banner-promocao" style="display:none; background: linear-gradient(90deg, #FFD700, #DAA520); color: #8B4513; text-align: center; padding: 10px; border-radius: 8px; margin-bottom: 15px; font-weight: bold; font-size: 16px; box-shadow: 0 2px 4px rgba(0,0,0,0.2);"></div>
+
+<div class="card"><div class="titulo">🥣 Caldo de Sururu</div><div id="sururu-area"></div></div>
+<div class="card"><div class="titulo">🥣 Caldo de Camarão</div><div id="camarao-area"></div></div>
+<div class="card"><div class="titulo">🥣 Caldo de Frango</div><div id="frango-area"></div></div>
+<div class="card"><div class="titulo">🥣 Caldo de Mocotó</div><div id="mocoto-area"></div></div>
+<div class="card"><div class="titulo">🥣 Caldo Nordestino</div><div id="nord-area"></div></div>
+
+<div class="card"><div class="titulo">🔥 Combos Especiais</div><div id="combos-area"></div></div>
+
+<div class="card">
+    <div class="titulo">🍋 Extras</div>
+    <div id="extras-area"></div>
+    <div id="info-direitos" style="text-align:center; font-weight:bold; color:#8B4513; margin-top:10px; font-size:15px; padding:0 10px;"></div>
+</div>
+
+<div class="card">
+    <div id="total-area">
+        Valor total sem o frete: <span id="total-display">R$ 0,00</span>
+    </div>
+
+    <div class="titulo">💳 Forma de Pagamento</div>
+
+    <div style="width:100%; max-width:100%;">
+        <label class="pagamento-opcao">
+            <input type="checkbox" name="pagamento" value="Pix">
+            Pix
+        </label>
+
+        <label class="pagamento-opcao">
+            <input type="checkbox" name="pagamento" value="Cartão de crédito">
+            Cartão de crédito
+        </label>
+
+        <label class="pagamento-opcao">
+            <input type="checkbox" name="pagamento" value="Cartão de débito">
+            Cartão de débito
+        </label>
+
+        <label class="pagamento-opcao">
+            <input type="checkbox" name="pagamento" value="Dinheiro">
+            Dinheiro
+        </label>
+        <div id="troco-area" style="display:none; width:100%; margin-top:10px;">
+            <label style="font-weight:bold; display:block; margin-bottom:6px; font-size:15px; color:#8B4513;">
+                Caso precise de troco:
+            </label>
+            <input
+                type="text"
+                id="valor-troco"
+                placeholder="Ex: 200 (apenas números)"
+                style="width:100%; padding:10px; font-size:15px; border-radius:6px; border:2px solid #8B4513; box-sizing:border-box; background:#FFFFFF; color:#8B4513;"
+            >
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <label for="nome-cliente" style="font-weight:bold; margin-bottom:8px; display:block; font-size:16px; color:#8B4513;">Qual é o seu nome?</label>
+    <input type="text" id="nome-cliente" placeholder="Digite seu nome" style="width:100%; padding:10px; font-size:15px; border-radius:6px; border:2px solid #8B4513; margin-bottom:10px; box-sizing:border-box; background:#FFFFFF; color:#8B4513;">
+
+    <label for="observacao-cliente" style="font-weight:bold; margin-bottom:8px; display:block; font-size:16px; color:#8B4513;">Alguma observação ou dúvida? (opcional)</label>
+    <input type="text" id="observacao-cliente" placeholder="Ex: Retirada do pedido no estabelecimento" style="width:100%; padding:10px; font-size:15px; border-radius:6px; border:2px solid #8B4513; margin-bottom:10px; box-sizing:border-box; background:#FFFFFF; color:#8B4513;">
+</div>
+
+<button id="btnPedido">FINALIZAR PEDIDO (R$ 0,00)</button>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+############################## SOBRE NOS#############
+
+
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre Nós - Caldão Nordestino</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: transparent !important;
+            color: #8B4513;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .sobre-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Cabeçalho com logo */
+        .logo-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 15px;
+        }
+
+        .logo-title {
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: #FFD700 !important;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .logo-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: #FFD700 !important;
+            border-radius: 2px;
+        }
+
+        .logo-subtitle {
+            font-size: 1.2rem;
+            color: #FFD700 !important;
+            font-weight: 600;
+            margin-top: 10px;
+            font-style: italic;
+        }
+
+        /* Grid principal */
+        .sobre-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        @media (min-width: 768px) {
+            .sobre-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 25px;
+            }
+        }
+
+        /* Cards */
+        .info-card {
+            background: #FFFFFF;
+            border: 2px solid #8B4513;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(139, 69, 19, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: auto;
+            position: relative;
+            overflow: visible;
+            margin-bottom: 10px;
+        }
+
+        .info-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(139, 69, 19, 0.15);
+        }
+
+        .card-title {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #8B4513;
+            text-align: center;
+        }
+
+        @media (min-width: 480px) {
+            .card-title {
+                flex-direction: row;
+                text-align: left;
+            }
+        }
+
+        .icon-container {
+            width: 50px;
+            height: 50px;
+            background: #FFD700;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            margin-bottom: 10px;
+            box-shadow: 0 3px 8px rgba(139, 69, 19, 0.2);
+            flex-shrink: 0;
+        }
+
+        .icon {
+            font-size: 22px;
+            color: #8B4513;
+        }
+
+        .card-title h2 {
+            font-size: 1.4rem;
+            color: #8B4513;
+            font-weight: 700;
+        }
+
+        /* Conteúdo dos cards */
+        .info-content {
+            font-size: 1rem;
+            color: #8B4513;
+            position: relative;
+            z-index: 1;
+        }
+
+        .info-item {
+            margin-bottom: 15px;
+            padding-left: 10px;
+            border-left: 3px solid #FFD700;
+            padding-left: 12px;
+        }
+
+        .info-item strong {
+            color: #8B4513;
+            font-size: 1.1rem;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .highlight {
+            background: #FFF8DC;
+            padding: 10px 15px;
+            border-radius: 8px;
+            border-left: 4px solid #FFD700;
+            margin: 12px 0;
+            font-weight: 600;
+            color: #8B4513;
+        }
+
+        /* Container especial para o mapa */
+        .map-link-container {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px dashed #8B4513;
+            text-align: center;
+            width: 100%;
+            display: block;
+        }
+
+        .map-link {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #FFD700;
+            color: #8B4513;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.3s ease;
+            border: 2px solid #8B4513;
+            font-size: 0.95rem;
+            width: auto;
+            max-width: 100%;
+            box-sizing: border-box;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .map-link:hover {
+            background: #DAA520;
+        }
+
+        /* Links sociais */
+        .social-links {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        @media (min-width: 480px) {
+            .social-links {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            background: #FFFFFF;
+            padding: 15px;
+            border-radius: 12px;
+            text-decoration: none;
+            color: #8B4513;
+            transition: all 0.3s ease;
+            border: 2px solid #8B4513;
+            box-shadow: 0 3px 8px rgba(139, 69, 19, 0.1);
+        }
+
+        .social-link:hover {
+            transform: translateY(-2px);
+            border-color: #FFD700;
+            box-shadow: 0 5px 15px rgba(139, 69, 19, 0.15);
+        }
+
+        .social-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 20px;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .social-icon.whatsapp { background: #25D366; }
+        .social-icon.instagram { background: linear-gradient(45deg, #405DE6, #833AB4, #C13584, #E1306C, #FD1D1D); }
+        .social-icon.maps { background: #FFD700; color: #8B4513; }
+
+        .social-text h3 {
+            font-size: 1.1rem;
+            color: #8B4513;
+            margin-bottom: 4px;
+        }
+
+        .social-text p {
+            font-size: 0.85rem;
+            color: #8B4513;
+            opacity: 0.9;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            background: #8B4513;
+            border-radius: 12px;
+            color: #FFD700;
+            clear: both;
+            position: relative;
+            z-index: 2;
+        }
+
+        .footer h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .footer p {
+            font-size: 1rem;
+            opacity: 0.95;
+        }
+
+        /* Elementos decorativos */
+        .decorative-bowl {
+            font-size: 2.5rem;
+            text-align: center;
+            margin: 20px 0;
+            animation: float 3s ease-in-out infinite;
+            color: #FFD700 !important;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        .color-accent {
+            color: #8B4513;
+            font-weight: 700;
+        }
+
+        /* Ajustes para celular vertical */
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+
+            .logo-header {
+                padding: 10px;
+                margin-bottom: 20px;
+            }
+
+            .logo-title {
+                font-size: 1.8rem;
+                letter-spacing: 1px;
+            }
+
+            .logo-subtitle {
+                font-size: 1rem;
+            }
+
+            .info-card {
+                padding: 15px;
+                border-radius: 12px;
+                margin-bottom: 15px;
+            }
+
+            .icon-container {
+                width: 45px;
+                height: 45px;
+                margin-right: 12px;
+            }
+
+            .icon {
+                font-size: 20px;
+            }
+
+            .card-title h2 {
+                font-size: 1.2rem;
+            }
+
+            .info-content {
+                font-size: 0.95rem;
+            }
+
+            .map-link {
+                padding: 8px 16px;
+                font-size: 0.9rem;
+                white-space: normal;
+                width: 100%;
+                text-align: center;
+            }
+
+            .social-link {
+                padding: 12px;
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .social-icon {
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+
+            .social-text h3 {
+                font-size: 1rem;
+            }
+
+            .social-text p {
+                font-size: 0.8rem;
+            }
+
+            .footer {
+                padding: 15px;
+                margin-top: 25px;
+            }
+
+            .footer h3 {
+                font-size: 1.1rem;
+            }
+
+            .decorative-bowl {
+                font-size: 2rem;
+            }
+        }
+
+        /* Ajustes para tablets */
+        @media (min-width: 481px) and (max-width: 767px) {
+            .logo-title {
+                font-size: 2rem;
+            }
+
+            .logo-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .info-card {
+                padding: 18px;
+            }
+
+            .map-link {
+                white-space: normal;
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        /* Ajustes para desktop */
+        @media (min-width: 1024px) {
+            .logo-title {
+                font-size: 2.5rem;
+            }
+
+            .logo-subtitle {
+                font-size: 1.3rem;
+            }
+
+            .sobre-grid {
+                gap: 30px;
+            }
+
+            .info-card {
+                padding: 25px;
+            }
+
+            .map-link {
+                white-space: nowrap;
+            }
+        }
+
+        /* Garantir que não haja sobreposição */
+        .clearfix::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="sobre-container">
+        <!-- Cabeçalho com Logo -->
+        <div class="logo-header">
+            <h1 class="logo-title">Caldão Nordestino</h1>
+            <div class="decorative-bowl">🥣</div>
+            <p class="logo-subtitle">O sabor autêntico do Nordeste em cada colher!</p>
+        </div>
+
+        <!-- Grid de Informações -->
+        <div class="sobre-grid">
+            <!-- Card Horários -->
+            <div class="info-card">
+                <div class="card-title">
+                    <div class="icon-container">
+                        <i class="fas fa-clock icon"></i>
+                    </div>
+                    <h2>Horários de Funcionamento</h2>
+                </div>
+                <div class="info-content">
+                    <div class="info-item">
+                        <strong>⏰ Abrimos:</strong>
+                        <p>De <span class="color-accent">Terça a Sábado</span></p>
+                    </div>
+
+                    <div class="info-item">
+                        <strong>🕕 Nosso horário:</strong>
+                        <p>Das <span class="color-accent">18:00h às 21:00h</span></p>
+                    </div>
+
+                    <div class="highlight">
+                        <i class="fas fa-utensils"></i> Servimos caldos quentinhos e saborosos neste horário!
+                    </div>
+
+                    <div class="info-item">
+                        <strong>📅 Fechado:</strong>
+                        <p>Domingos e Segundas-feiras</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card Endereço -->
+            <div class="info-card">
+                <div class="card-title">
+                    <div class="icon-container">
+                        <i class="fas fa-map-marker-alt icon"></i>
+                    </div>
+                    <h2>Nosso Endereço</h2>
+                </div>
+                <div class="info-content">
+                    <div class="info-item">
+                        <strong>📍 Onde estamos:</strong>
+                        <p>Rua do Areal, número 79, Bairro Centro</p>
+                    </div>
+
+                    <div class="info-item">
+                        <strong>🚩 Pontos de Referência:</strong>
+                        <p>• Ao lado da <span class="color-accent">Intensiva UTI Móvel</span></p>
+                        <p>• Antes do <span class="color-accent">Chico MegaBurguer</span></p>
+                        <p>• Em frente ao <span class="color-accent">Almerinda Empresarial</span></p>
+                    </div>
+
+                    <div class="map-link-container">
+                        <a href="https://maps.app.goo.gl/YccDmhCZR9njwX4D9" target="_blank" class="map-link">
+                            <i class="fas fa-map-marked-alt"></i> Ver no Google Maps
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Links de Contato -->
+        <div class="info-card">
+            <div class="card-title">
+                <div class="icon-container">
+                    <i class="fas fa-handshake icon"></i>
+                </div>
+                <h2>Entre em Contato Conosco</h2>
+            </div>
+
+            <div class="social-links">
+                <!-- WhatsApp -->
+                <a href="https://w.app/r8lacx" target="_blank" class="social-link">
+                    <div class="social-icon whatsapp">
+                        <i class="fab fa-whatsapp"></i>
+                    </div>
+                    <div class="social-text">
+                        <h3>WhatsApp</h3>
+                        <p>Faça seu pedido diretamente pelo WhatsApp! Clique para conversar conosco.</p>
+                    </div>
+                </a>
+
+                <!-- Instagram -->
+                <a href="https://www.instagram.com/caldaonordestino?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" class="social-link">
+                    <div class="social-icon instagram">
+                        <i class="fab fa-instagram"></i>
+                    </div>
+                    <div class="social-text">
+                        <h3>Instagram</h3>
+                        <p>Siga-nos no Instagram e veja nossas novidades, promoções e fotos dos caldos!</p>
+                    </div>
+                </a>
+
+                <!-- Maps -->
+                <a href="https://maps.app.goo.gl/YccDmhCZR9njwX4D9" target="_blank" class="social-link">
+                    <div class="social-icon maps">
+                        <i class="fas fa-map-pin"></i>
+                    </div>
+                    <div class="social-text">
+                        <h3>Localização</h3>
+                        <p>Veja nossa localização exata no Google Maps e trace sua rota até nós!</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <h3>🥣 Caldão Nordestino 🥣</h3>
+            <p>Servindo os melhores caldos da região com amor e tradição nordestina!</p>
+            <p style="margin-top: 15px; font-size: 0.95rem; opacity: 0.9;">
+                <i class="fas fa-heart"></i> Cada caldo feito com ingredientes frescos e receita tradicional
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Efeito suave de scroll para os links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Adiciona classe ativa ao card quando em visualização
+        const observerOptions = {
+            threshold: 0.2
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animated');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.info-card').forEach(card => {
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
+
+
+

@@ -1,15 +1,15 @@
 from conexao import cursor, conexao
 
-def inserir_cliente_sql(nome: str, telefone: str, disparo_status: bool):
+def inserir_cliente_sql(nome: str, telefone: str, disparo_status: bool, enviou_dia: bool):
     """
     Insere um cliente na tabela 'clientes'.
     Executa o INSERT e faz commit no banco.
     """
     sql = """
     INSERT INTO clientes (nome, telefone, disparo_status)
-    VALUES (%s, %s, %s)
+    VALUES (%s, %s, %s, %s)
     """
-    valores = (nome, telefone, disparo_status)
+    valores = (nome, telefone, disparo_status, enviou_dia)
 
     cursor.execute(sql, valores)
     conexao.commit()

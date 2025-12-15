@@ -51,7 +51,8 @@ def adicionar_contato_teste():
         return None if not tentar_novamente else "retry"
 
     nome = solicitar_nome()
-    inserir_cliente_sql(nome, telefone, True)
+
+    inserir_cliente_sql(nome, telefone, True, False)
     return telefone
 
 

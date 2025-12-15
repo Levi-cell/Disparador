@@ -26,7 +26,7 @@ def menu_interativo():
     #
     # ADM pode comentar a linha 25, 27 e 29, caso coloque um banco na conexao.
 
-    criar_table_clientes()
+    # criar_table_clientes()
 
     verifica_dados()
 
