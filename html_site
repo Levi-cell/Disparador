@@ -48,6 +48,19 @@ h1 { text-align: center; font-size: 28px; color: #FFD700; margin-bottom: 5px; fo
     min-width: 130px;
 }
 
+/* Ajuste especial para a tabela de combos */
+.combos-table {
+    width: 100% !important;
+    min-width: 280px !important; /* Aumentado para mostrar nomes completos */
+}
+
+.combos-table th:nth-child(1),
+.combos-table td:nth-child(1) {
+    min-width: 120px !important; /* Mais espaço para o nome do combo */
+    text-align: left !important;
+    padding-left: 8px !important;
+}
+
 .qty-btn-container {
     display: flex;
     justify-content: center;
@@ -76,7 +89,7 @@ h1 { text-align: center; font-size: 28px; color: #FFD700; margin-bottom: 5px; fo
     margin: 0;
 }
 .qty-btn:hover { transform: scale(1.15); background: #FFF8DC; }
-.qty-btn:active { transform: scale(0.82); background: #DAA520; }
+.qty-btn:active { transform: scale(0.82); background: #FFD700; }
 .qty-number {
     padding: 0 6px;
     font-size: 18px;
@@ -88,7 +101,7 @@ h1 { text-align: center; font-size: 28px; color: #FFD700; margin-bottom: 5px; fo
 }
 
 #btnPedido { margin-top: 15px; width: 100%; padding: 16px; font-size: 18px; font-weight: bold; background: #FFD700; color: #8B4513; border: none; border-radius: 10px; cursor: pointer; box-sizing: border-box; border: 2px solid #FFD700; }
-#btnPedido:hover { background: #A0522D; }
+#btnPedido:hover { background: #FFD700; }
 
 #total-area {
     margin: 0 0 15px 0;
@@ -105,24 +118,32 @@ h1 { text-align: center; font-size: 28px; color: #FFD700; margin-bottom: 5px; fo
     box-sizing: border-box;
 }
 
-/* Estilo para a notificação fixa */
+/* Estilo para a notificação fixa - POSIÇÃO AJUSTADA */
 #notification {
     position: fixed;
-    top: 15px;
+    top: 50%; /* Alterado para centro vertical */
     left: 50%;
-    transform: translateX(-50%);
+    transform: translate(-50%, -50%); /* Centralizado completamente */
     background-color: #FFD700;
     color: #8B4513;
-    padding: 10px 20px;
-    border-radius: 8px;
-    box-shadow: 0 3px 8px rgba(139,69,19,0.3);
+    padding: 15px 25px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(139,69,19,0.4);
     z-index: 9999;
     font-weight: bold;
     text-align: center;
-    max-width: 90%;
+    max-width: 85%;
     display: none;
-    font-size: 15px;
+    font-size: 16px;
     border: 2px solid #8B4513;
+    animation: fadeInOut 2.8s ease-in-out;
+}
+
+@keyframes fadeInOut {
+    0% { opacity: 0; transform: translate(-50%, -60%); }
+    15% { opacity: 1; transform: translate(-50%, -50%); }
+    85% { opacity: 1; transform: translate(-50%, -50%); }
+    100% { opacity: 0; transform: translate(-50%, -40%); }
 }
 
 .pagamento-opcao {
@@ -192,6 +213,28 @@ h1 { text-align: center; font-size: 28px; color: #FFD700; margin-bottom: 5px; fo
         min-width: 110px;
     }
 
+    /* Ajustes específicos para combos no mobile */
+    .combos-table {
+        min-width: 260px !important;
+    }
+
+    .combos-table th:nth-child(1),
+    .combos-table td:nth-child(1) {
+        min-width: 100px !important;
+        font-size: 13px !important;
+        padding-left: 6px !important;
+    }
+
+    .combos-table th:nth-child(2),
+    .combos-table td:nth-child(2) {
+        min-width: 70px !important;
+    }
+
+    .combos-table th:nth-child(3),
+    .combos-table td:nth-child(3) {
+        min-width: 90px !important;
+    }
+
     .qty-btn-container {
         gap: 5px;
         max-width: 110px;
@@ -220,10 +263,11 @@ h1 { text-align: center; font-size: 28px; color: #FFD700; margin-bottom: 5px; fo
     }
 
     #notification {
-        top: 10px;
-        padding: 8px 16px;
-        font-size: 14px;
-        max-width: 95%;
+        top: 50%;
+        padding: 12px 20px;
+        font-size: 15px;
+        max-width: 90%;
+        border-radius: 8px;
     }
 
     .pagamento-opcao {
@@ -265,6 +309,17 @@ h1 { text-align: center; font-size: 28px; color: #FFD700; margin-bottom: 5px; fo
         padding: 5px 3px;
     }
 
+    /* Ajustes para combos em telas muito pequenas */
+    .combos-table {
+        min-width: 240px !important;
+    }
+
+    .combos-table th:nth-child(1),
+    .combos-table td:nth-child(1) {
+        min-width: 90px !important;
+        font-size: 12px !important;
+    }
+
     .qty-btn-container {
         gap: 4px;
         max-width: 100px;
@@ -279,6 +334,13 @@ h1 { text-align: center; font-size: 28px; color: #FFD700; margin-bottom: 5px; fo
     .qty-number {
         font-size: 15px;
         padding: 0 4px;
+    }
+
+    #notification {
+        top: 50%;
+        padding: 10px 16px;
+        font-size: 14px;
+        max-width: 92%;
     }
 }
 
@@ -307,6 +369,23 @@ h1 { text-align: center; font-size: 28px; color: #FFD700; margin-bottom: 5px; fo
     .tabela-caldo td:nth-child(3) {
         width: 30%;
         min-width: 130px;
+    }
+
+    /* Ajustes específicos para combos no desktop */
+    .combos-table th:nth-child(1),
+    .combos-table td:nth-child(1) {
+        width: 40% !important; /* Mais espaço para o nome */
+    }
+
+    .combos-table th:nth-child(2),
+    .combos-table td:nth-child(2) {
+        width: 30% !important;
+    }
+
+    .combos-table th:nth-child(3),
+    .combos-table td:nth-child(3) {
+        width: 30% !important;
+        min-width: 130px !important;
     }
 
     .qty-btn-container {
@@ -427,17 +506,18 @@ function atualizarDisplayPromocoes(promoSururu, promoNordestino, data) {
     }
 }
 
-// Função para mostrar notificação
+// Função para mostrar notificação - POSIÇÃO AJUSTADA
 function showTemporaryPopup(msg) {
     const notification = document.getElementById("notification");
     notification.innerText = msg;
     notification.style.display = "block";
     notification.style.opacity = "1";
-    notification.style.transform = "translateX(-50%) translateY(0)";
+    notification.style.transform = "translate(-50%, -50%)";
 
+    // Usar setTimeout para remover após animação
     setTimeout(() => {
         notification.style.opacity = "0";
-        notification.style.transform = "translateX(-50%) translateY(-20px)";
+        notification.style.transform = "translate(-50%, -40%)";
         setTimeout(() => {
             notification.style.display = "none";
         }, 300);
@@ -521,10 +601,11 @@ function renderTabela(sabor, id) {
 }
 
 function renderCombos() {
-    let html = `<table class="tabela-caldo"><tr><th>Combo</th><th>Preço</th><th>Qtd</th></tr>`;
+    let html = `<table class="tabela-caldo combos-table"><tr><th>Combo</th><th>Preço</th><th>Qtd</th></tr>`;
     for (let c in combos) {
         let combo = combos[c];
-        let nomeVisual = combo.nome.replace(/^Combo\s+/i, "").replace("CaldoLover", "CaldoLvr").replace("Caldolicia", "Caldolic");
+        // MOSTRAR NOMES COMPLETOS - removido as abreviações
+        let nomeVisual = combo.nome.replace(/^Combo\s+/i, "");
         html += `<tr>
             <td title="${combo.nome}">${nomeVisual}</td>
             <td>R$ ${combo.preco.toFixed(2).replace(".", ",")}</td>
@@ -675,6 +756,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.getElementById("btnPedido").onclick = function() {
         let nomeCliente = document.getElementById("nome-cliente").value.trim();
+        let enderecoCliente = document.getElementById("endereco-cliente").value.trim();
         let observacaoCliente = document.getElementById("observacao-cliente").value.trim();
         let msg = "Gostaria de fazer o seguinte pedido:\n\n";
         let totalPedido = 0;
@@ -721,6 +803,10 @@ document.addEventListener("DOMContentLoaded", () => {
             msg += `\n*Nome do cliente: ${nomeCliente}*\n`;
         }
 
+        if(enderecoCliente !== "") {
+            msg += `\n*Endereço: ${enderecoCliente}*\n`;
+        }
+
         if(observacaoCliente !== "") {
             msg += `\n*Observação: ${observacaoCliente}*\n`;
         }
@@ -733,20 +819,62 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         if (pagamentoSelecionado !== "") {
-            msg += `\nForma de pagamento: *${pagamentoSelecionado}*`;
-
             if (pagamentoSelecionado === "Dinheiro") {
                 let trocoRaw = document.getElementById("valor-troco").value.trim();
 
                 if (trocoRaw !== "") {
-                    trocoRaw = trocoRaw.replace(",", ".");
-                    let trocoNumero = parseFloat(trocoRaw);
+                    // Encontrar todos os números na string (com ponto ou vírgula decimal)
+                    const numeros = trocoRaw.match(/\d+(?:[.,]\d+)?/g);
 
-                    if (!isNaN(trocoNumero)) {
-                        let trocoFormatado = trocoNumero.toFixed(2).replace(".", ",");
-                        msg += `, *troco\excedente: R$ ${trocoFormatado}*`;
+                    if (numeros && numeros.length > 0) {
+                        // Substituir cada número encontrado pela versão formatada
+                        let textoFormatado = trocoRaw;
+
+                        for (let i = 0; i < numeros.length; i++) {
+                            let numOriginal = numeros[i];
+                            // Converter para número
+                            let numStr = numOriginal.replace(",", ".");
+                            let numero = parseFloat(numStr);
+
+                            if (!isNaN(numero)) {
+                                // Formatar com 2 casas decimais
+                                let formatado = numero.toFixed(2).replace(".", ",");
+
+                                // Verificar se já tem R$ antes do número
+                                const temRS = new RegExp(`R\\$\\s*${numOriginal.replace(".", "\\.").replace(",", "\\,")}`).test(textoFormatado);
+
+                                if (!temRS) {
+                                    // Substituir o número original pelo formatado
+                                    // Se não tem R$, adiciona R$ antes do número formatado
+                                    textoFormatado = textoFormatado.replace(
+                                        numOriginal,
+                                        `R$ ${formatado}`
+                                    );
+                                } else {
+                                    // Se já tem R$, mantém o R$ e só formata o número
+                                    textoFormatado = textoFormatado.replace(
+                                        `R$ ${numOriginal}`,
+                                        `R$ ${formatado}`
+                                    ).replace(
+                                        `R$${numOriginal}`,
+                                        `R$ ${formatado}`
+                                    );
+                                }
+                            }
+                        }
+
+                        msg += `\nForma de pagamento: *Dinheiro*, ${textoFormatado}`;
+                    } else {
+                        // Se não encontrar números, usar o texto original
+                        msg += `\nForma de pagamento: *Dinheiro*, ${trocoRaw}`;
                     }
+                } else {
+                    // Campo vazio - apenas informa Dinheiro sem mencionar troco
+                    msg += `\nForma de pagamento: *Dinheiro*`;
                 }
+            } else {
+                // Para Pix, Cartão de crédito, Cartão de débito
+                msg += `\nForma de pagamento: *${pagamentoSelecionado}*`;
             }
         }
 
@@ -756,7 +884,7 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 
 <!-- Banner de promoção (será mostrado apenas quando houver promoção) -->
-<div id="banner-promocao" style="display:none; background: linear-gradient(90deg, #FFD700, #DAA520); color: #8B4513; text-align: center; padding: 10px; border-radius: 8px; margin-bottom: 15px; font-weight: bold; font-size: 16px; box-shadow: 0 2px 4px rgba(0,0,0,0.2);"></div>
+<div id="banner-promocao" style="display:none; background: linear-gradient(90deg, #FFD700, #FFD700); color: #8B4513; text-align: center; padding: 10px; border-radius: 8px; margin-bottom: 15px; font-weight: bold; font-size: 16px; box-shadow: 0 2px 4px rgba(0,0,0,0.2);"></div>
 
 <div class="card"><div class="titulo">🥣 Caldo de Sururu</div><div id="sururu-area"></div></div>
 <div class="card"><div class="titulo">🥣 Caldo de Camarão</div><div id="camarao-area"></div></div>
@@ -806,7 +934,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <input
                 type="text"
                 id="valor-troco"
-                placeholder="Ex: 200 (apenas números)"
+                placeholder="Ex: troco para 100, ou 15 de troco"
                 style="width:100%; padding:10px; font-size:15px; border-radius:6px; border:2px solid #8B4513; box-sizing:border-box; background:#FFFFFF; color:#8B4513;"
             >
         </div>
@@ -816,6 +944,10 @@ document.addEventListener("DOMContentLoaded", () => {
 <div class="card">
     <label for="nome-cliente" style="font-weight:bold; margin-bottom:8px; display:block; font-size:16px; color:#8B4513;">Qual é o seu nome?</label>
     <input type="text" id="nome-cliente" placeholder="Digite seu nome" style="width:100%; padding:10px; font-size:15px; border-radius:6px; border:2px solid #8B4513; margin-bottom:10px; box-sizing:border-box; background:#FFFFFF; color:#8B4513;">
+
+    <!-- NOVO CAMPO: ENDEREÇO -->
+    <label for="endereco-cliente" style="font-weight:bold; margin-bottom:8px; display:block; font-size:16px; color:#8B4513;">Qual é o seu endereço completo? (frete entre: R$ 6 e 9)</label>
+    <input type="text" id="endereco-cliente" placeholder="Ex: Rua X, Bairro Y, ponto de referência, número Z" style="width:100%; padding:10px; font-size:15px; border-radius:6px; border:2px solid #8B4513; margin-bottom:10px; box-sizing:border-box; background:#FFFFFF; color:#8B4513;">
 
     <label for="observacao-cliente" style="font-weight:bold; margin-bottom:8px; display:block; font-size:16px; color:#8B4513;">Alguma observação ou dúvida? (opcional)</label>
     <input type="text" id="observacao-cliente" placeholder="Ex: Retirada do pedido no estabelecimento" style="width:100%; padding:10px; font-size:15px; border-radius:6px; border:2px solid #8B4513; margin-bottom:10px; box-sizing:border-box; background:#FFFFFF; color:#8B4513;">
@@ -837,12 +969,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-
-
-
-############################## SOBRE NOS#############
-
-
+#### SOBRE NOS
 
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -1448,6 +1575,5 @@ document.addEventListener("DOMContentLoaded", () => {
     </script>
 </body>
 </html>
-
 
 

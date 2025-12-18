@@ -131,7 +131,6 @@ def escolhe_se_midia():
             print("------------------------------")
 
 def abre_link(driver, link_inicial):
-    trazer_chrome_para_frente_e_acessar_aba(link_inicial)
     try:
         driver.get(link_inicial)
         trazer_chrome_para_frente_e_acessar_aba(link_inicial)
@@ -236,10 +235,10 @@ def disparador_promocao(id_cliente, midia, tipo_message):
         trata_erro_inicial(id_cliente, midia, tipo_message)
         return
 
-    trazer_chrome_para_frente_e_acessar_aba(link_inicial)
+
     print("🌐 Calibrando o WhatsApp...")
     print("----------")
-    time.sleep(5)
+    time.sleep(8)
 
     lista_clientes_desativados = []
 
@@ -334,8 +333,6 @@ def localiza_campo_texto(espera, link_whatsapp):
 
 def cola_mensagem_campo(link_whatsapp, campo_mensagem, mensagem_personalizada):
 
-    trazer_chrome_para_frente_e_acessar_aba(link_whatsapp)
-
     try:
         trazer_chrome_para_frente_e_acessar_aba(link_whatsapp)
         pasted = paste_text_into_field(campo_mensagem, mensagem_personalizada)
@@ -360,7 +357,6 @@ def cola_mensagem_campo(link_whatsapp, campo_mensagem, mensagem_personalizada):
 
 ## possível função descontinuada
 def envia_foto_botao(link_whatsapp, espera):
-    trazer_chrome_para_frente_e_acessar_aba(link_whatsapp)
 
     try:
         trazer_chrome_para_frente_e_acessar_aba(link_whatsapp)
@@ -454,7 +450,6 @@ def varre_clientes_com_midia(
             continue
 
         ## LOCALIZANDO CAMPO DE TEXTO E DELETANDO TUDO QUE TIVER NELE
-        trazer_chrome_para_frente_e_acessar_aba(link_whatsapp)
         campo_mensagem, foi = localiza_campo_texto(espera, link_whatsapp)
         if not foi:
             tratativa_disparo(nome, telefone, midia, tipo_message)
@@ -493,7 +488,7 @@ def varre_clientes_com_midia(
 
         print("---------------")
         print("✔ Mensagem enviada!")
-
+        time.sleep(1)
         marcar_enviou_dia_sql(telefone)
 
         tempo_espera_2 = numero_randomico()
@@ -598,6 +593,7 @@ def varre_clientes_sem_midia(
 
         print("---------------")
         print("✔ Mensagem enviada!")
+        time.sleep(1)
 
         marcar_enviou_dia_sql(telefone)
 

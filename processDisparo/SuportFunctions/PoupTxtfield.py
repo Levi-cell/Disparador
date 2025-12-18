@@ -2,7 +2,7 @@ from processDisparo.SQLfunctions.ConsultFunctions import consulta_cliente_sql
 from processDisparo.SQLfunctions.UpdateFunctions import desativar_disparo_sql
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
-from processDisparo.SuportFunctions.iniciar_chrome import trazer_chrome_para_frente_e_acessar_aba
+from processDisparo.SuportFunctions.iniciar_chrome import trazer_chrome_para_frente_e_acessar_aba, iniciar_chrome_remoto
 from selenium.webdriver.common.by import By
 import time
 from selenium.common.exceptions import (
@@ -18,7 +18,6 @@ def detectar_popup_ou_chat(driver, telefone, link):
 
     deu_certo = True
     espera = WebDriverWait(driver, 30)
-    trazer_chrome_para_frente_e_acessar_aba(link)
     try:
         trazer_chrome_para_frente_e_acessar_aba(link)
         elemento = espera.until(

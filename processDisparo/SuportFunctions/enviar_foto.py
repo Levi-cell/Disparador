@@ -91,7 +91,7 @@ def enviar_foto_whatsapp(opcao, espera, link):
     print("-----------------------------------------------\n")
 
     # Abrir botão de anexar
-    trazer_chrome_para_frente_e_acessar_aba(link)
+
     try:
         trazer_chrome_para_frente_e_acessar_aba(link)
         botao_clip = espera.until(
@@ -123,7 +123,7 @@ def enviar_foto_whatsapp(opcao, espera, link):
         return not deu_certo
 
     # fotos e videos
-    trazer_chrome_para_frente_e_acessar_aba(link)
+
     try:
         trazer_chrome_para_frente_e_acessar_aba(link)
         input_imagem = espera.until(

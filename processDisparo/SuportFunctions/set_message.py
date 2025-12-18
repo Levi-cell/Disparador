@@ -40,17 +40,34 @@ def nao_quer_disparo():
 
 def message_antencede():
 
-    message = ("\n\nFaça o seu pedido no nosso Link para garantir o seu Caldão! ás 18 horas iremos te notificar "
-               "e preparar o seu pedido 😊")
+    message = ("\n\nAgende seu pedido que ás 18 horas iremos te notificar "
+               "e preparar o seu pedido! 😊")
+
+    return message
+
+def numero_disparo():
+
+    message = ("\n\n Esse número é apenas para divulgações de eventos e promoções do Caldão Nordestino, caso tenha alguma"
+               "dúvida ou queira fazer um pedido, você pode nos contatar por esse link:\n\n"
+               "- https://api.whatsapp.com/send?phone=555575991211138&text=Ol%C3%A1+tenho+duvidas+sobre+o+Cald%C3%A3o+Nordestino+%F0%9F%8C%B5\n\n"
+               "Caso prefira fazer um pedido com mais praticidade acesse nosso site:\n\n"
+               "- https://sites.google.com/view/cardpiocaldonordestino/in%C3%ADcio")
 
     return message
 
 def message_cardapio():
 
-    message = ("\n\n- *Novidade!! agora você pode fazer seu pedido no nosso site com mais praticidade:*"
-               "  https://sites.google.com/view/cardpiocaldonordestino/in%C3%ADcio")
+    message = ("\n\n*Nosso cardápio e site 😊 ( e com promoções do whatsapp 👀):*\n"
+               "- https://sites.google.com/view/cardpiocaldonordestino/in%C3%ADcio")
 
     return message
+
+# def message_cardapio():
+#
+#     message = ("*Novidade QUENTÍSSIMA para nossos queridos CALDOLOVERS!! agora você pode fazer seu pedido diretamente nosso novo SITE com muito mais praticidade!!*\n\n"
+#                "- https://sites.google.com/view/cardpiocaldonordestino/in%C3%ADcio")
+#
+#     return message
 
 
 def menssangem_aleatoria_quinta():
@@ -58,62 +75,72 @@ def menssangem_aleatoria_quinta():
     mensagem_sorteada = numero_message()
 
     mensagem_quinta_1 = (
-        "Caldolover de plantão! 😊\n"
-        "Hoje é a nossa tradicional Quinta Nordestina, caldo sabor nordestino está com R$3 de desconto! Peça já o seu 🌵🔥!\n Exclusivo aqui no WhatsApp!"
+        "Caldolover de plantão!\n"
+        "Hoje é a nossa tradicional Quinta Nordestina, caldo sabor nordestino está com R$3 de desconto! Peça já o seu!\n"
+        "Exclusivo para WhatsApp!🔥"
 
     )
 
     mensagem_quinta_2 = (
-        "Atenção querido(a) Caldolover! 😊\n"
-        "A Quinta Nordestina chegou trazendo caldo sabor nordestino com tamanhos a partir de 6,99! Vem de caldinho 🌵🔥!\n Somente para pedidos feitos pelo WhatsApp!"
+        "Atenção querido(a) Caldolover!\n"
+        "A Quinta Nordestina chegou trazendo caldo sabor nordestino com tamanhos a partir de 6,99! Vem de caldinho!\n"
+        "Exclusivo para WhatsApp!🔥"
 
     )
 
     mensagem_quinta_3 = (
-        "querido(a) Caldolover! 😊\n"
-        "Hoje todos os caldos sabor nordestino estão com R$3 OFF! Não perca o seu caldinho 🌵🔥!\n Promoção exclusiva do WhatsApp!"
+        "querido(a) Caldolover!\n"
+        "Hoje todos os caldos sabor nordestino estão com R$3 OFF! Não perca o seu caldinho!\n"
+        "Exclusivo para WhatsApp!🔥"
 
     )
 
     mensagem_quinta_4 = (
-        "Atenção Caldolover! 😊👀\n"
-        "A Quinta Nordestina tá daquele jeitinho: caldo sabor nordestino com R$3 OFF em qualquer tamanho! Garanta o seu 🌵🔥!\n Exclusivo pelo WhatsApp!"
+        "Atenção Caldolover!\n"
+        "A Quinta Nordestina tá daquele jeitinho: caldo sabor nordestino com R$3 OFF em qualquer tamanho! Garanta o seu!\n"
+        "Exclusivo para WhatsApp!🔥"
 
     )
 
     mensagem_quinta_5 = (
-        "Caldolover! 😊\n"
-        "Hoje tem caldo sabor nordestino com tamanhos a partir de 6,99! Aproveite e peça o seu 🌵🔥!\n Válido somente no WhatsApp!"
+        "Caldolover!\n"
+        "Hoje tem caldo sabor nordestino com tamanhos a partir de 6,99! Aproveite e peça o seu!\n"
+        "Exclusivo para WhatsApp!🔥"
 
     )
 
     mensagem_quinta_6 = (
-        "Atenção querido(a) Caldolover! 😊\n"
-        "Na Quinta Nordestina, todos os caldos sabor nordestino estão com R$3 OFF para esquentar a noite do nosso Caldolover! Faça já seu pedido 🌵🔥!\n Mas somente aqui no WhatsApp!"
+        "Atenção querido(a) Caldolover!\n"
+        "Na Quinta Nordestina, todos os caldos sabor nordestino estão com R$3 OFF para esquentar a noite do nosso Caldolover! Faça já seu pedido!\n"
+        "Exclusivo para WhatsApp!🔥"
 
     )
 
     mensagem_quinta_7 = (
-        "Caldolover! 😊\n"
-        "O caldo sabor nordestino está com R$3 OFF em todos os tamanhos! Garanta o seu caldinho 🌵🔥!\n Promoção exclusiva do WhatsApp!"
+        "Caldolover!\n"
+        "O caldo sabor nordestino está com R$3 OFF em todos os tamanhos! Garanta o seu caldinho!\n"
+        "Exclusivo para WhatsApp!🔥"
 
     )
 
     mensagem_quinta_8 = (
-        "Atenção Caldolover! 😊👀\n"
-        "Hoje a Quinta Nordestina traz caldo sabor nordestino a partir de 6,99 para nosso Caldolover aproveitar! Chame e peça já 🌵🔥!\n Exclusivo pelo WhatsApp!"
+        "Atenção Caldolover!\n"
+        "Hoje a Quinta Nordestina traz caldo sabor nordestino a partir de 6,99 para nosso Caldolover aproveitar! Chame e peça já!\n"
+        "Exclusivo para WhatsApp!🔥"
 
     )
 
     mensagem_quinta_9 = (
-        "Caldolover querido(a)! 😊\n"
-        "Temos caldo nordestino com R$3 OFF hoje! Não deixe para depois 🌵🔥!\n Oferta exclusiva do WhatsApp!"
+        "Caldolover querido(a)!\n"
+        "Temos caldo nordestino com R$3 OFF hoje! Não deixe para depois!\n"
+        "Exclusivo para WhatsApp!🔥"
 
     )
 
     mensagem_quinta_10 = (
-        "Atenção querido(a) Caldolover! 😊\n"
-        "A Quinta Nordestina chegou trazendo caldo nordestino com R$3 de desconto para alegrar sua noite! Peça agora mesmo 🌵🔥!\n Promoção válida somente aqui pelo WhatsApp!"
+        "Atenção querido(a) Caldolover!\n"
+        "A Quinta Nordestina chegou trazendo caldo nordestino com R$3 de desconto para alegrar sua noite! Peça agora mesmo!\n"
+        "Exclusivo para Whatsapp!🔥"
 
     )
 
@@ -139,62 +166,72 @@ def menssangem_aleatoria_quarta():
     mensagem_sorteada = numero_message()
 
     mensagem1 = (
-        "Caldolover de plantão, atenção que hoje tá imperdível! 😊👀\n"
-        "Todos os caldos de sururu estão com R$3 OFF! Peça já o seu 🌵🔥!\n Exclusivamente para pedidos no WhatsApp!"
+        "Caldolover de plantão, atenção que hoje tá imperdível!\n"
+        "Todos os caldos de sururu estão com R$3 OFF! Peça já o seu!\n"
+        "Exclusivo para WhatsApp!🔥"
 
     )
 
     mensagem2 = (
-        "Caldolover querido(a)! 😊\n"
-        "Hoje é dia de aproveitar o caldo de sururu com tamanhos a partir de R$8,99! Vem de caldinho 🌵🔥!\n Somente pelo WhatsApp!"
+        "Caldolover querido(a)!\n"
+        "Hoje é dia de aproveitar o caldo de sururu com tamanhos a partir de R$8,99! Vem de caldinho!\n"
+        "Exclusivo para WhatsApp!🔥"
 
     )
 
     mensagem3 = (
-        "Atenção, Caldolover! 😊👀\n"
-        "O sururu tá liberado com R$3 OFF em todos os tamanhos! Não perca seu caldinho 🌵🔥!\n Promoção exclusiva no WhatsApp!"
+        "Atenção, Caldolover!\n"
+        "O sururu tá liberado com R$3 OFF em todos os tamanhos! Não perca seu caldinho!\n"
+        "Exclusivo para WhatsApp!🔥"
 
     )
 
     mensagem4 = (
-        "Caldolover! 😊\n"
-        "A quarta do sururuvis está garantida com R$3 OFF nos caldos de sururu! Garanta o seu 🌵🔥!\n Apenas aqui no WhatsApp!"
+        "Caldolover!\n"
+        "A quarta do sururuvis está garantida com R$3 OFF nos caldos de sururu! Garanta o seu!\n"
+        "Exclusivo para WhatsApp!🔥"
 
     )
 
     mensagem5 = (
-        "Atenção Caldolover! 😊👀\n"
-        "Hoje tem caldo de sururu com tamanhos a partir de R$8,99! Peça já 🌵🔥!\n Exclusivo para WhatsApp!"
+        "Atenção Caldolover!\n"
+        "Hoje tem caldo de sururu com tamanhos a partir de R$8,99! Peça já!\n"
+        "Exclusivo para WhatsApp!🔥"
 
     )
 
     mensagem6 = (
-        "Caldolover! 😊\n"
-        "O caldo de sururu está com R$3 OFF em todos os tamanhos! Aproveite agora 🌵🔥!\n Promoção exclusiva do WhatsApp!"
+        "Caldolover!\n"
+        "O caldo de sururu está com R$3 OFF em todos os tamanhos! Aproveite agora!\n"
+        "Exclusivo para WhatsApp!🔥"
 
     )
 
     mensagem7 = (
-        "Atenção Caldolover! 😊👀\n"
-        "Caldo de sururu com tamanhos a partir de R$8,99! Garanta o seu 🌵🔥!\n Exclusivo para WhatsApp!"
+        "Atenção Caldolover!\n"
+        "Caldo de sururu com tamanhos a partir de R$8,99! Garanta o seu!\n"
+        "Exclusivo para WhatsApp!🔥"
 
     )
 
     mensagem8 = (
-        "Caldolover querido(a)! 😊\n"
-        "Hoje tem sururu com tamanhos a partir de R$8,99! Não deixe para depois 🌵🔥!\n Somente válido no WhatsApp!"
+        "Caldolover querido(a)!\n"
+        "Hoje tem sururu com tamanhos a partir de R$8,99! Não deixe para depois!\n"
+        "Exclusivo para WhatsApp!🔥"
 
     )
 
     mensagem9 = (
-        "Atenção Caldolover! 😊👀\n"
-        "O caldo de sururu está com R$3 OFF em todos os tamanhos para esquentar a noite do nosso Caldolover! Peça já o seu 🌵🔥!\n Disponível somente no WhatsApp"
+        "Atenção Caldolover!\n"
+        "O caldo de sururu está com R$3 OFF em todos os tamanhos para esquentar a noite do nosso Caldolover! Peça já o seu!\n"
+        "Exclusivo para WhatsApp!🔥"
 
     )
 
     mensagem10 = (
-        "Caldolover! 😊\n"
-        "Hoje tem Caldo de sururu com tamanhos a partir de R$8,99! Vem garantir o seu 🌵🔥!\n Disponível somente no WhatsApp"
+        "Caldolover!\n"
+        "Hoje tem Caldo de sururu com tamanhos a partir de R$8,99! Vem garantir o seu!\n"
+        "Exclusivo para WhatsApp!🔥"
 
     )
 
@@ -336,17 +373,19 @@ def mensagem_do_dia():
 
     else:
 
-        mensagem_dia_frio = menssangem_fim_de_semana()
+        mensagem_cardapios = numero_disparo()
 
-        if horario < 18:
+        # mensagem_dia_frio = menssangem_fim_de_semana()
+        #
+        # if horario < 18:
+        #
+        #     messagem_antecendencia = message_antencede()
+        #
+        #     mensagem_dia_frio = mensagem_dia_frio + messagem_antecendencia
+        #
+        # mensagem_dia_frio = mensagem_dia_frio + mensagem_cardapio + mensagem_nao_disparo
 
-            messagem_antecendencia = message_antencede()
-
-            mensagem_dia_frio = mensagem_dia_frio + messagem_antecendencia
-
-        mensagem_dia_frio = mensagem_dia_frio + mensagem_cardapio + mensagem_nao_disparo
-
-        return mensagem_dia_frio
+        return mensagem_cardapios  #mensagem_dia_frio
 
 def aviso_ausencia():
 
