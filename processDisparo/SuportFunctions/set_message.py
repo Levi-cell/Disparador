@@ -373,7 +373,7 @@ def mensagem_do_dia():
 
     else:
 
-        mensagem_cardapios = numero_disparo()
+        mensagem_cardapios = mensagem_simples()
 
         # mensagem_dia_frio = menssangem_fim_de_semana()
         #
@@ -524,9 +524,28 @@ def menssangem_fim_de_semana():
             return dict_mensagens[chave]
 
 
+# def mensagem_simples():
+#
+#     message = "O tempo esfriou, e o caldão nordestino já está quentinho esperando por você 💛🔥!"
+#
+#     return message
+
+
 def mensagem_simples():
+    mensagem_recesso = (
+        "O Caldão Nordestino funcionará normalmente até o dia 20/12 (Sábado)\n\n"
+        "Após essa data, entraremos em recesso de fim de ano, retornando no dia 05/01, "
+        "com ainda mais sabor e novidades para você! 😋✨\n\n"
+        "🎄 Aproveitamos para desejar um Feliz Natal e um Ano Novo repleto de saúde, paz "
+        "e muitas conquistas a todos os nossos CaldoLovers!\n"
+        "Que 2026 venha quente, forte e cheio de caldo! 💛🥣🎆\n\n"
+        "🔗 Nosso site:\n"
+        "👉 https://sites.google.com/view/cardpiocaldonordestino/in%C3%ADcio\n\n"
+        "📢 Importante:\n"
+        "Esse site foi disponibilizado de forma antecipada, apenas para os nossos clientes "
+        "mais próximos aproveitarem 😄✨\n"
+        "Na nossa volta, iremos oficializar o site em todas as nossas redes sociais! 🚀\n\n"
+        "Até breve e muito obrigado pelo carinho e apoio de sempre! 💛🔥"
+    )
 
-    message = "O tempo esfriou, e o caldão nordestino já está quentinho esperando por você 💛🔥!"
-
-    return message
-
+    return mensagem_recesso
