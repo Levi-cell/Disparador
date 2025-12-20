@@ -23,6 +23,19 @@ h1 { text-align: center; font-size: 28px; color: #FFD700; margin-bottom: 5px; fo
     vertical-align: middle;
 }
 
+/* Badge especial para promoção de fim de ano */
+.promo-badge-fimdeano {
+    background: #FF6B6B;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 3px 8px;
+    border-radius: 4px;
+    margin-left: 8px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
 .tabela-caldo {
     width: 100%;
     border-collapse: collapse;
@@ -190,6 +203,12 @@ h1 { text-align: center; font-size: 28px; color: #FFD700; margin-bottom: 5px; fo
         margin-left: 5px;
     }
 
+    .promo-badge-fimdeano {
+        font-size: 12px;
+        padding: 2px 6px;
+        margin-left: 5px;
+    }
+
     .tabela-caldo {
         display: block;
         width: 100%;
@@ -292,6 +311,11 @@ h1 { text-align: center; font-size: 28px; color: #FFD700; margin-bottom: 5px; fo
     .titulo { font-size: 17px; }
 
     .promo-badge {
+        font-size: 11px;
+        padding: 2px 5px;
+    }
+
+    .promo-badge-fimdeano {
         font-size: 11px;
         padding: 2px 5px;
     }
@@ -441,7 +465,7 @@ function getDiaDaSemana() {
     return hoje.getDay(); // 0-6
 }
 
-// Função para aplicar promoções de acordo com o dia da semana
+// Função para aplicar promoções de acordo com o dia da semana e data específica (20/12/2025)
 function aplicarPromocoes() {
     // Copia os preços originais
     precosAtuais = JSON.parse(JSON.stringify(precosOriginais));
@@ -450,59 +474,115 @@ function aplicarPromocoes() {
     const hoje = new Date();
     const dataFormatada = hoje.toLocaleDateString('pt-BR');
 
-    // Verificar promoções
+    // Verificar se é 20 de dezembro de 2025 (JavaScript: mês 11 = Dezembro)
+    const ePromocaoFimDeAno = (hoje.getDate() === 20 && hoje.getMonth() === 11 && hoje.getFullYear() === 2025);
+
+    let temPromocaoFimDeAno = false;
     let temPromocaoSururu = false;
     let temPromocaoNordestino = false;
 
-    // Quarta-feira (dia 3) - Promoção do Sururu: R$ 3,00 de desconto
-    if (diaDaSemana === 3) { // 3 = Quarta-feira
-        temPromocaoSururu = true;
-        for (let tamanho in precosAtuais.sururu) {
-            precosAtuais.sururu[tamanho] = Math.max(0, precosAtuais.sururu[tamanho] - 3);
+    // REGRA DE PRIORIDADE: Se for 20/12/2025, aplica a promoção de fim de ano (e ignora as outras)
+    if (ePromocaoFimDeAno) {
+        temPromocaoFimDeAno = true;
+        // Aplica R$ 3,00 de desconto em TODOS os caldos
+        for (let sabor in precosAtuais) {
+            for (let tamanho in precosAtuais[sabor]) {
+                // Subtrai R$ 3,00 do preço original, garantindo que não fique negativo
+                precosAtuais[sabor][tamanho] = Math.max(0, precosAtuais[sabor][tamanho] - 3);
+            }
         }
-    }
+        console.log("Promoção de Fim de Ano ativada: R$ 3,00 OFF em todos os caldos!");
+    } else {
+        // Se NÃO for 20/12/2025, aplica as promoções regulares por dia da semana
+        // Quarta-feira (dia 3) - Promoção do Sururu: R$ 3,00 de desconto
+        if (diaDaSemana === 3) {
+            temPromocaoSururu = true;
+            for (let tamanho in precosAtuais.sururu) {
+                precosAtuais.sururu[tamanho] = Math.max(0, precosAtuais.sururu[tamanho] - 3);
+            }
+        }
 
-    // Quinta-feira (dia 4) - Promoção do Nordestino: R$ 3,00 de desconto
-    if (diaDaSemana === 4) { // 4 = Quinta-feira
-        temPromocaoNordestino = true;
-        for (let tamanho in precosAtuais.nord) {
-            precosAtuais.nord[tamanho] = Math.max(0, precosAtuais.nord[tamanho] - 3);
+        // Quinta-feira (dia 4) - Promoção do Nordestino: R$ 3,00 de desconto
+        if (diaDaSemana === 4) {
+            temPromocaoNordestino = true;
+            for (let tamanho in precosAtuais.nord) {
+                precosAtuais.nord[tamanho] = Math.max(0, precosAtuais.nord[tamanho] - 3);
+            }
         }
     }
 
     // Atualizar display com informações de promoção
-    atualizarDisplayPromocoes(temPromocaoSururu, temPromocaoNordestino, dataFormatada);
+    atualizarDisplayPromocoes(temPromocaoFimDeAno, temPromocaoSururu, temPromocaoNordestino, dataFormatada);
 
-    return { temPromocaoSururu, temPromocaoNordestino, dataFormatada };
+    return { temPromocaoFimDeAno, temPromocaoSururu, temPromocaoNordestino, dataFormatada };
 }
 
 // Função para atualizar o display com informações de promoção
-function atualizarDisplayPromocoes(promoSururu, promoNordestino, data) {
-    // Atualizar títulos dos cards
-    const tituloSururu = document.querySelector('.card:nth-child(1) .titulo');
-    const tituloNordestino = document.querySelector('.card:nth-child(5) .titulo');
+function atualizarDisplayPromocoes(promoFimDeAno, promoSururu, promoNordestino, data) {
+    // Atualizar títulos dos cards com badges de promoção
+    const titulos = document.querySelectorAll('.titulo');
 
-    if (tituloSururu && promoSururu) {
-        tituloSururu.innerHTML = '🥣 Caldo de Sururu <span class="promo-badge">PROMO QUARTA!</span>';
-    }
+    if (promoFimDeAno) {
+        // Para promoção de fim de ano, adiciona badge especial em todos os caldos
+        titulos.forEach((titulo, index) => {
+            if (index < 5) { // Apenas para os 5 caldos (não inclui combos e extras)
+                // Remove qualquer badge existente
+                let textoOriginal = titulo.innerHTML;
+                textoOriginal = textoOriginal.replace(/<span class="promo-badge[^"]*">[^<]*<\/span>/g, '');
+                textoOriginal = textoOriginal.replace(/<span class="promo-badge-fimdeano[^"]*">[^<]*<\/span>/g, '');
 
-    if (tituloNordestino && promoNordestino) {
-        tituloNordestino.innerHTML = '🥣 Caldo Nordestino <span class="promo-badge">PROMO QUINTA!</span>';
-    }
+                // Adiciona badge de fim de ano
+                titulo.innerHTML = textoOriginal + ' <span class="promo-badge-fimdeano">PROMO FIM DE ANO!</span>';
+            }
+        });
 
-    // Adicionar banner de promoção no topo se houver promoção
-    const bannerPromocao = document.getElementById('banner-promocao');
-    if (promoSururu || promoNordestino) {
-        let mensagemPromo = `🏷️ PROMOÇÃO `;
-        if (promoSururu) mensagemPromo += "Quarta do Sururuvis, Sururu com R$ 3,00 OFF! ";
-        if (promoNordestino) mensagemPromo += "Quinta Nordestina, Nordestino com - R$ 3,00 OFF!";
-
+        // Atualiza banner
+        let mensagemPromo = `🎄 PROMOÇÃO FIM DE ANO! 🎄 Todos os caldos com R$ 3,00 OFF!`;
+        const bannerPromocao = document.getElementById('banner-promocao');
         if (bannerPromocao) {
             bannerPromocao.textContent = mensagemPromo;
             bannerPromocao.style.display = 'block';
+            bannerPromocao.style.background = 'linear-gradient(90deg, #FF6B6B, #FFD700)';
+            bannerPromocao.style.color = '#8B4513';
         }
-    } else if (bannerPromocao) {
-        bannerPromocao.style.display = 'none';
+    } else {
+        // Para promoções normais (quarta e quinta)
+        if (promoSururu) {
+            const tituloSururu = document.querySelector('.card:nth-child(1) .titulo');
+            if (tituloSururu) {
+                let textoOriginal = tituloSururu.innerHTML;
+                textoOriginal = textoOriginal.replace(/<span class="promo-badge[^"]*">[^<]*<\/span>/g, '');
+                textoOriginal = textoOriginal.replace(/<span class="promo-badge-fimdeano[^"]*">[^<]*<\/span>/g, '');
+                tituloSururu.innerHTML = textoOriginal + ' <span class="promo-badge">PROMO QUARTA!</span>';
+            }
+        }
+
+        if (promoNordestino) {
+            const tituloNordestino = document.querySelector('.card:nth-child(5) .titulo');
+            if (tituloNordestino) {
+                let textoOriginal = tituloNordestino.innerHTML;
+                textoOriginal = textoOriginal.replace(/<span class="promo-badge[^"]*">[^<]*<\/span>/g, '');
+                textoOriginal = textoOriginal.replace(/<span class="promo-badge-fimdeano[^"]*">[^<]*<\/span>/g, '');
+                tituloNordestino.innerHTML = textoOriginal + ' <span class="promo-badge">PROMO QUINTA!</span>';
+            }
+        }
+
+        // Atualiza banner para promoções normais
+        const bannerPromocao = document.getElementById('banner-promocao');
+        if (promoSururu || promoNordestino) {
+            let mensagemPromo = `🏷️ PROMOÇÃO `;
+            if (promoSururu) mensagemPromo += "Quarta do Sururuvis, Sururu com R$ 3,00 OFF! ";
+            if (promoNordestino) mensagemPromo += "Quinta Nordestina, Nordestino com R$ 3,00 OFF!";
+
+            if (bannerPromocao) {
+                bannerPromocao.textContent = mensagemPromo;
+                bannerPromocao.style.display = 'block';
+                bannerPromocao.style.background = 'linear-gradient(90deg, #FFD700, #FFD700)';
+                bannerPromocao.style.color = '#8B4513';
+            }
+        } else if (bannerPromocao) {
+            bannerPromocao.style.display = 'none';
+        }
     }
 }
 
@@ -761,6 +841,22 @@ document.addEventListener("DOMContentLoaded", () => {
         let msg = "Gostaria de fazer o seguinte pedido:\n\n";
         let totalPedido = 0;
 
+        // Verificar se há promoção ativa
+        const hoje = new Date();
+        const ePromocaoFimDeAno = (hoje.getDate() === 20 && hoje.getMonth() === 11 && hoje.getFullYear() === 2025);
+        const diaDaSemana = getDiaDaSemana();
+        const temPromocaoSururu = (diaDaSemana === 3);
+        const temPromocaoNordestino = (diaDaSemana === 4);
+
+        // Adicionar mensagem de promoção se houver
+        if (ePromocaoFimDeAno) {
+            msg += "🎄 PROMOÇÃO FIM DE ANO: TODOS OS CALDOS COM R$ 3,00 OFF! 🎄\n\n";
+        } else if (temPromocaoSururu) {
+            msg += "🏷️ PROMOÇÃO QUARTA: SURURU COM R$ 3,00 OFF!\n\n";
+        } else if (temPromocaoNordestino) {
+            msg += "🏷️ PROMOÇÃO QUINTA: NORDESTINO COM R$ 3,00 OFF!\n\n";
+        }
+
         for (let sabor in precosAtuais) {
             for (let tam in precosAtuais[sabor]) {
                 let qtd = parseInt(document.getElementById(`qtd-${sabor}${tam}`).innerText);
@@ -772,7 +868,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
                     let itemMsg = `* ${nomesCaldos[sabor]} ${letras[tam]} – R$ ${preco.toFixed(2).replace(".", ",")} x${qtd}`;
 
-                    // Adicionar nota sobre desconto se houver
+                    // Adicionar informação de desconto se houver (R$ 3,00 OFF)
+                    if (preco < precoOriginal) {
+                        itemMsg += ` (R$ 3,00 OFF)`;
+                    }
 
                     msg += itemMsg + `\n`;
                 }
@@ -955,6 +1054,83 @@ document.addEventListener("DOMContentLoaded", () => {
 
 <button id="btnPedido">FINALIZAR PEDIDO (R$ 0,00)</button>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

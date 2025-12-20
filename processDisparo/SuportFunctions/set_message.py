@@ -533,18 +533,16 @@ def menssangem_fim_de_semana():
 
 def mensagem_simples():
     mensagem_recesso = (
-        "O Caldão Nordestino funcionará normalmente até o dia 20/12 (Sábado)\n\n"
-        "Após essa data, entraremos em recesso de fim de ano, retornando no dia 05/01, "
-        "com ainda mais sabor e novidades para você! 😋✨\n\n"
-        "🎄 Aproveitamos para desejar um Feliz Natal e um Ano Novo repleto de saúde, paz "
+        "*ano novo = estoque novo!*\n"
+        "Por isso estamos fazendo uma promoção inédita de fim de ano, *todos os caldo com R$ 3 OFF*!!\n\n"
+        "Aproveitamos para desejar um Feliz Natal e um Ano Novo repleto de saúde, paz "
         "e muitas conquistas a todos os nossos CaldoLovers!\n"
         "Que 2026 venha quente, forte e cheio de caldo! 💛🥣🎆\n\n"
-        "🔗 Nosso site:\n"
-        "👉 https://sites.google.com/view/cardpiocaldonordestino/in%C3%ADcio\n\n"
+        "🔗 Segue nosso site com a promoção de fim de ano:\n"
+        "- 👉 https://sites.google.com/view/cardpiocaldonordestino/in%C3%ADcio\n\n"
         "📢 Importante:\n"
-        "Esse site foi disponibilizado de forma antecipada, apenas para os nossos clientes "
-        "mais próximos aproveitarem 😄✨\n"
-        "Na nossa volta, iremos oficializar o site em todas as nossas redes sociais! 🚀\n\n"
+        "Esse site está sendo disponibilizado de forma antecipada  apenas para os nossos clientes mais próximos testarem 😄\n"
+        "Como vocês aprovaram, na nossa volta, iremos oficializar o site em todas as nossas redes sociais! 🚀\n\n"
         "Até breve e muito obrigado pelo carinho e apoio de sempre! 💛🔥"
     )
 
