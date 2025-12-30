@@ -41,6 +41,12 @@ def midia_aleatoria():
         if chave == midia_sorteada:
             return dict_foto[chave]
 
+def midia_selecionada():
+
+    midia = r"C:\Disparo\Projeto\Disparador\processDisparo\Midia\natal.png"
+
+    return midia
+
 
 def escolhe_foto_data():
     dia_semana = datetime.now().weekday()
@@ -54,7 +60,7 @@ def escolhe_foto_data():
         return foto
 
     else:
-        foto = midia_aleatoria()
+        foto = midia_selecionada()
         return foto
 
 def define_foto(opcao):

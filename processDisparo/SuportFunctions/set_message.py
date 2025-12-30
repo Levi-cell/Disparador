@@ -532,18 +532,14 @@ def menssangem_fim_de_semana():
 
 
 def mensagem_simples():
-    mensagem_recesso = (
-        "*ano novo = estoque novo!*\n"
-        "Por isso estamos fazendo uma promoção inédita de fim de ano, *todos os caldo com R$ 3 OFF*!!\n\n"
-        "Aproveitamos para desejar um Feliz Natal e um Ano Novo repleto de saúde, paz "
-        "e muitas conquistas a todos os nossos CaldoLovers!\n"
-        "Que 2026 venha quente, forte e cheio de caldo! 💛🥣🎆\n\n"
-        "🔗 Segue nosso site com a promoção de fim de ano:\n"
-        "- 👉 https://sites.google.com/view/cardpiocaldonordestino/in%C3%ADcio\n\n"
-        "📢 Importante:\n"
-        "Esse site está sendo disponibilizado de forma antecipada  apenas para os nossos clientes mais próximos testarem 😄\n"
-        "Como vocês aprovaram, na nossa volta, iremos oficializar o site em todas as nossas redes sociais! 🚀\n\n"
-        "Até breve e muito obrigado pelo carinho e apoio de sempre! 💛🔥"
-    )
+    mensagem = "ano novo = estoque novo! 🥣🔥\n" \
+               "Estamos com uma promoção especial de fim de ano: todos os caldos com R$ 3 OFF!\n\n" \
+               "⏰ Hoje: horário especial das 17h às 22h\n\n" \
+               "🔗 Site com a promoção (acesso antecipado):\n" \
+               "👉 https://sites.google.com/view/cardpiocaldonordestino/in%C3%ADcio\n\n" \
+               "📢 Este número é apenas para promoções.\n\n" \
+               "📲 Atendimento:\n" \
+               "👉 https://api.whatsapp.com/send?phone=555575991211138\n\n" \
+               "Obrigado pelo carinho de sempre! 💛🔥"
 
-    return mensagem_recesso
+    return mensagem

@@ -430,7 +430,7 @@ def varre_clientes_com_midia(
             tratativa_disparo(nome, telefone, midia, tipo_message)
             return
 
-        time.sleep(3)
+        time.sleep(5)
 
         ### DETECTA POPUP OU CHAT
 
@@ -440,7 +440,7 @@ def varre_clientes_com_midia(
         if not deu_certo:
             tratativa_disparo(nome, telefone, midia, tipo_message)
             return
-        time.sleep(1)
+        time.sleep(5)
         # NUMEROS INVÁLIDOS CAEM AQUI
 
         if numero_avalidar is False and cliente_removido is not None:
@@ -455,7 +455,7 @@ def varre_clientes_com_midia(
             tratativa_disparo(nome, telefone, midia, tipo_message)
             return
 
-        time.sleep(1)
+        time.sleep(5)
         ### COLA A MENSAGEM NO CAMPO DE TEXTO
 
         foi = cola_mensagem_campo(
@@ -465,13 +465,13 @@ def varre_clientes_com_midia(
             tratativa_disparo(nome, telefone, midia, tipo_message)
             return
 
-        time.sleep(1)
+        time.sleep(5)
 
         ## TENTA ANEXAR FOTO NO CAMPO CHAT
 
         print("tentando anexar foto...")
 
-        time.sleep(1)
+        time.sleep(5)
 
         deu_certo = enviar_foto_whatsapp(
             tipo_message, espera, link_whatsapp
@@ -480,7 +480,7 @@ def varre_clientes_com_midia(
             tratativa_disparo(nome, telefone, midia, tipo_message)
             return
 
-        time.sleep(1)
+        time.sleep(5)
         ## APERTA O BOTAO FINAL PARA ENVIAR MENSAGEM COM FOTO + TEXTO
 
         tempo_espera_1 = numero_randomico()
@@ -492,12 +492,12 @@ def varre_clientes_com_midia(
             tratativa_disparo(nome, telefone, midia, tipo_message)
             return
 
-        time.sleep(1)
+        time.sleep(5)
 
         print("---------------")
         print("✔ Mensagem enviada!")
 
-        time.sleep(1)
+        time.sleep(5)
         marcar_enviou_dia_sql(telefone)
 
         tempo_espera_2 = numero_randomico()
@@ -554,7 +554,7 @@ def varre_clientes_sem_midia(
             tratativa_disparo(nome, telefone, midia, tipo_message)
             return
 
-        time.sleep(3)
+        time.sleep(5)
 
         # DETECTANDO POPUP OU TEXTO
 
@@ -562,7 +562,7 @@ def varre_clientes_sem_midia(
             driver, telefone, link_whatsapp
         )
 
-        time.sleep(1)
+        time.sleep(5)
 
         if not deu_certo:
             tratativa_disparo(nome, telefone, midia, tipo_message)
@@ -582,7 +582,7 @@ def varre_clientes_sem_midia(
             tratativa_disparo(nome, telefone, midia, tipo_message)
 
 
-        time.sleep(1)
+        time.sleep(5)
         # COLA MENSAGEM NO CAMPO TEXTO
 
         foi = cola_mensagem_campo(
@@ -592,7 +592,7 @@ def varre_clientes_sem_midia(
             tratativa_disparo(nome, telefone, midia, tipo_message)
             return
 
-        time.sleep(1)
+        time.sleep(5)
 
         tempo_espera_1 = numero_randomico()
         print("⏳ Esperando %s segundos antes de enviar..." % tempo_espera_1)
@@ -604,12 +604,12 @@ def varre_clientes_sem_midia(
             tratativa_disparo(nome, telefone, midia, tipo_message)
             return
 
-        time.sleep(1)
+        time.sleep(5)
 
         print("---------------")
         print("✔ Mensagem enviada!")
 
-        time.sleep(1)
+        time.sleep(5)
 
         marcar_enviou_dia_sql(telefone)
 
