@@ -293,6 +293,8 @@ def trazer_chrome_para_frente_e_acessar_aba(url_alvo, port=9222):
         return False  # ❗ SEMPRE RETORNA False em caso de exceção
 
 
+iniciar_chrome_remoto()
+
 # def bring_chrome_to_front():
 #     hwnd = win32gui.FindWindow(None, "WhatsApp")
 #     if hwnd:

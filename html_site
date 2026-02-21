@@ -36,6 +36,20 @@ h1 { text-align: center; font-size: 28px; color: #FFD700; margin-bottom: 5px; fo
     vertical-align: middle;
 }
 
+/* Badge especial para promoção Sextou - CORES AJUSTADAS */
+.promo-badge-sextou {
+    background: linear-gradient(135deg, #FFD700 0%, #DAA520 100%); /* Tom de amarelo do site */
+    color: #8B4513; /* Marrom das letras */
+    font-size: 14px;
+    font-weight: bold;
+    padding: 3px 8px;
+    border-radius: 4px;
+    margin-left: 8px;
+    display: inline-block;
+    vertical-align: middle;
+    border: 1px solid #8B4513; /* Borda marrom */
+}
+
 .tabela-caldo {
     width: 100%;
     border-collapse: collapse;
@@ -131,12 +145,12 @@ h1 { text-align: center; font-size: 28px; color: #FFD700; margin-bottom: 5px; fo
     box-sizing: border-box;
 }
 
-/* Estilo para a notificação fixa - POSIÇÃO AJUSTADA */
+/* Estilo para a notificação fixa - POSIÇÃO AJUSTADA PARA UM POUCO ACIMA DO CENTRO */
 #notification {
     position: fixed;
-    top: 50%; /* Alterado para centro vertical */
+    top: 40%; /* Alterado para um pouco acima do centro */
     left: 50%;
-    transform: translate(-50%, -50%); /* Centralizado completamente */
+    transform: translate(-50%, -50%); /* Centralizado horizontalmente, mas mantido na posição vertical do top */
     background-color: #FFD700;
     color: #8B4513;
     padding: 15px 25px;
@@ -204,6 +218,12 @@ h1 { text-align: center; font-size: 28px; color: #FFD700; margin-bottom: 5px; fo
     }
 
     .promo-badge-fimdeano {
+        font-size: 12px;
+        padding: 2px 6px;
+        margin-left: 5px;
+    }
+
+    .promo-badge-sextou {
         font-size: 12px;
         padding: 2px 6px;
         margin-left: 5px;
@@ -281,12 +301,20 @@ h1 { text-align: center; font-size: 28px; color: #FFD700; margin-bottom: 5px; fo
         margin-bottom: 12px;
     }
 
+    /* POSIÇÃO DO POPUP NO MOBILE - UM POUCO ACIMA DO CENTRO */
     #notification {
-        top: 50%;
+        top: 35%; /* Um pouco mais acima no mobile para melhor visualização */
         padding: 12px 20px;
         font-size: 15px;
         max-width: 90%;
         border-radius: 8px;
+    }
+
+    @keyframes fadeInOut {
+        0% { opacity: 0; transform: translate(-50%, -70%); }
+        15% { opacity: 1; transform: translate(-50%, -50%); }
+        85% { opacity: 1; transform: translate(-50%, -50%); }
+        100% { opacity: 0; transform: translate(-50%, -30%); }
     }
 
     .pagamento-opcao {
@@ -316,6 +344,11 @@ h1 { text-align: center; font-size: 28px; color: #FFD700; margin-bottom: 5px; fo
     }
 
     .promo-badge-fimdeano {
+        font-size: 11px;
+        padding: 2px 5px;
+    }
+
+    .promo-badge-sextou {
         font-size: 11px;
         padding: 2px 5px;
     }
@@ -360,8 +393,9 @@ h1 { text-align: center; font-size: 28px; color: #FFD700; margin-bottom: 5px; fo
         padding: 0 4px;
     }
 
+    /* POSIÇÃO DO POPUP EM TELAS MUITO PEQUENAS */
     #notification {
-        top: 50%;
+        top: 30%; /* Mais acima em telas muito pequenas */
         padding: 10px 16px;
         font-size: 14px;
         max-width: 92%;
@@ -439,25 +473,24 @@ h1 { text-align: center; font-size: 28px; color: #FFD700; margin-bottom: 5px; fo
 <script>
 const letras = { 300: "P", 400: "M", 500: "G" };
 
-// Preços originais
+// Preços originais (Mocotó removido)
 const precosOriginais = {
     sururu: { 300: 11.99, 400: 14.99, 500: 16.99 },
     camarao:{ 300: 11.99, 400: 14.99, 500: 16.99 },
     frango: { 300: 9.99, 400: 12.99, 500: 14.99 },
-    mocoto: { 300: 9.99, 400: 12.99, 500: 14.99 },
     nord:   { 300: 9.99, 400: 12.99, 500: 14.99 }
 };
 
 // Variável para armazenar os preços atuais (com promoções aplicadas)
 let precosAtuais = {};
 
-const nomesCaldos = { sururu: "Sururu", camarao: "Camarão", frango: "Frango", mocoto: "Mocotó", nord: "Nordestino" };
+const nomesCaldos = { sururu: "Sururu", camarao: "Camarão", frango: "Frango", nord: "Nordestino" };
 const combos = {
     querocaldo: { nome: "Combo QueroCaldo", itens: "Camarão + Sururu (G)", preco: 27.99 },
     caldolover: { nome: "Combo CaldoLover", itens: "Nordestino + Camarão (G)", preco: 25.99 },
     caldolicia: { nome: "Combo Caldolicia", itens: "Frango + Nordestino (G)", preco: 23.99 }
 };
-const extras = { limao: { nome: "Limão", preco: 0 }, molho: { nome: "Molho", preco: 0 }, torrada: { nome: "Torrada", preco: 1 } };
+const extras = { limao: { nome: "Limão", preco: 0 }, molho: { nome: "Molho", preco: 0 }, torrada: { nome: "Torrada", preco: 0.99 } };
 
 // Função para obter o dia da semana atual (0=Domingo, 1=Segunda, ..., 6=Sábado)
 function getDiaDaSemana() {
@@ -480,6 +513,7 @@ function aplicarPromocoes() {
     let temPromocaoFimDeAno = false;
     let temPromocaoSururu = false;
     let temPromocaoNordestino = false;
+    let temPromocaoSextou = false;
 
     // REGRA DE PRIORIDADE: Se for 20/12/2025, aplica a promoção de fim de ano (e ignora as outras)
     if (ePromocaoFimDeAno) {
@@ -494,8 +528,8 @@ function aplicarPromocoes() {
         console.log("Promoção de Fim de Ano ativada: R$ 3,00 OFF em todos os caldos!");
     } else {
         // Se NÃO for 20/12/2025, aplica as promoções regulares por dia da semana
-        // Quarta-feira (dia 3) - Promoção do Sururu: R$ 3,00 de desconto
-        if (diaDaSemana === 3) {
+        // terça-feira (dia 2) - Promoção do Sururu: R$ 3,00 de desconto
+        if (diaDaSemana === 2) {
             temPromocaoSururu = true;
             for (let tamanho in precosAtuais.sururu) {
                 precosAtuais.sururu[tamanho] = Math.max(0, precosAtuais.sururu[tamanho] - 3);
@@ -509,27 +543,41 @@ function aplicarPromocoes() {
                 precosAtuais.nord[tamanho] = Math.max(0, precosAtuais.nord[tamanho] - 3);
             }
         }
+
+        // Sexta-feira (dia 5) - Promoção Sextou: R$ 2,00 de desconto em TODOS os caldos (exceto combos)
+        if (diaDaSemana === 5) {
+            temPromocaoSextou = true;
+            // Aplica R$ 2,00 de desconto em TODOS os caldos
+            for (let sabor in precosAtuais) {
+                for (let tamanho in precosAtuais[sabor]) {
+                    // Subtrai R$ 2,00 do preço original, garantindo que não fique negativo
+                    precosAtuais[sabor][tamanho] = Math.max(0, precosAtuais[sabor][tamanho] - 2);
+                }
+            }
+            console.log("Promoção Sextou ativada: R$ 2,00 OFF em todos os caldos!");
+        }
     }
 
     // Atualizar display com informações de promoção
-    atualizarDisplayPromocoes(temPromocaoFimDeAno, temPromocaoSururu, temPromocaoNordestino, dataFormatada);
+    atualizarDisplayPromocoes(temPromocaoFimDeAno, temPromocaoSururu, temPromocaoNordestino, temPromocaoSextou, dataFormatada);
 
-    return { temPromocaoFimDeAno, temPromocaoSururu, temPromocaoNordestino, dataFormatada };
+    return { temPromocaoFimDeAno, temPromocaoSururu, temPromocaoNordestino, temPromocaoSextou, dataFormatada };
 }
 
 // Função para atualizar o display com informações de promoção
-function atualizarDisplayPromocoes(promoFimDeAno, promoSururu, promoNordestino, data) {
+function atualizarDisplayPromocoes(promoFimDeAno, promoSururu, promoNordestino, promoSextou, data) {
     // Atualizar títulos dos cards com badges de promoção
     const titulos = document.querySelectorAll('.titulo');
 
     if (promoFimDeAno) {
         // Para promoção de fim de ano, adiciona badge especial em todos os caldos
         titulos.forEach((titulo, index) => {
-            if (index < 5) { // Apenas para os 5 caldos (não inclui combos e extras)
+            if (index < 4) { // Apenas para os 4 caldos (não inclui combos e extras)
                 // Remove qualquer badge existente
                 let textoOriginal = titulo.innerHTML;
                 textoOriginal = textoOriginal.replace(/<span class="promo-badge[^"]*">[^<]*<\/span>/g, '');
                 textoOriginal = textoOriginal.replace(/<span class="promo-badge-fimdeano[^"]*">[^<]*<\/span>/g, '');
+                textoOriginal = textoOriginal.replace(/<span class="promo-badge-sextou[^"]*">[^<]*<\/span>/g, '');
 
                 // Adiciona badge de fim de ano
                 titulo.innerHTML = textoOriginal + ' <span class="promo-badge-fimdeano">PROMO FIM DE ANO!</span>';
@@ -545,24 +593,51 @@ function atualizarDisplayPromocoes(promoFimDeAno, promoSururu, promoNordestino, 
             bannerPromocao.style.background = 'linear-gradient(90deg, #FF6B6B, #FFD700)';
             bannerPromocao.style.color = '#8B4513';
         }
+    } else if (promoSextou) {
+        // Para promoção Sextou, adiciona badge especial em todos os caldos
+        titulos.forEach((titulo, index) => {
+            if (index < 4) { // Apenas para os 4 caldos (não inclui combos e extras)
+                // Remove qualquer badge existente
+                let textoOriginal = titulo.innerHTML;
+                textoOriginal = textoOriginal.replace(/<span class="promo-badge[^"]*">[^<]*<\/span>/g, '');
+                textoOriginal = textoOriginal.replace(/<span class="promo-badge-fimdeano[^"]*">[^<]*<\/span>/g, '');
+                textoOriginal = textoOriginal.replace(/<span class="promo-badge-sextou[^"]*">[^<]*<\/span>/g, '');
+
+                // Adiciona badge de Sextou
+                titulo.innerHTML = textoOriginal + ' <span class="promo-badge-sextou">PROMO SEXTOU!</span>';
+            }
+        });
+
+        // Atualiza banner para promoção Sextou - CORES AJUSTADAS
+        let mensagemPromo = `🎉 PROMOÇÃO SEXTOU! 🎉`;
+        const bannerPromocao = document.getElementById('banner-promocao');
+        if (bannerPromocao) {
+            bannerPromocao.textContent = mensagemPromo;
+            bannerPromocao.style.display = 'block';
+            bannerPromocao.style.background = 'linear-gradient(90deg, #FFD700 0%, #DAA520 100%)'; /* Amarelo do site */
+            bannerPromocao.style.color = '#8B4513'; /* Marrom das letras */
+            bannerPromocao.style.border = '2px solid #8B4513'; /* Borda marrom */
+        }
     } else {
-        // Para promoções normais (quarta e quinta)
+        // Para promoções normais (terça e quinta)
         if (promoSururu) {
             const tituloSururu = document.querySelector('.card:nth-child(1) .titulo');
             if (tituloSururu) {
                 let textoOriginal = tituloSururu.innerHTML;
                 textoOriginal = textoOriginal.replace(/<span class="promo-badge[^"]*">[^<]*<\/span>/g, '');
                 textoOriginal = textoOriginal.replace(/<span class="promo-badge-fimdeano[^"]*">[^<]*<\/span>/g, '');
-                tituloSururu.innerHTML = textoOriginal + ' <span class="promo-badge">PROMO QUARTA!</span>';
+                textoOriginal = textoOriginal.replace(/<span class="promo-badge-sextou[^"]*">[^<]*<\/span>/g, '');
+                tituloSururu.innerHTML = textoOriginal + ' <span class="promo-badge">PROMO TERÇA!</span>';
             }
         }
 
         if (promoNordestino) {
-            const tituloNordestino = document.querySelector('.card:nth-child(5) .titulo');
+            const tituloNordestino = document.querySelector('.card:nth-child(4) .titulo'); // Alterado para 4º card (Nordestino)
             if (tituloNordestino) {
                 let textoOriginal = tituloNordestino.innerHTML;
                 textoOriginal = textoOriginal.replace(/<span class="promo-badge[^"]*">[^<]*<\/span>/g, '');
                 textoOriginal = textoOriginal.replace(/<span class="promo-badge-fimdeano[^"]*">[^<]*<\/span>/g, '');
+                textoOriginal = textoOriginal.replace(/<span class="promo-badge-sextou[^"]*">[^<]*<\/span>/g, '');
                 tituloNordestino.innerHTML = textoOriginal + ' <span class="promo-badge">PROMO QUINTA!</span>';
             }
         }
@@ -571,8 +646,8 @@ function atualizarDisplayPromocoes(promoFimDeAno, promoSururu, promoNordestino, 
         const bannerPromocao = document.getElementById('banner-promocao');
         if (promoSururu || promoNordestino) {
             let mensagemPromo = `🏷️ PROMOÇÃO `;
-            if (promoSururu) mensagemPromo += "Quarta do Sururuvis, Sururu com R$ 3,00 OFF! ";
-            if (promoNordestino) mensagemPromo += "Quinta Nordestina, Nordestino com R$ 3,00 OFF!";
+            if (promoSururu) mensagemPromo += "Terça do Sururuvis";
+            if (promoNordestino) mensagemPromo += "Quinta Nordestina";
 
             if (bannerPromocao) {
                 bannerPromocao.textContent = mensagemPromo;
@@ -806,7 +881,6 @@ document.addEventListener("DOMContentLoaded", () => {
     renderTabela("sururu","sururu-area");
     renderTabela("camarao","camarao-area");
     renderTabela("frango","frango-area");
-    renderTabela("mocoto","mocoto-area");
     renderTabela("nord","nord-area");
     renderCombos();
     renderExtras();
@@ -845,16 +919,19 @@ document.addEventListener("DOMContentLoaded", () => {
         const hoje = new Date();
         const ePromocaoFimDeAno = (hoje.getDate() === 20 && hoje.getMonth() === 11 && hoje.getFullYear() === 2025);
         const diaDaSemana = getDiaDaSemana();
-        const temPromocaoSururu = (diaDaSemana === 3);
+        const temPromocaoSururu = (diaDaSemana === 2);
         const temPromocaoNordestino = (diaDaSemana === 4);
+        const temPromocaoSextou = (diaDaSemana === 5);
 
         // Adicionar mensagem de promoção se houver
         if (ePromocaoFimDeAno) {
             msg += "🎄 PROMOÇÃO FIM DE ANO: TODOS OS CALDOS COM R$ 3,00 OFF! 🎄\n\n";
+        } else if (temPromocaoSextou) {
+            msg += " ";
         } else if (temPromocaoSururu) {
-            msg += "🏷️ PROMOÇÃO QUARTA: SURURU COM R$ 3,00 OFF!\n\n";
+            msg += " ";
         } else if (temPromocaoNordestino) {
-            msg += "🏷️ PROMOÇÃO QUINTA: NORDESTINO COM R$ 3,00 OFF!\n\n";
+            msg += " ";
         }
 
         for (let sabor in precosAtuais) {
@@ -868,9 +945,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
                     let itemMsg = `* ${nomesCaldos[sabor]} ${letras[tam]} – R$ ${preco.toFixed(2).replace(".", ",")} x${qtd}`;
 
-                    // Adicionar informação de desconto se houver (R$ 3,00 OFF)
+                    // Adicionar informação de desconto se houver
                     if (preco < precoOriginal) {
-                        itemMsg += ` (R$ 3,00 OFF)`;
+                        let desconto = precoOriginal - preco;
+                        if (desconto === 3) {
+                            itemMsg += ` `;
+                        } else if (desconto === 2) {
+                            itemMsg += ` `;
+                        }
                     }
 
                     msg += itemMsg + `\n`;
@@ -983,12 +1065,11 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 
 <!-- Banner de promoção (será mostrado apenas quando houver promoção) -->
-<div id="banner-promocao" style="display:none; background: linear-gradient(90deg, #FFD700, #FFD700); color: #8B4513; text-align: center; padding: 10px; border-radius: 8px; margin-bottom: 15px; font-weight: bold; font-size: 16px; box-shadow: 0 2px 4px rgba(0,0,0,0.2);"></div>
+<div id="banner-promocao" style="display:none; background: linear-gradient(90deg, #FFD700, #FFD700); color: #8B4513; text-align: center; padding: 10px; border-radius: 8px; margin-bottom: 15px; font-weight: bold; font-size: 16px; box-shadow: 0 2px 4px rgba(0,0,0,0.2); border: 2px solid #8B4513;"></div>
 
 <div class="card"><div class="titulo">🥣 Caldo de Sururu</div><div id="sururu-area"></div></div>
 <div class="card"><div class="titulo">🥣 Caldo de Camarão</div><div id="camarao-area"></div></div>
 <div class="card"><div class="titulo">🥣 Caldo de Frango</div><div id="frango-area"></div></div>
-<div class="card"><div class="titulo">🥣 Caldo de Mocotó</div><div id="mocoto-area"></div></div>
 <div class="card"><div class="titulo">🥣 Caldo Nordestino</div><div id="nord-area"></div></div>
 
 <div class="card"><div class="titulo">🔥 Combos Especiais</div><div id="combos-area"></div></div>
@@ -1041,20 +1122,19 @@ document.addEventListener("DOMContentLoaded", () => {
 </div>
 
 <div class="card">
-    <label for="nome-cliente" style="font-weight:bold; margin-bottom:8px; display:block; font-size:16px; color:#8B4513;">Qual é o seu nome?</label>
+    <label for="nome-cliente" style="font-weight:bold; margin-bottom:8px; display:block; font-size:16px; color:#8B4513;">Nome</label>
     <input type="text" id="nome-cliente" placeholder="Digite seu nome" style="width:100%; padding:10px; font-size:15px; border-radius:6px; border:2px solid #8B4513; margin-bottom:10px; box-sizing:border-box; background:#FFFFFF; color:#8B4513;">
 
     <!-- NOVO CAMPO: ENDEREÇO -->
-    <label for="endereco-cliente" style="font-weight:bold; margin-bottom:8px; display:block; font-size:16px; color:#8B4513;">Qual é o seu endereço completo? (frete entre: R$ 6 e 9)</label>
+    <label for="endereco-cliente" style="font-weight:bold; margin-bottom:8px; display:block; font-size:16px; color:#8B4513;">Endereço completo (frete entre: R$ 6 e 9)</label>
     <input type="text" id="endereco-cliente" placeholder="Ex: Rua X, Bairro Y, ponto de referência, número Z" style="width:100%; padding:10px; font-size:15px; border-radius:6px; border:2px solid #8B4513; margin-bottom:10px; box-sizing:border-box; background:#FFFFFF; color:#8B4513;">
 
-    <label for="observacao-cliente" style="font-weight:bold; margin-bottom:8px; display:block; font-size:16px; color:#8B4513;">Alguma observação ou dúvida? (opcional)</label>
+    <label for="observacao-cliente" style="font-weight:bold; margin-bottom:8px; display:block; font-size:16px; color:#8B4513;">Observação ou dúvida? (opcional)</label>
     <input type="text" id="observacao-cliente" placeholder="Ex: Retirada do pedido no estabelecimento" style="width:100%; padding:10px; font-size:15px; border-radius:6px; border:2px solid #8B4513; margin-bottom:10px; box-sizing:border-box; background:#FFFFFF; color:#8B4513;">
 </div>
 
 <button id="btnPedido">FINALIZAR PEDIDO (R$ 0,00)</button>
 </div>
-
 
 
 
