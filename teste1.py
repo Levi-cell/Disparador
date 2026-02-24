@@ -1,7 +1,7 @@
 from pywa import WhatsApp
 from pywa.types.templates import TemplateLanguage
 
-# ⚠️ ESSE TOKEN ESTÁ EXPOSTO - GERE OUTRO
+
 TOKEN = "EAATYGW2lhwgBQ4NNpLFVOzkhBCfH7SeWuus3RkF47cq9ldlK7QnU9UHhYZAH9xfWlOnf6p3sbbZAZC179mGXxiS6ZBLRt0EU5bWPrkjLOsjP1mAWVrPR8xadDOnEOWDuyhD0SFhojrOpqcKoo68NzqNdtJMGNqdoKEAZCGP1xdD1EMVn6J2CY86XZCWe30HQZDZD"
 
 PHONE_NUMBER_ID = "954435134428733"
@@ -13,8 +13,8 @@ wa = WhatsApp(
 
 wa.send_template(
     to="5571994111866",
-    name="teste",
-    language=TemplateLanguage("pt_BR")
+    name="hello_world",
+    language=TemplateLanguage("en_US")
 )
 
 # Inicialize o cliente
