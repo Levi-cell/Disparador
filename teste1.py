@@ -13,8 +13,8 @@ wa = WhatsApp(
 
 wa.send_template(
     to="5571994111866",
-    name="hello_world",
-    language=TemplateLanguage("en_US")
+    name="teste",
+    language=TemplateLanguage("pt_BR")
 )
 
 # Inicialize o cliente
